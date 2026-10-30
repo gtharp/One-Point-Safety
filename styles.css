@@ -1,0 +1,166 @@
+:root{
+  --bg:#f6f7f5; --card:#ffffff; --ink:#1c2420; --muted:#66706b; --line:#e2e6e3;
+  --accent:#1f6f43; --accent-soft:#e3f1e8; --warn:#b5462b; --warn-soft:#fbe9e4;
+  --gold:#946500; --gold-soft:#fbf1d6; --bar:#9fc7ae; --scrim:rgba(0,0,0,.35);
+}
+@media (prefers-color-scheme: dark){
+  :root{--bg:#121614; --card:#1b201d; --ink:#e7ece9; --muted:#9aa49f; --line:#2c332f;
+    --accent:#5cc58a; --accent-soft:#1f3328; --warn:#f08a6c; --warn-soft:#3a231d;
+    --gold:#e9b949; --gold-soft:#352b14; --bar:#2f6a49; --scrim:rgba(0,0,0,.6);}
+}
+html{font-size:15px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:1rem/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-text-size-adjust:100%}
+button{font:inherit;color:inherit}
+
+/* ---------- Header / controls ---------- */
+header{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1px solid var(--line);padding:.7rem 1rem .75rem}
+.hrow{display:flex;align-items:center;justify-content:space-between;gap:.75rem;max-width:1200px;margin:0 auto}
+.hwrap{max-width:1200px;margin:0 auto}
+h1{margin:0;font-size:1.35rem;letter-spacing:-.02em}
+h1 span{color:var(--accent)}
+.badge{display:inline-block;font-size:.68rem;font-weight:700;padding:.1rem .5rem;border-radius:99px;background:var(--warn-soft);color:var(--warn);margin-left:.4rem;vertical-align:middle}
+.sub{color:var(--muted);font-size:.8rem;margin-top:.1rem}
+.controls{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;margin-top:.55rem}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:99px;overflow:hidden}
+.seg button{border:0;background:var(--card);padding:.35rem .85rem;font-size:.85rem;cursor:pointer}
+.seg button.on{background:var(--accent);color:#fff}
+.wk{display:inline-flex;align-items:center;gap:.3rem;font-size:.88rem;font-weight:700}
+.wk button{border:1px solid var(--line);background:var(--card);border-radius:99px;width:1.9rem;height:1.9rem;cursor:pointer;line-height:1}
+.wk button:disabled{opacity:.3;cursor:default}
+.days{display:flex;gap:.4rem;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:var(--card);padding:.3rem .7rem;border-radius:99px;font-size:.8rem;cursor:pointer}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.tvbtn{border:1px solid var(--line);background:var(--card);border-radius:99px;padding:.35rem .8rem;font-size:.8rem;cursor:pointer;white-space:nowrap}
+@media (max-width:899px){.tvbtn{display:none}}
+[hidden]{display:none!important}
+
+/* ---------- Layout ---------- */
+.layout{display:grid;gap:1.25rem;padding:1rem;max-width:1200px;margin:0 auto;
+  grid-template-columns:minmax(0,1fr);grid-template-areas:"odd" "tot" "pen" "log" "games"}
+.a-odd{grid-area:odd}.a-tot{grid-area:tot}.a-pen{grid-area:pen}.a-log{grid-area:log}.a-games{grid-area:games}
+@media (min-width:1000px){
+  .layout{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"tot tot" "odd pen" "log games"}
+}
+section h2{font-size:.78rem;margin:0 0 .55rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);
+  display:flex;justify-content:space-between;align-items:center;gap:.5rem}
+section h2 small{text-transform:none;letter-spacing:0;font-weight:500}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.75rem}
+.linkbtn{border:0;background:none;color:var(--accent);cursor:pointer;font-size:.78rem;text-decoration:underline;padding:0;text-transform:none;letter-spacing:0}
+
+/* ---------- Tier pills ---------- */
+.tier{display:inline-block;font-size:.62rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:.08rem .45rem;border-radius:99px;background:var(--bg);color:var(--muted)}
+.t3{background:var(--warn-soft);color:var(--warn)}
+.t2{background:var(--gold-soft);color:var(--gold)}
+.t1{background:var(--accent-soft);color:var(--accent)}
+.k3{border-left-color:var(--warn)!important}.k2{border-left-color:var(--gold)!important}.k1{border-left-color:var(--accent)!important}
+
+/* ---------- Oddities ---------- */
+.a-odd .panel{border-top:3px solid var(--warn)}
+.board{display:grid;grid-template-columns:repeat(auto-fill,minmax(8.5rem,1fr));gap:.5rem;margin-bottom:.8rem}
+.tile{text-align:left;border:1px solid var(--line);border-left:4px solid var(--line);background:var(--card);border-radius:10px;padding:.5rem .6rem;cursor:pointer}
+.tile:hover{background:var(--bg)}
+.tile.on{outline:2px solid var(--accent);outline-offset:-1px}
+.tile .n{font-size:1.6rem;font-weight:800;line-height:1.05;margin-top:.25rem}
+.tile .l{font-size:.8rem;line-height:1.25}
+.feed{display:grid;gap:.5rem}
+.ocard{display:block;width:100%;text-align:left;border:1px solid var(--line);border-left:4px solid var(--line);background:var(--card);border-radius:10px;padding:.55rem .7rem;cursor:pointer}
+.ocard:hover{background:var(--bg)}
+.ocard .tt{font-weight:700;font-size:.95rem;margin-top:.15rem}
+.ocard .d{font-size:.85rem;margin-top:.1rem}
+.ocard .m{font-size:.75rem;color:var(--muted);margin-top:.2rem}
+.waiting{font-size:.78rem;color:var(--muted);margin-top:.7rem}
+.empty{font-size:.85rem;color:var(--muted);padding:.4rem 0}
+#featured{display:none}
+
+/* ---------- Totals ---------- */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(7.5rem,1fr));gap:.6rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.65rem .75rem;cursor:pointer;text-align:left}
+.card:hover{border-color:var(--accent)}
+.card.on{outline:2px solid var(--accent);outline-offset:-1px}
+.card .n{font-size:1.75rem;font-weight:700;line-height:1.1}
+.card .l{font-size:.82rem;color:var(--muted)}
+.card .a{font-size:.72rem;color:var(--muted);margin-top:.2rem}
+
+/* ---------- Penalties ---------- */
+.pen{display:grid;grid-template-columns:1fr 2.6rem;gap:.5rem;align-items:center;padding:.3rem .4rem;border-radius:8px;cursor:pointer}
+.pen:hover,.pen.on{background:var(--accent-soft)}
+.pen .name{font-size:.88rem}
+.pen .bar{height:.4rem;border-radius:3px;background:var(--bar);margin-top:.25rem}
+.pen .ct{text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
+.rare{font-size:.6rem;font-weight:800;color:var(--warn);background:var(--warn-soft);padding:.05rem .4rem;border-radius:99px;margin-left:.35rem;vertical-align:middle}
+
+/* ---------- Play log ---------- */
+.filterbar{display:flex;gap:.4rem;align-items:center;flex-wrap:wrap;margin-bottom:.4rem;font-size:.8rem;color:var(--muted)}
+.filterbar .tag{background:var(--accent-soft);color:var(--accent);padding:.15rem .6rem;border-radius:99px;font-weight:600}
+.row{display:block;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);padding:.5rem .3rem;cursor:pointer}
+.row:hover{background:var(--accent-soft)}
+.row .a{font-size:.88rem}
+.row .b{font-size:.74rem;color:var(--muted);margin-top:.08rem}
+.dot{display:inline-block;width:.5rem;height:.5rem;border-radius:50%;margin-right:.35rem;vertical-align:middle}
+.dot.k3{background:var(--warn)}.dot.k2{background:var(--gold)}.dot.k1{background:var(--accent)}
+.more{margin-top:.6rem}
+
+/* ---------- Games ---------- */
+.games{display:grid;gap:.5rem}
+.game{display:grid;grid-template-columns:1fr auto;gap:.15rem .6rem;padding:.6rem .7rem;border:1px solid var(--line);border-radius:10px;cursor:pointer;background:var(--card);text-align:left}
+.game:hover{border-color:var(--accent)}
+.game.on{outline:2px solid var(--accent);outline-offset:-1px}
+.game .teams{font-weight:600}
+.game .score{font-weight:700;font-variant-numeric:tabular-nums}
+.game .meta{font-size:.74rem;color:var(--muted);grid-column:1/-1}
+
+/* ---------- Detail sheet ---------- */
+.scrim{position:fixed;inset:0;background:var(--scrim);opacity:0;pointer-events:none;transition:opacity .2s;z-index:20}
+.scrim.open{opacity:1;pointer-events:auto}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:21;background:var(--card);border-radius:16px 16px 0 0;
+  max-height:85vh;overflow:auto;padding:1.1rem 1rem calc(1.4rem + env(safe-area-inset-bottom));
+  transform:translateY(105%);transition:transform .25s;box-shadow:0 -6px 30px rgba(0,0,0,.15)}
+.sheet.open{transform:none}
+@media (min-width:760px){
+  .sheet{left:50%;right:auto;bottom:auto;top:50%;width:34rem;border-radius:16px;
+    transform:translate(-50%,-46%);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
+  .sheet.open{transform:translate(-50%,-50%);opacity:1;pointer-events:auto}
+}
+.sheet h3{margin:.45rem 2rem .2rem 0;font-size:1.3rem;line-height:1.2}
+.sheet .d{font-size:.95rem}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:.3rem .9rem;font-size:.86rem;margin:.8rem 0}
+.kv dt{color:var(--muted)}.kv dd{margin:0}
+.why{background:var(--bg);border-radius:10px;padding:.7rem .8rem;font-size:.86rem}
+.actions{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.9rem}
+.btn{display:inline-block;border:1px solid var(--line);background:var(--card);padding:.45rem .9rem;border-radius:99px;font-size:.84rem;cursor:pointer;text-decoration:none;color:var(--ink)}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff}
+.x{position:absolute;top:.5rem;right:.6rem;border:0;background:none;font-size:1.6rem;line-height:1;cursor:pointer;color:var(--muted);padding:.3rem}
+.note{font-size:.72rem;color:var(--muted);margin-top:.7rem}
+
+footer{color:var(--muted);font-size:.75rem;padding:.5rem 1rem 2.5rem;text-align:center}
+
+/* ---------- Big-screen (TV / 4K) mode ---------- */
+html.tvroot{font-size:clamp(14px,.78vw,30px)}
+body.tv{height:100vh;overflow:hidden;display:flex;flex-direction:column}
+body.tv header{position:static}
+body.tv .hrow,body.tv .hwrap{max-width:none}
+body.tv .layout{max-width:none;width:100%;flex:1;min-height:0;padding:1rem 1.25rem;
+  grid-template-columns:1.25fr 1fr 1.15fr 1fr;grid-template-rows:auto minmax(0,1fr);
+  grid-template-areas:"tot tot tot tot" "odd pen log games"}
+body.tv section{min-height:0;display:flex;flex-direction:column}
+body.tv section>.panel,body.tv section>.scroll{flex:1;min-height:0;overflow:auto}
+body.tv .cards{grid-template-columns:repeat(8,1fr)}
+body.tv #featured{display:block;margin-bottom:.9rem}
+body.tv footer{display:none}
+.big{border:1px solid var(--line);border-left:6px solid var(--line);border-radius:12px;padding:.9rem 1rem;background:var(--bg)}
+.big .tt{font-size:1.45rem;font-weight:800;margin:.3rem 0 .2rem}
+.big .d{font-size:1rem}
+.big .m{font-size:.8rem;color:var(--muted);margin-top:.35rem}
+
+/* ---------- Loading / empty states ---------- */
+.loading,.offseason{padding:2.5rem 1rem;text-align:center;color:var(--muted)}
+.offseason h2{font-size:1.1rem;color:var(--ink);text-transform:none;letter-spacing:0;justify-content:center}
+
+@media print{
+  :root{--bg:#fff;--card:#fff;--ink:#000;--muted:#444;--line:#ccc}
+  header{position:static}
+  .controls,.tvbtn,.linkbtn,.more,.sheet,.scrim,#featured{display:none!important}
+  .layout{grid-template-columns:1fr!important;grid-template-areas:"odd" "tot" "pen" "log" "games"!important}
+  .card,.panel,.game,.ocard,.tile{break-inside:avoid}
+}

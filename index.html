@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>One-Point Safety</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div class="hrow">
+    <h1>One-Point <span>Safety</span></h1>
+    <button class="tvbtn" id="tvBtn">Big screen</button>
+  </div>
+  <div class="hwrap">
+    <div class="sub" id="subline"></div>
+    <div class="controls">
+      <div class="seg" id="scope"></div>
+      <div class="wk" id="wknav"><button data-wk="-1" id="wkPrev" aria-label="Previous week">‹</button><span id="wkLabel"></span><button data-wk="1" id="wkNext" aria-label="Next week">›</button></div>
+      <div class="days" id="days"></div>
+    </div>
+  </div>
+</header>
+
+<main class="layout" id="layout" hidden>
+  <section class="a-odd">
+    <h2>Oddities <small id="oddCount"></small></h2>
+    <div class="panel">
+      <div id="featured"></div>
+      <div class="board" id="board"></div>
+      <div class="feed" id="feed"></div>
+      <button class="chip more" id="moreFeed" hidden></button>
+      <div class="waiting" id="waiting"></div>
+    </div>
+  </section>
+
+  <section class="a-tot">
+    <h2>League totals</h2>
+    <div class="cards" id="cards"></div>
+  </section>
+
+  <section class="a-pen">
+    <h2>Penalties by type <button class="linkbtn" id="penSort"></button></h2>
+    <div class="panel" id="penalties"></div>
+  </section>
+
+  <section class="a-log" id="logSec">
+    <h2>Play log</h2>
+    <div class="panel">
+      <div class="filterbar" id="filterbar"></div>
+      <div id="log"></div>
+      <button class="chip more" id="moreLog" hidden>Show all</button>
+    </div>
+  </section>
+
+  <section class="a-games">
+    <h2 id="gamesTitle">Games</h2>
+    <div class="scroll"><div class="games" id="games"></div></div>
+  </section>
+</main>
+
+<div class="loading" id="loading">Loading season data&hellip;</div>
+<div class="offseason" id="offseason" hidden>
+  <h2>No games yet this season</h2>
+  <p>Check back once the season kicks off. In the meantime, here's last season's data.</p>
+</div>
+
+<footer>
+  <span id="updated"></span> &middot; Not affiliated with the NFL &middot; Data: <a href="https://github.com/nflverse/nflverse-data" target="_blank" rel="noopener">nflverse</a>
+</footer>
+
+<div class="scrim" id="scrim"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Play details"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

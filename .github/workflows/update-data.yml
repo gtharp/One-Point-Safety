@@ -1,0 +1,48 @@
+name: Update data
+
+on:
+  schedule:
+    # 13:00 UTC daily -> ~7-8am Central depending on daylight saving.
+    # Runs year-round (not just in-season); build_data.py handles the
+    # offseason case on its own, so there's nothing extra to schedule.
+    - cron: "0 13 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+          cache-dependency-path: scripts/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Build data
+        run: python3 scripts/build_data.py --out data
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- data; then
+            echo "No data changes."
+            exit 0
+          fi
+          git add data
+          git commit -m "Update data ($(date -u +'%Y-%m-%d %H:%M UTC'))"
+          git push
