@@ -170,13 +170,15 @@ than several things tiered Rare, so they moved to Wild. Tiers in
 
 ## Deploying: GitHub Pages + custom domain
 
+Live at [one-pointsafety.com](https://one-pointsafety.com), served from
+`main` via Settings → Pages. For reference, or if setting this up again
+elsewhere:
+
 1. **Settings → Pages → Build and deployment → Source: Deploy from a
    branch.** Branch: `main`, folder: `/ (root)`. No build step, nothing
    else to configure here.
-2. **Custom domain.** This repo ships a placeholder `CNAME` file
-   (`yourdomain.example`) — replace its contents with your real domain and
-   commit. (Or set it via the Pages settings UI, which writes the file for
-   you.)
+2. **Custom domain.** Set it in the Pages settings UI (which writes the
+   `CNAME` file for you), or edit `CNAME` directly and commit.
 3. **DNS**, at your domain registrar:
    - **Apex domain** (`example.com`): four `A` records pointing at
      GitHub Pages' IPs — `185.199.108.153`, `185.199.109.153`,
