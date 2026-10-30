@@ -1,7 +1,7 @@
 {
   "season": 2026,
   "has_data": true,
-  "current_week": 7,
+  "current_week": 8,
   "weeks": [
     1,
     2,
@@ -9,9 +9,10 @@
     4,
     5,
     6,
-    7
+    7,
+    8
   ],
-  "last_updated": "2026-10-30T03:25:02.626334+00:00",
+  "last_updated": "2026-10-30T11:43:07.752915+00:00",
   "source": "nflverse play-by-play (nflverse/nflverse-data)",
-  "games_count": 107
+  "games_count": 108
 }

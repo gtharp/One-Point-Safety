@@ -177,34 +177,27 @@ ODDITIES = [
         "detect": detect_lateral_td,
     },
     {
-        "id": "qb_reception",
-        "tier": "wild",
-        "label": "QB catches a pass",
-        "why": "A quarterback lines up as a receiver (often a trick play) and actually catches the ball.",
-        "detect": detect_qb_reception,
-    },
-    # ---- Rare ----
-    {
         "id": "walkoff",
-        "tier": "rare",
+        "tier": "wild",
         "label": "Walk-off score",
         "why": "The game-winning score comes with no time left on the clock.",
         "detect": detect_walkoff,
     },
+    {
+        "id": "fake_special_teams_td",
+        "tier": "wild",
+        "label": "Fake punt/FG touchdown",
+        "why": "A fake punt or field goal that goes all the way for a touchdown, often with a punter, "
+        "holder or kicker making the play.",
+        "detect": detect_fake_special_teams_td,
+    },
+    # ---- Rare ----
     {
         "id": "blocked_kick_td",
         "tier": "rare",
         "label": "Blocked punt/FG touchdown",
         "why": "The defense blocks a punt or field goal and scores on the same play.",
         "detect": detect_blocked_kick_td,
-    },
-    {
-        "id": "fake_special_teams_td",
-        "tier": "rare",
-        "label": "Fake punt/FG touchdown",
-        "why": "A fake punt or field goal that goes all the way for a touchdown, often with a punter, "
-        "holder or kicker making the play.",
-        "detect": detect_fake_special_teams_td,
     },
     {
         "id": "fg_60",
@@ -235,6 +228,13 @@ ODDITIES = [
         "detect": detect_non_qb_td_pass,
     },
     # ---- Uncommon ----
+    {
+        "id": "qb_reception",
+        "tier": "uncommon",
+        "label": "QB catches a pass",
+        "why": "A quarterback lines up as a receiver (often a trick play) and actually catches the ball.",
+        "detect": detect_qb_reception,
+    },
     {
         "id": "safety",
         "tier": "uncommon",

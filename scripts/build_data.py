@@ -19,6 +19,7 @@ import json
 import pathlib
 import re
 import sys
+import time
 
 import pandas as pd
 import requests
@@ -58,12 +59,22 @@ def current_season(today=None):
     return today.year - 1 if today.month <= 2 else today.year
 
 
-def fetch(url, binary=True):
-    resp = requests.get(url, timeout=60)
-    if resp.status_code == 404:
-        return None
-    resp.raise_for_status()
-    return resp.content if binary else resp.text
+def fetch(url, binary=True, retries=3):
+    for attempt in range(retries):
+        try:
+            resp = requests.get(url, timeout=60)
+        except requests.RequestException:
+            if attempt == retries - 1:
+                raise
+            time.sleep(2 ** attempt)
+            continue
+        if resp.status_code == 404:
+            return None
+        if resp.status_code >= 500 and attempt < retries - 1:
+            time.sleep(2 ** attempt)
+            continue
+        resp.raise_for_status()
+        return resp.content if binary else resp.text
 
 
 def load_pbp(season):
