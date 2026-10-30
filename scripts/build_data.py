@@ -130,6 +130,10 @@ def build_games(pbp, schedules, season):
                 "weekday": row["weekday"],
                 "date": row["gameday"],
                 "kickoff_ct": et_to_ct(row["gametime"]),
+                # Raw "HH:MM" 24h ET, zero-padded -- safe to sort on directly.
+                # Don't sort on kickoff_ct: its 12h "9:30 AM"/"1:00 PM" strings
+                # don't compare correctly (an AM game would sort after a PM one).
+                "_sort_time": row["gametime"] if isinstance(row["gametime"], str) else "",
                 "away": row["away_team"],
                 "home": row["home_team"],
                 "away_score": None if pd.isna(row["away_score"]) else int(row["away_score"]),
@@ -140,7 +144,7 @@ def build_games(pbp, schedules, season):
                 "final": pd.notna(row["away_score"]) and pd.notna(row["home_score"]),
             }
         )
-    games.sort(key=lambda g: (g["week"], g["date"], g["kickoff_ct"] or ""))
+    games.sort(key=lambda g: (g["week"], g["date"], g.pop("_sort_time")))
     return games
 
 
