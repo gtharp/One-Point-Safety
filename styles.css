@@ -31,6 +31,7 @@ h1 span{color:var(--accent)}
 .days{display:flex;gap:.4rem;flex-wrap:wrap}
 .chip{border:1px solid var(--line);background:var(--card);padding:.3rem .7rem;border-radius:99px;font-size:.8rem;cursor:pointer}
 .chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.resetbtn{background:var(--warn-soft);border-color:transparent;color:var(--warn);font-weight:600;margin-left:auto}
 .tvbtn{border:1px solid var(--line);background:var(--card);border-radius:99px;padding:.35rem .8rem;font-size:.8rem;cursor:pointer;white-space:nowrap}
 @media (max-width:899px){.tvbtn{display:none}}
 [hidden]{display:none!important}
@@ -134,6 +135,8 @@ section h2 small{text-transform:none;letter-spacing:0;font-weight:500}
 .note{font-size:.72rem;color:var(--muted);margin-top:.7rem}
 
 footer{color:var(--muted);font-size:.75rem;padding:.5rem 1rem 2.5rem;text-align:center}
+footer .donate{margin-top:.3rem;font-size:.7rem}
+footer .donate a{color:var(--accent)}
 
 /* ---------- Big-screen (TV / 4K) mode ---------- */
 html.tvroot{font-size:clamp(14px,.78vw,30px)}

@@ -19,7 +19,7 @@ const METRICS = [
 
 let META = null, GAMES = [], EVENTS = [], ODD = {}, RARE_PEN = {}, GAMES_BY_ID = new Map();
 let FEED = [];
-const S = { scope: "week", week: 1, day: "all", type: null, sub: null, odd: null, game: null, penSort: "count", logAll: false, feedAll: false };
+const S = { scope: "season", week: 1, day: "all", type: null, sub: null, odd: null, game: null, penSort: "count", logAll: false, feedAll: false };
 
 /* ---------- Load ---------- */
 async function loadJSON(path) {
@@ -88,6 +88,9 @@ function finalScore(g) {
 
 const gIn = g => S.scope === "season" || (g.week === S.week && (S.day === "all" || g.weekday === S.day));
 const inScope = e => e.g && gIn(e.g) && (S.game === null || e.game_id === S.game);
+const matchesTypeSub = e => (!S.type || e.type === S.type) && (!S.sub || e.penalty_type === S.sub);
+const matchesOdd = e => !S.odd || (S.odd === "rare_pen" ? e.rare_penalty : e.oddity_ids.includes(S.odd));
+const hasActiveFilter = () => !!(S.type || S.sub || S.odd || S.game !== null);
 
 function primaryOddityId(e) {
   if (!e.oddity_ids || !e.oddity_ids.length) return null;
@@ -141,6 +144,8 @@ function renderHeader() {
     const first = wk[0], last = wk[wk.length - 1];
     $("subline").textContent = first ? `Week ${S.week} · ${gDate(first)} – ${gDate(last)} · ${gs.length} games` : `Week ${S.week}`;
   }
+
+  $("resetAll").hidden = !hasActiveFilter();
 }
 
 /* ---------- Oddities ---------- */
@@ -154,7 +159,10 @@ function oddCard(e) {
 }
 
 function renderOdd() {
-  const ev = EVENTS.filter(e => inScope(e) && (e.oddity_ids.length || e.rare_penalty));
+  // Board tiles respect the type/penalty filter (so clicking "Safeties" in
+  // League totals narrows these too) but not S.odd itself, so all tiles
+  // stay clickable to switch the selection rather than disappearing.
+  const ev = EVENTS.filter(e => inScope(e) && matchesTypeSub(e) && (e.oddity_ids.length || e.rare_penalty));
   const counts = {};
   ev.forEach(e => {
     e.oddity_ids.forEach(id => { counts[id] = (counts[id] || 0) + 1; });
@@ -165,14 +173,13 @@ function renderOdd() {
   const keys = Object.keys(counts).sort((a, b) => tierOfKey(b) - tierOfKey(a) || counts[a] - counts[b]);
 
   $("oddCount").textContent = `${ev.length} this ${S.scope === "season" ? "season" : S.day === "all" ? "week" : "day"}`;
-  $("board").innerHTML = keys.map(k => {
+  $("board").innerHTML = keys.length ? keys.map(k => {
     const t = tierOfKey(k);
     return `<button class="tile k${t} ${S.odd === k ? "on" : ""}" data-o="${k}"><span class="tier t${t}">${TIER_NAME[t]}</span>
       <div class="n">${counts[k]}</div><div class="l">${esc(labelOfKey(k))}</div></button>`;
-  }).join("");
+  }).join("") : `<div class="empty">No oddities match the current filter.</div>`;
 
-  FEED = ev.filter(e => !S.odd || (S.odd === "rare_pen" ? e.rare_penalty : e.oddity_ids.includes(S.odd)))
-    .sort((a, b) => (b.tier || 0) - (a.tier || 0) || b.id - a.id);
+  FEED = ev.filter(matchesOdd).sort((a, b) => (b.tier || 0) - (a.tier || 0) || b.id - a.id);
   const lim = S.feedAll ? FEED.length : 6;
   $("feed").innerHTML = FEED.length ? FEED.slice(0, lim).map(oddCard).join("") : `<div class="empty">No oddities in this period yet.</div>`;
   $("moreFeed").hidden = FEED.length <= 6;
@@ -229,10 +236,7 @@ function renderPen() {
 
 /* ---------- Play log ---------- */
 function renderLog() {
-  let ev = EVENTS.filter(inScope);
-  if (S.type) ev = ev.filter(e => e.type === S.type);
-  if (S.sub) ev = ev.filter(e => e.penalty_type === S.sub);
-  if (S.odd) ev = ev.filter(e => (S.odd === "rare_pen" ? e.rare_penalty : e.oddity_ids.includes(S.odd)));
+  const ev = EVENTS.filter(e => inScope(e) && matchesTypeSub(e) && matchesOdd(e));
 
   const tags = [];
   if (S.odd) tags.push(S.odd === "rare_pen" ? "Rare penalties" : ODD[S.odd].label);
@@ -319,7 +323,7 @@ document.addEventListener("fullscreenchange", () => { if (!document.fullscreenEl
 
 /* ---------- Clicks ---------- */
 document.addEventListener("click", ev => {
-  const t = ev.target.closest("[data-scope],[data-wk],[data-day],[data-t],[data-s],[data-g],[data-o],[data-e],[data-gf],#clear,#moreLog,#moreFeed,#penSort,#tvBtn,#sheetClose,#scrim");
+  const t = ev.target.closest("[data-scope],[data-wk],[data-day],[data-t],[data-s],[data-g],[data-o],[data-e],[data-gf],#clear,#resetAll,#moreLog,#moreFeed,#penSort,#tvBtn,#sheetClose,#scrim");
   if (!t) return;
   const d = t.dataset;
   if (d.e !== undefined) { openSheet(EVENTS[+d.e]); return; }
@@ -341,7 +345,7 @@ document.addEventListener("click", ev => {
   else if (d.s) { const same = S.sub === d.s; S.type = same ? null : "pen"; S.sub = same ? null : d.s; S.odd = null; }
   else if (d.o) { S.odd = S.odd === d.o ? null : d.o; S.type = S.sub = null; }
   else if (d.g !== undefined) { S.game = S.game === d.g ? null : d.g; }
-  else if (t.id === "clear") { S.type = S.sub = S.odd = null; S.game = null; }
+  else if (t.id === "clear" || t.id === "resetAll") { S.type = S.sub = S.odd = null; S.game = null; }
   S.logAll = false; S.feedAll = false; tvIdx = 0;
   render();
 });
