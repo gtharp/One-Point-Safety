@@ -68,12 +68,18 @@ def season_weather_rows(season, schedules):
     return rows
 
 
+# Keep `condition` and `snow_inches` -- the front end needs them to show
+# an actual rain/snow description instead of a meaningless temperature for
+# those two records. `rain_rank`/`snow_rank` are pure internal sort keys.
+def strip(r):
+    return {k: v for k, v in r.items() if k not in ("rain_rank", "snow_rank")}
+
+
 def pick(rows, key, reverse=False):
     candidates = [r for r in rows if r.get(key) is not None]
     if not candidates:
         return None
-    best = sorted(candidates, key=lambda r: r[key], reverse=reverse)[0]
-    return {k: v for k, v in best.items() if k not in ("rain_rank", "snow_rank", "snow_inches")}
+    return strip(sorted(candidates, key=lambda r: r[key], reverse=reverse)[0])
 
 
 def main():
@@ -103,14 +109,12 @@ def main():
     rain_candidates = [r for r in all_rows if r["rain_rank"] is not None]
     rainiest = None
     if rain_candidates:
-        best = sorted(rain_candidates, key=lambda r: (r["rain_rank"], -(r["humidity"] or 0)))[0]
-        rainiest = {k: v for k, v in best.items() if k not in ("rain_rank", "snow_rank", "snow_inches")}
+        rainiest = strip(sorted(rain_candidates, key=lambda r: (r["rain_rank"], -(r["humidity"] or 0)))[0])
 
     snow_candidates = [r for r in all_rows if r["snow_rank"] is not None]
     snowiest = None
     if snow_candidates:
-        best = sorted(snow_candidates, key=lambda r: (-(r["snow_inches"] or -1), r["snow_rank"]))[0]
-        snowiest = {k: v for k, v in best.items() if k not in ("rain_rank", "snow_rank", "snow_inches")}
+        snowiest = strip(sorted(snow_candidates, key=lambda r: (-(r["snow_inches"] or -1), r["snow_rank"]))[0])
 
     records = {
         "coldest": pick(all_rows, "temp"),

@@ -39,18 +39,40 @@ async function boot() {
   $("loading").hidden = true;
   $("layout").hidden = false;
   render();
+  renderWxAllTime();
 
   loadJSON("data/weather_records.json").then(renderWxRecords).catch(() => {});
+}
+
+// The real, hand-researched all-time weather records -- any event in
+// data/history.json can carry a "record" field ({label, value}); this
+// pulls them all into one prominent panel rather than leaving them
+// buried in the main list, since they're the headline numbers, not the
+// "since 2002" computed ones below them.
+function renderWxAllTime() {
+  const withRecord = EVENTS.filter(e => e.record);
+  if (!withRecord.length) return;
+  $("wxAllTimeSec").hidden = false;
+  $("wxAllTimeCards").innerHTML = withRecord.map(e => `
+    <button class="card" data-e="${e._idx}"><div class="n">${esc(e.record.value)}</div>
+      <div class="l">${esc(e.record.label)}</div>
+      <div class="a">${esc(e.title)}</div></button>`).join("");
 }
 
 const WX_LABELS = {
   coldest: "Coldest", hottest: "Hottest", muggiest: "Muggiest", driest: "Driest",
   windiest: "Windiest", rainiest: "Rainiest", snowiest: "Snowiest",
 };
+function wxUnit(key, r) {
+  if (key === "muggiest" || key === "driest") return `${r.humidity}%`;
+  if (key === "windiest") return `${r.wind} mph`;
+  if (key === "snowiest") return r.snow_inches != null ? `${r.snow_inches}"` : (r.condition || "Snow");
+  if (key === "rainiest") return r.condition || "Rain";
+  return `${r.temp}°F`;
+}
 function wxRecordCard(key, r) {
-  const unit = key === "muggiest" || key === "driest" ? `${r.humidity}%` : key === "windiest" ? `${r.wind} mph` : `${r.temp}°F`;
   const caveat = r.caveat ? `<span class="disputed" title="${esc(r.caveat)}">Flagged – hover</span>` : "";
-  return `<div class="card" style="cursor:default"><div class="n">${unit}</div>
+  return `<div class="card" style="cursor:default"><div class="n">${esc(wxUnit(key, r))}</div>
     <div class="l">${WX_LABELS[key]} ${caveat}</div>
     <div class="a">${esc(r.away)} @ ${esc(r.home)} · ${esc(r.date)}</div></div>`;
 }

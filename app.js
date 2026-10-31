@@ -221,9 +221,15 @@ const WX_LABELS = {
   coldest: "Coldest", hottest: "Hottest", muggiest: "Muggiest", driest: "Driest",
   windiest: "Windiest", rainiest: "Rainiest", snowiest: "Snowiest",
 };
+function wxUnit(key, r) {
+  if (key === "muggiest" || key === "driest") return `${r.humidity}%`;
+  if (key === "windiest") return `${r.wind} mph`;
+  if (key === "snowiest") return r.snow_inches != null ? `${r.snow_inches}"` : (r.condition || "Snow");
+  if (key === "rainiest") return r.condition || "Rain";
+  return `${r.temp}°F`;
+}
 function wxCard(key, r) {
-  const unit = key === "muggiest" || key === "driest" ? `${r.humidity}%` : key === "windiest" ? `${r.wind} mph` : `${r.temp}°F`;
-  return `<button class="card" data-gf="${esc(r.game_id)}"><div class="n">${unit}</div>
+  return `<button class="card" data-gf="${esc(r.game_id)}"><div class="n">${esc(wxUnit(key, r))}</div>
     <div class="l">${WX_LABELS[key]}</div><div class="a">${esc(gameName({ away: r.away, home: r.home }))} · Wk ${r.week}</div></button>`;
 }
 function renderWeather() {
@@ -279,8 +285,17 @@ function renderLog() {
 }
 
 /* ---------- Games ---------- */
+const WX_ORDER = ["coldest", "hottest", "muggiest", "driest", "windiest", "rainiest", "snowiest"];
+function gameWeatherTags(gid) {
+  if (!WEATHER || !WEATHER.records) return [];
+  return WX_ORDER.filter(k => WEATHER.records[k] && WEATHER.records[k].game_id === gid).map(k => WX_LABELS[k]);
+}
+
 function renderGames() {
-  const weird = gid => EVENTS.filter(e => e.game_id === gid).reduce((s, e) => s + (e.tier || 0), 0);
+  // A game's "weirdness" counts both oddity-tagged plays and any season
+  // weather record it holds (coldest, hottest, etc.) -- a game with 2
+  // oddities that's also this season's coldest shows "3 odd," not 2.
+  const weird = gid => EVENTS.filter(e => e.game_id === gid).reduce((s, e) => s + (e.tier || 0), 0) + gameWeatherTags(gid).length;
   let gs;
   if (S.scope === "season") {
     gs = GAMES.map(g => [g, weird(g.id)]).filter(x => x[1] > 0).sort((a, b) => b[1] - a[1]).slice(0, 10).map(x => x[0]);
@@ -293,11 +308,14 @@ function renderGames() {
     const ev = EVENTS.filter(e => e.game_id === g.id);
     const c = t => ev.filter(e => e.type === t).length;
     const odd = ev.filter(e => e.tier);
-    const top = Math.max(0, ...odd.map(e => e.tier || 0));
+    const wxTags = gameWeatherTags(g.id);
+    const oddCount = odd.length + wxTags.length;
+    const top = Math.max(0, ...odd.map(e => e.tier || 0), wxTags.length ? 1 : 0);
+    const oddLabel = wxTags.length ? `${oddCount} odd (${wxTags.join(", ")})` : `${oddCount} odd`;
     const score = g.final ? `${g.away_score}–${g.home_score}` : "—";
     return `<button class="game ${S.game === g.id ? "on" : ""}" data-g="${esc(g.id)}"><div class="teams">${gameName(g)}</div>
       <div class="score">${score}</div>
-      <div class="meta">${S.scope === "season" ? `Wk ${g.week} · ` : ""}${gDate(g)} · ${g.kickoff_ct || ""} · ${c("td")} TD · ${c("pen")} flags${odd.length ? ` · <span class="tier t${top}">${odd.length} odd</span>` : ""}</div></button>`;
+      <div class="meta">${S.scope === "season" ? `Wk ${g.week} · ` : ""}${gDate(g)} · ${g.kickoff_ct || ""} · ${c("td")} TD · ${c("pen")} flags${oddCount ? ` · <span class="tier t${top}">${esc(oddLabel)}</span>` : ""}</div></button>`;
   }).join("");
 }
 

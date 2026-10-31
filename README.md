@@ -97,9 +97,14 @@ nflverse's weather field goes — nowhere close to the sport's actual
 all-time extremes (the Ice Bowl, the Freezer Bowl, both well before even
 nflverse's 1999 play-by-play starts). Those live in `data/history.json`'s
 `weather_extremes` category instead, hand-researched the same way the
-rest of that file is — see the History appendix section below. The
-`"since 2002"` panel on `history.html` says as much, pointing at the
-`weather_extremes` entries for the real record holders.
+rest of that file is — see the History appendix section below. Any event
+there can carry an optional `"record"` field (`{label, value}`, e.g.
+`{"label": "Coldest game ever", "value": "-13°F"}`); `history.js` pulls
+every event with one into a prominent "All-time weather records" panel
+at the top of the page, intentionally placed *above* the "since 2002"
+panel — the hand-researched records are the real headline numbers, the
+computed ones are a supplement for the shorter, data-verified era, not
+a replacement.
 
 One parsed value got flagged rather than trusted outright: a 2016
 Steelers-Giants game's weather text reads "71 mph" wind, which is

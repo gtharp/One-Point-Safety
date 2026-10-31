@@ -60,6 +60,9 @@ def main():
             errors.append(f"{eid}: is_death is true but 'cause' is missing or invalid (must be one of {VALID_CAUSES})")
         if e.get("cause") and not e.get("is_death"):
             errors.append(f"{eid}: has a 'cause' tag but is_death isn't true")
+        record = e.get("record")
+        if record is not None and not ({"label", "value"} <= record.keys()):
+            errors.append(f"{eid}: 'record' must have both 'label' and 'value'")
 
     if errors:
         print(f"{len(errors)} problem(s) found:")

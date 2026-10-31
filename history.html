@@ -29,7 +29,7 @@
 <section class="featured">
   <div class="featured-wrap">
     <h2>Featured: The Flying Wedge</h2>
-    <p class="featured-cap">Football's most notorious formation: two wings of players, already running at full speed, converge into a V aimed at one point on the defensive line &mdash; with the ball carrier tucked inside, shielded by the mass. First used by Harvard against Yale in 1892 (not Princeton, a common mix-up). Reconstructed from historical accounts, not a single primary diagram &mdash; see "Read more" for sourcing and caveats.</p>
+    <p class="featured-cap">Football's most notorious formation: two wings of players, already running at full speed, converge into a V aimed at one point on the defensive line &mdash; with the ball carrier tucked inside, shielded by the mass. First used by Harvard against Yale in 1892. Reconstructed from historical accounts, not a single primary diagram &mdash; see "Read more" for sourcing and caveats.</p>
     <svg id="wedgeSvg" viewBox="0 0 800 420" role="img" aria-label="Animated diagram of the Flying Wedge formation">
       <rect class="field" x="0" y="0" width="800" height="420" rx="12"></rect>
       <line class="los" x1="20" y1="200" x2="780" y2="200"></line>
@@ -44,10 +44,18 @@
   </div>
 </section>
 
+<section class="featured" id="wxAllTimeSec" hidden>
+  <div class="featured-wrap">
+    <h2>All-time weather records</h2>
+    <p class="featured-cap">The sport's real extremes &mdash; hand-researched and sourced, not computed, since all of these predate nflverse's weather data entirely. Click a card for the full story and sources.</p>
+    <div class="cards" id="wxAllTimeCards"></div>
+  </div>
+</section>
+
 <section class="featured" id="wxRecordsSec" hidden>
   <div class="featured-wrap">
     <h2>Since 2002, by the numbers</h2>
-    <p class="featured-cap">Real nflverse weather data only goes back to 2002, so these are the true record holders for the data-verified era &mdash; not the sport's all-time records, almost all of which predate this data and are far more extreme (see "Weather extremes" below). <span id="wxRecordsNote"></span></p>
+    <p class="featured-cap">Real nflverse weather data only goes back to 2002, so these are the true data-verified records for games since then &mdash; a supplement to the all-time records above, not a replacement for them; none of these come close. <span id="wxRecordsNote"></span></p>
     <div class="cards" id="wxRecordsCards"></div>
   </div>
 </section>
