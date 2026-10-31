@@ -158,13 +158,52 @@ different outlets, a story that's popular legend more than documented
 rule history, etc.) — mark it rather than silently picking one number.
 Every entry needs at least one real source in `sources`.
 
+Death entries additionally carry `"is_death": true` and a `"cause"` tag --
+`"direct"` (on-field trauma), `"indirect"` (cardiac, heat stroke, other
+medical), `"long_term"` (CTE/brain-trauma-linked, occurring years after
+playing), or `"mixed"` (an aggregate entry spanning more than one cause).
+The front end shows a second row of filter chips for these, cutting across
+categories (e.g. "Indirect" pulls in Chuck Hughes from "Deaths & safety
+reform" alongside anything similarly tagged elsewhere). `cause` requires
+`is_death: true` and vice versa -- the validator checks this pairing.
+
 To add an entry: add it to `data/history.json` by hand, then run
 `python3 scripts/validate_history.py` to check required fields, duplicate
-ids, and that every entry (especially disputed ones) is sourced. The
-current entries were researched via web search with citations, not
-pulled from memory — do the same for new ones rather than trusting
-recalled dates, especially death tolls and "first ever" claims, which are
-exactly the kind of thing that turns out to be disputed across sources.
+ids, valid `cause` values, and that every entry (especially disputed ones)
+is sourced. The current entries were researched via web search with
+citations, not pulled from memory — do the same for new ones rather than
+trusting recalled dates, especially death tolls and "first ever" claims,
+which are exactly the kind of thing that turns out to be disputed across
+sources. Note: this sandbox's network policy blocks youtube.com and
+wikipedia.org entirely, so a source video or Wikipedia page sometimes has
+to be verified indirectly (search results, mirrors, other sites citing
+it) rather than fetched directly -- say so in the entry's `note` if that's
+what happened.
+
+### The Flying Wedge animation
+
+`flying-wedge.js` draws the animated diagram at the top of `history.html`
+(an inline SVG, animated with the Web Animations API — not a literal GIF;
+smaller, crisper, and automatically theme-aware via the site's existing
+CSS variables, at the cost of needing a modern browser). Formation
+geometry (wing positions, convergence point, which defenders get knocked
+back) is hardcoded as coordinate tables at the top of the file rather than
+pulled from `history.json`, since it's a one-off bespoke reconstruction,
+not list data. The "Read more" button opens the corresponding
+`data/history.json` entry (`1892-flying-wedge-invented`) via
+`window.openHistoryEntry(id)`, a small bridge `history.js` exposes for
+this purpose.
+
+One SVG gotcha worth knowing if you touch this file: animating the CSS
+`transform` property via `.animate()` on an element that *also* carries a
+`transform` XML attribute replaces that attribute's value instead of
+composing with it, so an element positioned only via `transform="translate(x,y)"`
+snaps to the SVG origin the instant it's animated. The fix used here is to
+wrap each such element in an outer `<g transform="...">` that sets the
+base position and is never animated, with an inner, attribute-free `<g>`
+as the actual animation target. (Elements positioned via real geometry
+attributes -- a `<circle>`'s `cx`/`cy` -- don't have this problem, since
+those aren't in the same "transform" namespace CSS competes with.)
 
 ## Running locally
 

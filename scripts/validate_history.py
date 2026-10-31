@@ -15,6 +15,9 @@ import sys
 REQUIRED_EVENT_FIELDS = {"id", "year", "date", "category", "title", "summary", "people", "teams", "disputed", "sources"}
 ID_RE = re.compile(r"^[a-z0-9][a-z0-9-]*[a-z0-9]$")
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+# "mixed" is for aggregate/statistical entries covering more than one cause
+# (e.g. a death-count summary), not a specific named death.
+VALID_CAUSES = {"direct", "indirect", "long_term", "mixed"}
 
 
 def main():
@@ -53,6 +56,10 @@ def main():
         for s in sources:
             if not s.get("url", "").startswith("http"):
                 errors.append(f"{eid}: source missing a valid url: {s}")
+        if e.get("is_death") and e.get("cause") not in VALID_CAUSES:
+            errors.append(f"{eid}: is_death is true but 'cause' is missing or invalid (must be one of {VALID_CAUSES})")
+        if e.get("cause") and not e.get("is_death"):
+            errors.append(f"{eid}: has a 'cause' tag but is_death isn't true")
 
     if errors:
         print(f"{len(errors)} problem(s) found:")

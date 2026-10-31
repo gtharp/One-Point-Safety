@@ -12,10 +12,30 @@
   ],
   "events": [
     {
+      "id": "1892-flying-wedge-invented",
+      "year": 1892,
+      "date": null,
+      "category": "safety_crisis",
+      "title": "The Flying Wedge debuts -- Harvard vs. Yale, not Princeton",
+      "summary": "Harvard strategist Lorin F. Deland, who had no football-playing background himself, designed the Flying Wedge -- reportedly inspired by military assault formations -- and Harvard introduced it in its 1892 season-ending game against Yale, opening the second half with it on a kickoff. The play gained real yardage before the runner was tripped up, and Harvard still lost the game 6-0. A popular belief has the play debuting against Princeton; every source checked for this entry agrees the actual opponent was Yale.",
+      "people": ["Lorin F. Deland"],
+      "teams": ["Harvard", "Yale"],
+      "disputed": true,
+      "note": "Sources also disagree on the exact year Deland first got interested in football (1890 vs. 1891) and on the precise sub-grouping of players within the wedge -- accounts vary between two groups of five flanking the ball carrier, a 4-and-5 split, or ten men in the wedge with an eleventh holding the ball. The animated diagram at the top of this page reconstructs the formation (two wings of five, one ball carrier) from these secondary descriptions, not a single primary source -- treat the geometry as a best-available reconstruction, not pixel-exact history.",
+      "sources": [
+        { "label": "Lorin F. Deland (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Lorin_F._Deland" },
+        { "label": "Harvard Crimson, 1926 retrospective", "url": "https://thecrimson.com/article/1926/11/5/flying-wedge-first-used-in-1892" },
+        { "label": "Creators.com", "url": "https://www.creators.com/read/terence-jeffrey/12/16/how-harvard-drove-a-wedge-into-football" },
+        { "label": "Eleven Warriors", "url": "https://www.elevenwarriors.com/2011/07/the-flying-wedge-and-the-big-ten" }
+      ]
+    },
+    {
       "id": "1905-death-toll",
       "year": 1905,
       "date": null,
       "category": "safety_crisis",
+      "is_death": true,
+      "cause": "direct",
       "title": "The 1905 football death crisis",
       "summary": "At least 18 college and prep football players died playing the game in 1905, with well over 100 serious injuries, triggering a national crisis over the sport's brutality and real calls for it to be banned outright.",
       "people": [],
@@ -49,6 +69,8 @@
       "year": 1905,
       "date": "1905-11-25",
       "category": "safety_crisis",
+      "is_death": true,
+      "cause": "direct",
       "title": "A Union College player dies after a game against NYU",
       "summary": "A Union College halfback died within hours of a head injury sustained diving into NYU's line, becoming one of the most publicized deaths of the 1905 season and intensifying the pressure for reform.",
       "people": [],
@@ -112,6 +134,8 @@
       "year": 1971,
       "date": "1971-10-24",
       "category": "safety_crisis",
+      "is_death": true,
+      "cause": "indirect",
       "title": "Chuck Hughes collapses and dies during an NFL game",
       "summary": "Detroit Lions receiver Chuck Hughes collapsed of a heart attack jogging back to the huddle during a game against the Chicago Bears at Tiger Stadium, and died at the hospital; the game continued after he was taken off the field. He'd had an unexplained locker-room collapse after a preseason game that year.",
       "people": ["Chuck Hughes"],
@@ -144,16 +168,19 @@
       "year": 2010,
       "date": null,
       "category": "safety_crisis",
+      "is_death": true,
+      "cause": "mixed",
       "title": "Football's deaths didn't stop -- they moved to high school and college",
-      "summary": "A peer-reviewed analysis of 1990-2010 data found U.S. high school and college football averaged about 12 deaths a year -- roughly 8 indirect (cardiac failure, heat illness, sickle cell trait) and 4 direct (traumatic brain, neck, or abdominal injury). The National Center for Catastrophic Sport Injury Research has published an Annual Survey of Football Injury Research continuously since 1931, and still does. The pro game's near-total absence of on-field deaths since Chuck Hughes masks a death toll that never went away -- it just moved almost entirely below the NFL, and from single dramatic hits to heat stroke and cardiac events during practice and conditioning.",
+      "summary": "A peer-reviewed analysis of 1990-2010 data found U.S. high school and college football averaged about 12 deaths a year -- roughly 8 indirect (cardiac failure, heat illness, sickle cell trait) and 4 direct (traumatic brain, neck, or abdominal injury). More recently, the National Center for Catastrophic Sport Injury Research counted 16 football deaths in 2023 (5 college, 7 high school, 2 middle school, 2 youth) -- only 3 of them traumatic brain injuries from direct play contact, the rest exertional or cardiac. The pro game's near-total absence of on-field deaths since Chuck Hughes masks a death toll that never went away -- it just moved almost entirely below the NFL, and from single dramatic hits to heat stroke and cardiac events during practice and conditioning.",
       "people": [],
       "teams": [],
       "disputed": true,
-      "note": "Reflects a 1990-2010 study period, not a single year's count -- we couldn't extract an exact recent-year figure from NCCSIR's published reports in this research pass. Treat the ~12/year figure as a long-run average, not a current headline number.",
+      "note": "The 12/year figure reflects a 1990-2010 study period, a long-run average, not a current headline number. The 2023 figure of 16 is sourced to news coverage citing NCCSIR data (Daily Herald, Equipment Managers Association, Audacy), not a primary NCCSIR report we could locate directly -- one outlet noted only 13 of the 16 were confirmed as football-caused, so the exact scope of \"16\" varies slightly by source.",
       "sources": [
         { "label": "PubMed", "url": "https://pubmed.ncbi.nlm.nih.gov/23477766/" },
-        { "label": "NCCSIR 2022 annual report (PDF)", "url": "https://nccsir.unc.edu/wp-content/uploads/sites/5614/2023/04/Annual-Football-2022-Fatalities-FINAL-web.pdf" },
-        { "label": "NCCSIR reports index", "url": "https://nccsir.unc.edu/reports/" }
+        { "label": "NCCSIR reports index", "url": "https://nccsir.unc.edu/reports/" },
+        { "label": "Daily Herald (2023 figures)", "url": "https://www.dailyherald.com/?p=1308103" },
+        { "label": "Equipment Managers Association (2023 figures)", "url": "https://equipmentmanagers.org/?p=41638" }
       ]
     },
     {
@@ -161,6 +188,8 @@
       "year": 2018,
       "date": "2018-06-13",
       "category": "safety_crisis",
+      "is_death": true,
+      "cause": "indirect",
       "title": "Jordan McNair dies of heat stroke after a Maryland conditioning workout",
       "summary": "Maryland offensive lineman Jordan McNair collapsed during a May 29, 2018 offseason conditioning workout and died June 13 of heat stroke, after an emergency liver transplant. An independent medical review found the university culpable: athletic trainers missed escalating symptoms, his cramping complaints were atypically read, and more than an hour passed before 911 was called. University president Wallace Loh publicly accepted \"legal and moral responsibility,\" and a separate investigation into the program's culture followed a report alleging toxicity.",
       "people": ["Jordan McNair", "Wallace Loh"],
@@ -171,6 +200,41 @@
         { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Jordan_McNair" },
         { "label": "CBS Sports", "url": "https://www.cbssports.com/college-football/news/investigation-finds-maryland-culpable-in-death-of-jordan-mcnair-d-j-durkin-remains-on-leave" },
         { "label": "ESPN", "url": "https://www.espn.com/college-football/story/_/id/24343021/jordan-mcnair-maryland-terrapins-died-heatstroke-team-workout" }
+      ]
+    },
+    {
+      "id": "2008-max-gilpin",
+      "year": 2008,
+      "date": "2008-08-23",
+      "category": "safety_crisis",
+      "is_death": true,
+      "cause": "indirect",
+      "title": "Max Gilpin's death leads to the first criminal charges against a football coach",
+      "summary": "15-year-old lineman Max Gilpin collapsed after wind sprints in 94-degree heat at a Pleasure Ridge Park High School (Louisville, KY) practice and died three days later of heat stroke. His coach, Jason Stinson, was charged with reckless homicide -- the first time a football coach had ever been criminally charged over a player's death -- and was acquitted in September 2009 after a two-hour jury deliberation. Kentucky passed a law afterward requiring coaches to complete heat-illness and emergency-planning training.",
+      "people": ["Max Gilpin", "Jason Stinson"],
+      "teams": ["Pleasure Ridge Park High School"],
+      "disputed": false,
+      "sources": [
+        { "label": "ABC News", "url": "https://abcnews.go.com/amp/GMA/MensHealth/football-coach-jason-stinsonons-trial-players-heat-death/story?id=8605588" },
+        { "label": "Claims Journal", "url": "https://amp.claimsjournal.com/news/southeast/2009/09/21/103903.htm" }
+      ]
+    },
+    {
+      "id": "2017-zach-martin-polsenberg",
+      "year": 2017,
+      "date": null,
+      "category": "safety_crisis",
+      "is_death": true,
+      "cause": "indirect",
+      "title": "Zach Martin-Polsenberg's death leads to Florida's cold-tub law",
+      "summary": "16-year-old Zach Martin-Polsenberg collapsed during a summer workout at Riverdale High School (Fort Myers, FL) and died 11 days later of heat stroke; no cold-water immersion tub was present at the practice. Florida's \"Zachary Martin Act,\" signed in June 2020, now requires public schools to keep cold-water immersion tubs at practices and games and to train staff to recognize heat illness.",
+      "people": ["Zach Martin-Polsenberg"],
+      "teams": ["Riverdale High School"],
+      "disputed": true,
+      "note": "His collapse was in June 2017; we don't have a confirmed exact date. A lawsuit against the school district is reported to have settled for roughly $950,000, but that figure is unconfirmed by the district itself.",
+      "sources": [
+        { "label": "News4Jax", "url": "https://www.news4jax.com/news/florida/2020/06/24/florida-enacts-heat-stroke-protections-for-student-athletes-named-for-teen-who-died/" },
+        { "label": "FOX 13", "url": "https://www.fox13news.com/news/florida-mom-of-high-school-football-player-who-died-of-heatstroke-advocates-for-athlete-safety-bill" }
       ]
     },
 
@@ -348,6 +412,8 @@
       "year": 2011,
       "date": null,
       "category": "rule_changing_injuries",
+      "is_death": true,
+      "cause": "long_term",
       "title": "Dave Duerson and Junior Seau: CTE-linked suicides",
       "summary": "Two prominent former NFL players died by suicide years after retiring, each later linked to chronic traumatic encephalopathy. Former Bears safety Dave Duerson died in February 2011, leaving a note asking that his brain be studied; Boston University confirmed CTE that May. Former Chargers linebacker Junior Seau died on May 2, 2012, at age 43; five neuropathologists later confirmed he had CTE too.",
       "people": ["Dave Duerson", "Junior Seau"],

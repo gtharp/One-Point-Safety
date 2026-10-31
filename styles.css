@@ -165,6 +165,13 @@ body.tv footer{display:none}
 .yearpill{display:inline-block;font-size:.68rem;font-weight:800;padding:.08rem .5rem;border-radius:99px;background:var(--accent-soft);color:var(--accent)}
 .disputed{display:inline-block;font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:.08rem .45rem;border-radius:99px;background:var(--warn-soft);color:var(--warn);margin-left:.3rem;vertical-align:middle}
 .catpill{display:inline-block;font-size:.62rem;font-weight:700;padding:.06rem .45rem;border-radius:99px;margin-left:.3rem;vertical-align:middle}
+.causepill{display:inline-block;font-size:.6rem;font-weight:700;padding:.06rem .45rem;border-radius:99px;margin-left:.3rem;vertical-align:middle;background:var(--bg);border:1px solid var(--line);color:var(--muted)}
+.chip.cause-direct,.causepill.cause-direct{color:var(--warn)}
+.chip.cause-indirect,.causepill.cause-indirect{color:var(--gold)}
+.chip.cause-long_term,.causepill.cause-long_term{color:var(--purple)}
+.chip.cause-direct.on{background:var(--warn);border-color:var(--warn);color:#fff}
+.chip.cause-indirect.on{background:var(--gold);border-color:var(--gold);color:#fff}
+.chip.cause-long_term.on{background:var(--purple);border-color:var(--purple);color:#fff}
 
 /* Distinct color per history category -- used for the left border on both
    the timeline (mobile) and quilt (desktop) layouts, plus the .catpill. */
@@ -178,6 +185,20 @@ body.tv footer{display:none}
 .catpill.cat-outlawed_plays{background:var(--gold-soft);color:var(--gold)}
 .catpill.cat-rule_changing_injuries{background:var(--purple-soft);color:var(--purple)}
 .catpill.cat-firsts{background:var(--accent-soft);color:var(--accent)}
+
+/* ---------- Flying Wedge featured animation ---------- */
+.featured{background:var(--card);border-bottom:1px solid var(--line);padding:1.1rem 1rem 1.3rem}
+.featured-wrap{max-width:800px;margin:0 auto}
+.featured h2{font-size:.78rem;margin:0 0 .5rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.featured-cap{font-size:.85rem;color:var(--muted);margin:0 0 .7rem;line-height:1.5}
+#wedgeSvg{width:100%;height:auto;display:block;border-radius:10px}
+.field{fill:var(--bg)}
+.los{stroke:var(--line);stroke-width:2;stroke-dasharray:6 5}
+.fieldlabel{font-size:11px;fill:var(--muted);font-family:inherit}
+.wedge-x line{stroke:var(--warn);stroke-width:3;stroke-linecap:round}
+.wedge-o{fill:var(--accent)}
+.wedge-ball{fill:var(--gold);stroke:var(--card);stroke-width:2}
+.featured-actions{display:flex;gap:.5rem;margin-top:.8rem;flex-wrap:wrap}
 
 /* Quilt: a dense mosaic grid on large screens. Below the breakpoint the
    feed stays the plain single-column timeline list. */
