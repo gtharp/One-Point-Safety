@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>One-Point Safety — History</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div class="hrow">
+    <h1>One-Point <span>Safety</span></h1>
+    <nav class="hnav">
+      <a class="navlink" href="index.html">Live stats</a>
+    </nav>
+  </div>
+  <div class="hwrap">
+    <div class="sub">An appendix of deaths, banned plays, equipment changes, firsts, and other wild true stories from football history &mdash; hand-researched, sourced, and separate from the live season tracker.</div>
+    <div class="controls">
+      <div class="days" id="cats"></div>
+      <button class="chip resetbtn" id="resetAll" hidden>&times; Reset filters</button>
+    </div>
+  </div>
+</header>
+
+<main class="layout histlayout" id="layout" hidden>
+  <section class="a-odd hist-full">
+    <h2>Events <small id="evCount"></small> <button class="linkbtn" id="sortDir"></button></h2>
+    <div class="panel">
+      <div id="feed" class="feed"></div>
+      <button class="chip more" id="moreFeed" hidden></button>
+    </div>
+  </section>
+</main>
+
+<div class="loading" id="loading">Loading history&hellip;</div>
+
+<footer>
+  Hand-researched and sourced where possible &mdash; see each entry for citations. Corrections welcome (open an issue). Not affiliated with the NFL.
+  <div class="donate">Enjoying the site? <a href="https://venmo.com/u/George-Tharp" target="_blank" rel="noopener">Chip in on Venmo</a></div>
+</footer>
+
+<div class="scrim" id="scrim"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Historical event details"></div>
+
+<script src="history.js"></script>
+</body>
+</html>

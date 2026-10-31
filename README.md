@@ -125,6 +125,47 @@ here. These are approximations, noted in case a rule needs retuning:
   which also caught the unrelated "Injury Update: X has returned to the
   game" notices — fixed to match only `"injured"`.)
 
+## The History appendix
+
+`history.html` (linked from the main page's header) is a separate page: a
+hand-researched index of deaths, banned plays, equipment changes, and
+other historic firsts from football's past — most of it from well before
+nflverse's play-by-play data starts, so it can't be generated the way the
+season data is. It's static content, not a pipeline.
+
+Its data lives in `data/history.json`: a `categories` list (id, label,
+blurb) and an `events` list. Each event is:
+
+```json
+{
+  "id": "2005-horse-collar-ban",
+  "year": 2005,
+  "date": null,
+  "category": "outlawed_plays",
+  "title": "The horse-collar tackle banned — the \"Roy Williams Rule\"",
+  "summary": "...",
+  "people": ["Roy Williams"],
+  "teams": ["Dallas Cowboys"],
+  "disputed": false,
+  "note": "...",
+  "sources": [{ "label": "Wikipedia", "url": "https://..." }]
+}
+```
+
+`date` is `null` when only the year is known. `disputed` + `note` are for
+facts that vary across sources (a death toll reported differently by
+different outlets, a story that's popular legend more than documented
+rule history, etc.) — mark it rather than silently picking one number.
+Every entry needs at least one real source in `sources`.
+
+To add an entry: add it to `data/history.json` by hand, then run
+`python3 scripts/validate_history.py` to check required fields, duplicate
+ids, and that every entry (especially disputed ones) is sourced. The
+current 38 entries were researched via web search with citations, not
+pulled from memory — do the same for new ones rather than trusting
+recalled dates, especially death tolls and "first ever" claims, which are
+exactly the kind of thing that turns out to be disputed across sources.
+
 ## Running locally
 
 ```bash

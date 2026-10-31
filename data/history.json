@@ -1,0 +1,608 @@
+{
+  "meta": {
+    "note": "Hand-curated, not auto-generated. See README.md for how to add an entry and scripts/validate_history.py to check it.",
+    "last_updated": "2026-10-31"
+  },
+  "categories": [
+    { "id": "safety_crisis", "label": "Deaths & safety reform", "blurb": "The early-1900s crisis that nearly got football banned outright, and the rules it produced." },
+    { "id": "equipment", "label": "Equipment evolution", "blurb": "Helmets, facemasks, and the slow road to the gear players wear today." },
+    { "id": "outlawed_plays", "label": "Plays & hits later banned", "blurb": "Moves that were once legal, the players known for them, and when the league outlawed them." },
+    { "id": "rule_changing_injuries", "label": "Injuries that shook the league", "blurb": "Specific incidents that became turning points for player safety, documented or not." },
+    { "id": "firsts", "label": "Historic firsts", "blurb": "Notable firsts across the sport's history." }
+  ],
+  "events": [
+    {
+      "id": "1905-death-toll",
+      "year": 1905,
+      "date": null,
+      "category": "safety_crisis",
+      "title": "The 1905 football death crisis",
+      "summary": "At least 18 college and prep football players died playing the game in 1905, with well over 100 serious injuries, triggering a national crisis over the sport's brutality and real calls for it to be banned outright.",
+      "people": [],
+      "teams": [],
+      "disputed": true,
+      "note": "The death toll is reported differently across sources: 18 (Theodore Roosevelt Center), 19 (the most commonly cited figure, from a contemporary Chicago Tribune count), and as high as 23 (American Heritage). Injury counts cited range from 137 to 159.",
+      "sources": [
+        { "label": "History.com", "url": "https://www.history.com/articles/how-teddy-roosevelt-saved-football" },
+        { "label": "New England Historical Society", "url": "https://newenglandhistoricalsociety.com/footballs-death-harvest-of-1905-or-how-teddy-roosevelt-saved-the-grid-game/" },
+        { "label": "Theodore Roosevelt Center", "url": "https://www.theodorerooseveltcenter.org/encyclopedia/culture-and-society/football/" },
+        { "label": "Paleofuture", "url": "https://paleofuture.com/blog/2013/9/19/19-football-players-died-in-1905-but-calls-for-reform-were-mocked" }
+      ]
+    },
+    {
+      "id": "1905-roosevelt-meeting",
+      "year": 1905,
+      "date": "1905-10-09",
+      "category": "safety_crisis",
+      "title": "Roosevelt summons Harvard, Yale, and Princeton to the White House",
+      "summary": "President Theodore Roosevelt met with representatives of the sport's three powerhouse programs and pressed them to clean up football's violence, reportedly threatening to ban the game by executive order if it didn't reform.",
+      "people": ["Theodore Roosevelt"],
+      "teams": ["Harvard", "Yale", "Princeton"],
+      "disputed": false,
+      "sources": [
+        { "label": "History.com", "url": "https://www.history.com/articles/how-teddy-roosevelt-saved-football" },
+        { "label": "Theodore Roosevelt Center", "url": "https://www.theodorerooseveltcenter.org/encyclopedia/culture-and-society/football/" }
+      ]
+    },
+    {
+      "id": "1905-union-college-death",
+      "year": 1905,
+      "date": "1905-11-25",
+      "category": "safety_crisis",
+      "title": "A Union College player dies after a game against NYU",
+      "summary": "A Union College halfback died within hours of a head injury sustained diving into NYU's line, becoming one of the most publicized deaths of the 1905 season and intensifying the pressure for reform.",
+      "people": [],
+      "teams": ["Union College", "NYU"],
+      "disputed": true,
+      "note": "Sources disagree on the player's first name (\"Harold,\" \"William,\" \"Blue,\" and \"W.R.\" all appear in different accounts) and the precise cause of death (cerebral hemorrhage vs. concussion). We've deliberately left out a first name pending better verification against primary 1905 records.",
+      "sources": [
+        { "label": "Tom Benjey", "url": "https://tombenjey.com/2011/03/03/names-of-players-who-died-in-1905/" },
+        { "label": "Deadspin", "url": "https://deadspin.com/did-football-cause-20-deaths-in-1905-re-investigating-1506758181/" }
+      ]
+    },
+    {
+      "id": "1905-iaaus-founded",
+      "year": 1905,
+      "date": "1905-12-28",
+      "category": "safety_crisis",
+      "title": "Forerunner of the NCAA founded, in direct response to the crisis",
+      "summary": "Representatives of 62 football-playing schools met and formed the Intercollegiate Athletic Association of the United States, explicitly to regulate the sport after the 1905 death toll. It adopted a formal constitution on March 31, 1906, and was renamed the National Collegiate Athletic Association on December 29, 1910.",
+      "people": [],
+      "teams": [],
+      "disputed": false,
+      "sources": [
+        { "label": "NCAA.org timeline", "url": "https://www.ncaa.org/timeline-1900s" },
+        { "label": "EBSCO", "url": "https://www.ebsco.com/research-starters/sports-and-leisure/american-college-football-allows-forward-pass" }
+      ]
+    },
+    {
+      "id": "1906-forward-pass-legalized",
+      "year": 1906,
+      "date": null,
+      "category": "safety_crisis",
+      "title": "Forward pass legalized, first downs lengthened, mass formations curtailed",
+      "summary": "New rules for the 1906 season legalized the forward pass, changed the first-down requirement to 5 yards in 4 downs (from 3 downs), and began dismantling football's dangerous mass-formation plays — all direct responses to the 1905 crisis.",
+      "people": [],
+      "teams": [],
+      "disputed": false,
+      "sources": [
+        { "label": "EBSCO", "url": "https://www.ebsco.com/research-starters/sports-and-leisure/american-college-football-allows-forward-pass" },
+        { "label": "History.com", "url": "https://www.history.com/articles/forward-pass-football-invented-origins" }
+      ]
+    },
+    {
+      "id": "1906-flying-wedge-banned",
+      "year": 1906,
+      "date": null,
+      "category": "safety_crisis",
+      "title": "The flying wedge is effectively banned",
+      "summary": "Football's infamous \"flying wedge\" mass-formation play, first restricted in 1894, was effectively ended by the 1906 rules requiring six men on the line of scrimmage at the snap, with further anti-mass-play rules (banning pushing or pulling the ball carrier) following around 1910.",
+      "people": [],
+      "teams": [],
+      "disputed": true,
+      "note": "A widely repeated claim that the flying wedge alone caused \"22 deaths and 150 injuries\" in 1905 could not be verified against a reliable source and is likely a conflation with that season's overall death/injury totals, so we've left it out.",
+      "sources": [
+        { "label": "The New Republic", "url": "https://newrepublic.com/article/74483/colle-football-bans-wedge-blocking-kickoffs" },
+        { "label": "Packers.com", "url": "https://www.packers.com/news/would-the-1906-rule-changes-banning-the-turtle-back-wedge-apply-to-the-tush-push" },
+        { "label": "Eleven Warriors", "url": "https://www.elevenwarriors.com/2011/07/the-flying-wedge-and-the-big-ten" }
+      ]
+    },
+
+    {
+      "id": "1920s-leather-helmets",
+      "year": 1920,
+      "date": null,
+      "category": "equipment",
+      "title": "Leather helmets become standard",
+      "summary": "Hardened leather helmets became the sport's de facto standard through the 1920s, though wearing one remained optional in many leagues for years afterward.",
+      "people": [],
+      "teams": [],
+      "disputed": false,
+      "sources": [
+        { "label": "Smithsonian", "url": "https://www.smithsonianmag.com/arts-culture/leatherhead-to-radio-head-the-evolution-of-the-football-helmet-56585562/" }
+      ]
+    },
+    {
+      "id": "1940-first-plastic-helmet",
+      "year": 1940,
+      "date": null,
+      "category": "equipment",
+      "title": "First plastic football helmet",
+      "summary": "Riddell designed the first plastic helmet shell in 1939, and Northwestern became the first team to wear one in a game, in its 1940 season opener against Syracuse.",
+      "people": [],
+      "teams": ["Northwestern", "Syracuse"],
+      "disputed": false,
+      "sources": [
+        { "label": "footballarchaeology.com", "url": "https://www.footballarchaeology.com/p/todays-tidbit-the-watershed-syracuse" },
+        { "label": "Wikipedia: History of the football helmet", "url": "https://en.wikipedia.org/wiki/History_of_the_football_helmet" }
+      ]
+    },
+    {
+      "id": "1941-last-helmetless-player",
+      "year": 1941,
+      "date": "1941-12-21",
+      "category": "equipment",
+      "title": "The last helmetless player in NFL history",
+      "summary": "Chicago Bears end Dick Plasman played the 1941 NFL Championship Game without a helmet — two weeks after Pearl Harbor — catching two passes for 48 yards in a Bears win, widely cited as the last time any NFL player took the field bare-headed.",
+      "people": ["Dick Plasman"],
+      "teams": ["Chicago Bears"],
+      "disputed": true,
+      "note": "One source places his final helmetless game in the 1940 championship rather than 1941; 1941 is the more commonly cited year.",
+      "sources": [
+        { "label": "History.com", "url": "https://www.history.com/news/nfl-last-helmetless-player-dick-plasman" },
+        { "label": "CBS Sports", "url": "https://www.cbssports.com/nfl/news/remember-when-dick-plasman-was-last-player-to-forgo-a-helmet" }
+      ]
+    },
+    {
+      "id": "1943-helmets-mandatory",
+      "year": 1943,
+      "date": null,
+      "category": "equipment",
+      "title": "NFL mandates helmets for all players",
+      "summary": "1943 was the first season the NFL required every player to wear a helmet; college football had already made them mandatory earlier.",
+      "people": [],
+      "teams": [],
+      "disputed": false,
+      "sources": [
+        { "label": "NBC Sports / ProFootballTalk", "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/recalling-when-the-nfl-made-helmets-mandatory" }
+      ]
+    },
+    {
+      "id": "1948-plastic-helmet-ban-reversal",
+      "year": 1948,
+      "date": null,
+      "category": "equipment",
+      "title": "The NFL's brief ban on plastic helmets",
+      "summary": "The NFL outlawed plastic helmets in 1948 over injury-risk concerns, then reversed course in 1949 and made plastic the league's official material, phasing out leather helmets industry-wide by the 1950s.",
+      "people": [],
+      "teams": [],
+      "disputed": false,
+      "sources": [
+        { "label": "Smithsonian", "url": "https://www.smithsonianmag.com/arts-culture/leatherhead-to-radio-head-the-evolution-of-the-football-helmet-56585562/" },
+        { "label": "footballarchaeology.com", "url": "https://www.footballarchaeology.com/p/todays-tidbit-transitioning-from" }
+      ]
+    },
+    {
+      "id": "1953-otto-graham-facemask",
+      "year": 1953,
+      "date": "1953-11-15",
+      "category": "equipment",
+      "title": "Otto Graham's facemask and the popularizing of the modern mask",
+      "summary": "Browns quarterback Otto Graham took a hit to the face from the 49ers' Art Michalik that required 15 stitches; he returned wearing a crude plastic mask the team improvised on the spot, popularizing the facemask. Paul Brown and Riddell developed the single-bar facemask the following year.",
+      "people": ["Otto Graham", "Art Michalik", "Paul Brown"],
+      "teams": ["Cleveland Browns", "San Francisco 49ers"],
+      "disputed": true,
+      "note": "Popularly framed as the facemask's origin story, though the Johnny Bright incident two years earlier is arguably the more direct cause of the NCAA's mandatory-facemask rule (see \"Injuries that shook the league\"). The final score of the Graham game is also reported inconsistently (23-21 vs. 23-20).",
+      "sources": [
+        { "label": "Cleveland Browns", "url": "https://www.clevelandbrowns.com/news/the-otto-graham-myth-and-the-evolution-of-the-face-mask-13045034" },
+        { "label": "Sports Illustrated", "url": "https://mmqb.si.com/2014/06/25/nfl-history-in-95-objects-single-bar-face-mask" }
+      ]
+    },
+    {
+      "id": "1955-facemasks-mandatory",
+      "year": 1955,
+      "date": null,
+      "category": "equipment",
+      "title": "NFL mandates facemasks for all players",
+      "summary": "1955 was the first season the NFL required facemasks league-wide, with exceptions grantable only by the commissioner.",
+      "people": [],
+      "teams": [],
+      "disputed": false,
+      "sources": [
+        { "label": "NBC Sports / ProFootballTalk", "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/recalling-when-the-nfl-made-helmets-mandatory" }
+      ]
+    },
+
+    {
+      "id": "1951-johnny-bright-incident",
+      "year": 1951,
+      "date": "1951-10-20",
+      "category": "rule_changing_injuries",
+      "title": "The Johnny Bright Incident",
+      "summary": "Drake University's Johnny Bright, a Black Heisman Trophy candidate, was repeatedly punched and elbowed in the face — unrelated to the play — by Oklahoma A&M's Wilbanks Smith, breaking his jaw. The attack was captured in a photo sequence that won the 1952 Pulitzer Prize, and is widely credited with prompting the NCAA to crack down on late hits and require ball-carriers to wear facemasks. Oklahoma State formally apologized in 2005.",
+      "people": ["Johnny Bright", "Wilbanks Smith"],
+      "teams": ["Drake", "Oklahoma A&M"],
+      "disputed": false,
+      "sources": [
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Johnny_Bright_incident" },
+        { "label": "Andscape", "url": "https://andscape.com/features/brutal-attack-on-black-heisman-favorite-drake-university-johnny-bright-led-the-ncaa-to-make-face-masks-mandatory" }
+      ]
+    },
+    {
+      "id": "1978-tatum-stingley-hit",
+      "year": 1978,
+      "date": "1978-08-12",
+      "category": "rule_changing_injuries",
+      "title": "Jack Tatum's hit paralyzes Darryl Stingley",
+      "summary": "In a preseason game between the Patriots and Raiders, Jack Tatum's hit on Darryl Stingley — legal under the rules at the time, no flag thrown — broke two vertebrae in Stingley's neck, leaving him paralyzed for the rest of his life. He died in 2007. The hit became a lasting touchstone in conversations about defenseless-receiver rules.",
+      "people": ["Jack Tatum", "Darryl Stingley"],
+      "teams": ["New England Patriots", "Oakland Raiders"],
+      "disputed": true,
+      "note": "No source documents a specific NFL rule change citing this play by name — it's a widely cited cultural touchstone, not a verified direct cause of a rule change.",
+      "sources": [
+        { "label": "History.com", "url": "https://loki.editorial.aetnd.com/this-day-in-history/rising-nfl-star-paralyzed-by-hit" },
+        { "label": "ESPN", "url": "https://www.espn.com/blog/afceast/post/_/id/15437/tatums-death-summons-stingley-tragedy" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Darryl_Stingley" }
+      ]
+    },
+    {
+      "id": "1985-theismann-leg",
+      "year": 1985,
+      "date": "1985-11-18",
+      "category": "rule_changing_injuries",
+      "title": "Lawrence Taylor breaks Joe Theismann's leg on Monday Night Football",
+      "summary": "Giants linebacker Lawrence Taylor sacked Redskins quarterback Joe Theismann on live national television; Taylor's knee landed on Theismann's leg, causing a compound fracture that ended Theismann's career. The play became an enduring cultural symbol of quarterback vulnerability.",
+      "people": ["Lawrence Taylor", "Joe Theismann"],
+      "teams": ["New York Giants", "Washington Redskins"],
+      "disputed": true,
+      "note": "As with the Stingley hit, no documented NFL rule change is tied specifically to this play by name — it's a cultural touchstone, not a verified direct cause.",
+      "sources": [
+        { "label": "ABC7 NY", "url": "https://abc7ny.com/post/lawrence-taylor-remembers-joe-theismanns-brutal-injury/1620524/" },
+        { "label": "Washingtonian", "url": "https://www.washingtonian.com/2015/09/29/the-oral-history-of-joe-theismanns-broken-leg" }
+      ]
+    },
+    {
+      "id": "2002-mike-webster-cte",
+      "year": 2002,
+      "date": null,
+      "category": "rule_changing_injuries",
+      "title": "Mike Webster's death and the discovery of CTE",
+      "summary": "Hall of Fame center Mike Webster died after years of cognitive decline. Forensic pathologist Dr. Bennet Omalu's autopsy identified chronic traumatic encephalopathy (CTE) in his brain — the first such diagnosis in a former NFL player. The NFL's own committee publicly demanded Omalu retract his findings, calling them \"completely wrong.\"",
+      "people": ["Mike Webster", "Bennet Omalu"],
+      "teams": [],
+      "disputed": true,
+      "note": "Sources disagree on the exact year of Webster's death (2002 vs. 2003).",
+      "sources": [
+        { "label": "CBS News", "url": "https://www.cbsnews.com/boston/news/report-nfl-concussion-settlement-becomes-official-after-supreme-court-rejects-case/" },
+        { "label": "historyplace.com", "url": "https://historyplace.com/specials/reviews/concussion.htm" }
+      ]
+    },
+    {
+      "id": "2012-bountygate",
+      "year": 2012,
+      "date": "2012-03-21",
+      "category": "rule_changing_injuries",
+      "title": "Bountygate: Saints coaches and players suspended over a pay-for-injury scheme",
+      "summary": "The NFL concluded the New Orleans Saints operated a bounty program paying players for injuring opponents. The league fined the team $500,000, stripped two second-round draft picks, and suspended head coach Sean Payton for the entire 2012 season, GM Mickey Loomis for 8 games, and defensive coordinator Gregg Williams indefinitely. Four players were suspended that May, but an arbitration panel vacated those suspensions that September, and former commissioner Paul Tagliabue voided them entirely that December while still condemning the team's conduct.",
+      "people": ["Sean Payton", "Gregg Williams", "Mickey Loomis", "Jonathan Vilma"],
+      "teams": ["New Orleans Saints"],
+      "disputed": false,
+      "sources": [
+        { "label": "Sports Illustrated", "url": "https://www.si.com/nfl/2012/03/21/nfl-hammers-saints-gregg-williams-for-bounty-scandal" },
+        { "label": "Washington Times", "url": "https://www.washingtontimes.com/news/2012/may/2/nfl-suspends-4-players-saints-bounties/" }
+      ]
+    },
+    {
+      "id": "2015-concussion-settlement",
+      "year": 2015,
+      "date": "2015-04-22",
+      "category": "rule_changing_injuries",
+      "title": "NFL concussion litigation reaches final settlement",
+      "summary": "Following years of CTE research and mounting lawsuits (the first filed in 2006 by former players), a class action led by Ray Easterling was filed in August 2011. A settlement worth up to $765 million was reached in 2013, revised and court-approved in June 2014, and received final approval in April 2015.",
+      "people": ["Ray Easterling"],
+      "teams": [],
+      "disputed": false,
+      "sources": [
+        { "label": "CBS News", "url": "https://www.cbsnews.com/boston/news/report-nfl-concussion-settlement-becomes-official-after-supreme-court-rejects-case/" }
+      ]
+    },
+    {
+      "id": "2009-concussion-protocol",
+      "year": 2009,
+      "date": null,
+      "category": "rule_changing_injuries",
+      "title": "The NFL's concussion protocol takes shape",
+      "summary": "A formal in-game concussion evaluation protocol began taking shape starting around 2009. Independent neurotrauma consultants were added to sidelines for the 2014 season, and the league began issuing fines for protocol violations by 2016-2017 (the Seahawks were fined $100,000 in 2017).",
+      "people": [],
+      "teams": ["Seattle Seahawks"],
+      "disputed": true,
+      "note": "Sources disagree on the exact origin year of the formal protocol (2009 vs. 2011, the latter crediting the league's Head, Neck and Spine Committee).",
+      "sources": [
+        { "label": "Stacker (via edhat.com)", "url": "https://www.edhat.com/?p=292749" }
+      ]
+    },
+
+    {
+      "id": "night-train-necktie",
+      "year": 1961,
+      "date": null,
+      "category": "outlawed_plays",
+      "title": "The \"Night Train Necktie\"",
+      "summary": "Hall of Fame defensive back Dick \"Night Train\" Lane was known for a brutal, high clothesline-style tackle that wrapped ball carriers around the neck, nicknamed the \"Night Train Necktie.\" A 1961 Detroit Free Press column ties a face-mask-grabbing tackle Lane made on Jon Arnett to the pressure that led the league to outlaw grabbing a ball carrier's face mask.",
+      "people": ["Dick \"Night Train\" Lane", "Jon Arnett"],
+      "teams": [],
+      "disputed": true,
+      "note": "No official NFL rulebook citation directly ties a rule change to Lane by name. The connection between his tackles and the specific rule changes they're credited with (banning face-mask grabs, and later the clothesline/neck tackle generally) comes from secondary and fan sources, not primary rule text — likely but unconfirmed.",
+      "sources": [
+        { "label": "ESPN obituary", "url": "https://www.espn.com/classic/obit/s/2002/0130/1319943.html" },
+        { "label": "Detroit Free Press archive", "url": "https://www.newspapers.com/newspage/98183562" },
+        { "label": "Kiddle", "url": "https://kids.kiddle.co/Night_Train_Lane" }
+      ]
+    },
+    {
+      "id": "2005-horse-collar-ban",
+      "year": 2005,
+      "date": null,
+      "category": "outlawed_plays",
+      "title": "The horse-collar tackle banned — the \"Roy Williams Rule\"",
+      "summary": "After Cowboys safety Roy Williams injured several players — including ending Musa Smith's season — by grabbing the inside back collar of their shoulder pads or jersey and yanking them down, NFL owners voted 27-5 to ban the horse-collar tackle starting in 2005, with a 15-yard penalty and automatic first down. The rule was expanded in 2006 to cover grabbing the jersey as well as pads, was adopted by college football in 2008 and high school football in 2009, and Williams himself was suspended one game in 2007 for a third violation, on Donovan McNabb.",
+      "people": ["Roy Williams", "Musa Smith", "Donovan McNabb"],
+      "teams": ["Dallas Cowboys"],
+      "disputed": false,
+      "sources": [
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Horse-collar_tackle" },
+        { "label": "NFL.com", "url": "https://amp.nfl.com/news/league-upholds-one-game-suspension-of-cowboys-williams-09000d5d805425f0" }
+      ]
+    },
+    {
+      "id": "spearing-helmet-to-helmet",
+      "year": 1976,
+      "date": null,
+      "category": "outlawed_plays",
+      "title": "Spearing and helmet-to-helmet hits banned",
+      "summary": "Leading with the crown of the helmet (\"spearing\") was broadly banned across football in 1976, credited with a documented drop in catastrophic head and neck injuries afterward. The NFL separately banned helmet-to-helmet hits initiated by defenders in 1996, extended the rule to cover hits on a quarterback after a turnover in 2002, and adopted a stricter, NCAA-style crown-of-the-helmet \"targeting\" rule in 2017.",
+      "people": [],
+      "teams": [],
+      "disputed": true,
+      "note": "One source dates the NFL's own adoption of the spearing ban to 2006 rather than the broader 1976 ban, and the 2017 effective date isn't confirmed against the primary rulebook — treat this timeline as approximate.",
+      "sources": [
+        { "label": "Wikipedia: Spearing", "url": "https://en.wikipedia.org/wiki/Spearing_(gridiron_football)" },
+        { "label": "Wikipedia: Helmet-to-helmet collision", "url": "https://en.wikipedia.org/wiki/Helmet-to-helmet_collision" }
+      ]
+    },
+    {
+      "id": "1977-head-slap-ban",
+      "year": 1977,
+      "date": null,
+      "category": "outlawed_plays",
+      "title": "The head slap banned — the \"Deacon Jones Rule\"",
+      "summary": "Hall of Fame defensive end Deacon Jones popularized the head slap, swatting blockers' helmets at the snap to stun them. The NFL banned the move in 1977, a rule still informally known as the \"Deacon Jones Rule.\"",
+      "people": ["Deacon Jones"],
+      "teams": [],
+      "disputed": true,
+      "note": "A non-official source claims a 1976 rule first restricted the multiple head slap before the full 1977 ban — this earlier step couldn't be verified against a primary source.",
+      "sources": [
+        { "label": "NFL Football Journal", "url": "https://nflfootballjournal.blogspot.com/2018/10/deacon-got-head-slap-from-tombstone.html" },
+        { "label": "ClutchPoints", "url": "https://clutchpoints.com/nfl/nfl-stories/why-was-the-deacon-jones-head-slap-banned-from-the-nfl" }
+      ]
+    },
+    {
+      "id": "crackback-chop-blocks",
+      "year": 1977,
+      "date": null,
+      "category": "outlawed_plays",
+      "title": "Crackback and chop blocks restricted, then banned",
+      "summary": "The NFL outlawed the crackback block in 1977 and expanded its restricted zone from 3 to 5 yards on each side of the line in 1979. A 1981 rule addressed chop blocks at the thigh or below, and all forms of the chop block were banned outright before the 2016 season — a cohort study afterward found defensive players' knee-injury rate had dropped. The \"peel-back block\" was separately banned and is informally called the \"Brian Cushing Rule,\" after the Texans linebacker whose career-altering knee injury prompted it.",
+      "people": ["Brian Cushing"],
+      "teams": ["Houston Texans"],
+      "disputed": false,
+      "sources": [
+        { "label": "Wikipedia: Chop block", "url": "https://en.wikipedia.org/wiki/Chop_block_(gridiron_football)" },
+        { "label": "Sports Illustrated Vault, 1977", "url": "https://vault.si.com/vault/1977/06/27/scorecard" },
+        { "label": "NFL.com", "url": "https://nfl.com/_amp/rules-recap-ban-of-peel-back-block-made-play-safer-for-defenses-0ap2000000335715" }
+      ]
+    },
+    {
+      "id": "conrad-dobler-dirtiest-player",
+      "year": 1977,
+      "date": null,
+      "category": "outlawed_plays",
+      "title": "Conrad Dobler, football's \"dirtiest player\"",
+      "summary": "Cardinals/Saints/Bills guard Conrad Dobler was dubbed \"Pro Football's Dirtiest Player\" on a July 1977 Sports Illustrated cover, for a reputation built on incidents including punching, spitting on, and kicking opponents. The label stuck for the rest of his career and beyond.",
+      "people": ["Conrad Dobler"],
+      "teams": ["St. Louis Cardinals", "New Orleans Saints", "Buffalo Bills"],
+      "disputed": true,
+      "note": "\"Dirtiest player\" is a media label, not an official NFL designation, and the specific incidents are reported only in secondary sources, not verified against primary footage here. No documented link between Dobler and any specific resulting rule change was found — unlike Roy Williams or Deacon Jones, this is a notorious-player entry, not a rule-change entry.",
+      "sources": [
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Conrad_Dobler" },
+        { "label": "CBS Sports", "url": "https://www.cbssports.com/nfl/news/former-cardinals-legend-conrad-dobler-widely-dubbed-nfls-dirtiest-player-dies-at-72" }
+      ]
+    },
+
+    {
+      "id": "1906-first-forward-pass",
+      "year": 1906,
+      "date": "1906-09-05",
+      "category": "firsts",
+      "title": "First legal forward pass thrown in a game",
+      "summary": "Bradbury Robinson threw the first legal forward pass under the new 1906 rules, for Saint Louis University against Carroll College in Waukesha, Wisconsin.",
+      "people": ["Bradbury Robinson", "Jack Schneider"],
+      "teams": ["Saint Louis University", "Carroll College"],
+      "disputed": true,
+      "note": "Sources disagree on whether the pass itself was incomplete (a turnover under that year's rules) or a completed touchdown to teammate Jack Schneider later in the same game; Kansas separately claims an earlier, \"experimental\" 1905 pass. Generally credited to Robinson, but not undisputed.",
+      "sources": [
+        { "label": "St. Louis Magazine", "url": "https://www.stlmag.com/news/sports/was-the-first-forward-pass-in-football-history-thrown-at-slu" },
+        { "label": "History.com", "url": "https://www.history.com/articles/forward-pass-football-invented-origins" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Bradbury_Robinson" }
+      ]
+    },
+    {
+      "id": "1920-first-nfl-game",
+      "year": 1920,
+      "date": "1920-10-03",
+      "category": "firsts",
+      "title": "First NFL (APFA) league game",
+      "summary": "The Dayton Triangles beat the Columbus Panhandles 14-0 at Triangle Park in Dayton, Ohio, in the first game of what would become the NFL. Lou Partlow scored the league's first touchdown.",
+      "people": ["Lou Partlow"],
+      "teams": ["Dayton Triangles", "Columbus Panhandles"],
+      "disputed": false,
+      "sources": [
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/1920_APFA_season" },
+        { "label": "Dayton Daily News", "url": "https://www.daytondailynews.com/local/the-dayton-triangles-what-to-know-about-the-first-nfl-game-in-dayton/NA7KAL56ORFTRJSK3336E4MFOE/" }
+      ]
+    },
+    {
+      "id": "1939-first-televised-game",
+      "year": 1939,
+      "date": "1939-10-22",
+      "category": "firsts",
+      "title": "First televised NFL game",
+      "summary": "NBC broadcast the Brooklyn Dodgers' 23-14 win over the Philadelphia Eagles at Ebbets Field on experimental station W2XBS, to an audience estimated at only a few hundred to a thousand television sets.",
+      "people": [],
+      "teams": ["Brooklyn Dodgers", "Philadelphia Eagles"],
+      "disputed": false,
+      "sources": [
+        { "label": "Pro Football Hall of Fame", "url": "https://www.profootballhof.com/football-history/the-1930s-and-the-first-televised-game/" },
+        { "label": "SportsVideo.org", "url": "https://www.sportsvideo.org/2019/10/22/eighty-years-ago-nbc-produced-the-very-first-live-nfl-telecast/" }
+      ]
+    },
+    {
+      "id": "1946-re-integration",
+      "year": 1946,
+      "date": null,
+      "category": "firsts",
+      "title": "Re-integration of professional football",
+      "summary": "Kenny Washington and Woody Strode signed with the Los Angeles Rams, and Marion Motley and Bill Willis signed with the AAFC's Cleveland Browns the same year, ending an informal color line NFL owners had held since 1934.",
+      "people": ["Kenny Washington", "Woody Strode", "Marion Motley", "Bill Willis"],
+      "teams": ["Los Angeles Rams", "Cleveland Browns"],
+      "disputed": false,
+      "sources": [
+        { "label": "NFLPA", "url": "https://nflpa.com/posts/meet-the-four-men-who-broke-the-nfl-s-color-line" },
+        { "label": "NFL Operations", "url": "https://operations.nfl.com/the-players/evolution-of-the-nfl-player/the-reintegration-of-the-nfl" }
+      ]
+    },
+    {
+      "id": "1958-greatest-game",
+      "year": 1958,
+      "date": "1958-12-28",
+      "category": "firsts",
+      "title": "First sudden-death overtime championship — \"The Greatest Game Ever Played\"",
+      "summary": "The Baltimore Colts beat the New York Giants 23-17 at Yankee Stadium on Alan Ameche's overtime touchdown run, the first NFL championship decided in sudden-death overtime.",
+      "people": ["Alan Ameche"],
+      "teams": ["Baltimore Colts", "New York Giants"],
+      "disputed": true,
+      "note": "First sudden-death NFL championship game; one source claims a less significant 1955 preseason game also ended in sudden death.",
+      "sources": [
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/1958_NFL_Championship_Game" },
+        { "label": "Pro Football Hall of Fame", "url": "https://profootballhof.com/news/greatest-game-ever-played" }
+      ]
+    },
+    {
+      "id": "1967-first-super-bowl",
+      "year": 1967,
+      "date": "1967-01-15",
+      "category": "firsts",
+      "title": "First Super Bowl",
+      "summary": "The Green Bay Packers beat the Kansas City Chiefs 35-10 at the LA Memorial Coliseum. It wasn't actually called the \"Super Bowl\" at the time — officially the \"AFL-NFL World Championship Game\" — and was named retroactively. Bart Starr was MVP.",
+      "people": ["Bart Starr"],
+      "teams": ["Green Bay Packers", "Kansas City Chiefs"],
+      "disputed": false,
+      "sources": [
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Super_Bowl_I" },
+        { "label": "History.com", "url": "https://www.history.com/this-day-in-history/january-15/packers-beat-chiefs-in-first-super-bowl" }
+      ]
+    },
+    {
+      "id": "1968-first-indoor-game",
+      "year": 1968,
+      "date": "1968-09-09",
+      "category": "firsts",
+      "title": "First NFL game played indoors",
+      "summary": "The Kansas City Chiefs beat the Houston Oilers 26-21 in the Oilers' first game inside the Astrodome.",
+      "people": [],
+      "teams": ["Houston Oilers", "Kansas City Chiefs"],
+      "disputed": false,
+      "note": "A college game (Houston vs. Tulsa, 1965) is sometimes mistaken for the first pro game in the Astrodome; the Oilers themselves played outdoors at Rice Stadium through 1967 and didn't move indoors until 1968.",
+      "sources": [
+        { "label": "Wikipedia: Astrodome", "url": "https://en.wikipedia.org/wiki/Astrodome" },
+        { "label": "bill37mccurdy.com", "url": "https://bill37mccurdy.com/2013/09/25/sept-11-1965-first-astrodome-football-game/" }
+      ]
+    },
+    {
+      "id": "1970-first-mnf",
+      "year": 1970,
+      "date": "1970-09-21",
+      "category": "firsts",
+      "title": "First Monday Night Football broadcast",
+      "summary": "The Cleveland Browns beat the New York Jets 31-21 in the first Monday Night Football game, called by Keith Jackson, Howard Cosell, and Don Meredith on ABC.",
+      "people": ["Keith Jackson", "Howard Cosell", "Don Meredith"],
+      "teams": ["Cleveland Browns", "New York Jets"],
+      "disputed": false,
+      "sources": [
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/List_of_Monday_Night_Football_results_(1970%E2%80%932005)" },
+        { "label": "News 5 Cleveland", "url": "https://www.news5cleveland.com/sports/browns/nfl-at-100-jets-browns-squared-off-in-mnfs-debut-in-1970" }
+      ]
+    },
+    {
+      "id": "1973-oj-2000-yards",
+      "year": 1973,
+      "date": "1973-12-16",
+      "category": "firsts",
+      "title": "First 2,000-yard rushing season",
+      "summary": "O.J. Simpson rushed for 2,003 yards in 14 games for the Buffalo Bills — still the single-season rushing-yards-per-game record (143.1) — breaking Jim Brown's 1,863-yard mark from 1963.",
+      "people": ["O.J. Simpson", "Jim Brown"],
+      "teams": ["Buffalo Bills"],
+      "disputed": false,
+      "sources": [
+        { "label": "Pro Football Hall of Fame", "url": "https://profootballhof.com/news/2024/04/pro-football-hall-of-famer-o-j-simpson,-first-to-rush-for-2,000-yards-in-a-season,-dies" },
+        { "label": "History.com", "url": "https://history.com/this-day-in-history/oj-simpson-rushes-record-2000-yards-in-a-season" }
+      ]
+    },
+    {
+      "id": "1986-instant-replay",
+      "year": 1986,
+      "date": null,
+      "category": "firsts",
+      "title": "Instant replay's rocky introduction",
+      "summary": "The NFL adopted instant replay review for the 1986 season (owners voted 23-4-1), with a booth official holding sole authority. It was dropped entirely from 1992-1998, then reinstated in 1999 with the coach's-challenge format still used today, which was made permanent in 2007.",
+      "people": [],
+      "teams": [],
+      "disputed": false,
+      "sources": [
+        { "label": "Pro Football Hall of Fame", "url": "https://www.profootballhof.com/news/moments-in-nfl-history-adoption-of-instant-replay/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Replay_review_in_gridiron_football" }
+      ]
+    },
+    {
+      "id": "2005-first-international-game",
+      "year": 2005,
+      "date": "2005-10-02",
+      "category": "firsts",
+      "title": "First NFL regular-season games outside the US, then outside North America",
+      "summary": "The Arizona Cardinals beat the San Francisco 49ers 31-14 at Estadio Azteca in Mexico City — the first regular-season NFL game outside the United States, drawing 103,467 fans, the largest regular-season crowd in NFL history at the time. The Giants' 13-10 win over the Dolphins at Wembley Stadium on October 28, 2007 was the first regular-season game outside North America.",
+      "people": [],
+      "teams": ["Arizona Cardinals", "San Francisco 49ers", "New York Giants", "Miami Dolphins"],
+      "disputed": false,
+      "note": "Mexico is in North America, so \"first outside the US\" (2005) and \"first outside North America\" (2007) are two distinct firsts that are often conflated.",
+      "sources": [
+        { "label": "American Football International", "url": "https://www.americanfootballinternational.com/the-history-of-the-nfl-international-series/" }
+      ]
+    },
+    {
+      "id": "2015-first-female-official",
+      "year": 2015,
+      "date": "2015-04-08",
+      "category": "firsts",
+      "title": "First full-time female NFL official",
+      "summary": "Sarah Thomas was hired as a line judge, becoming the NFL's first full-time female official. She later became the first woman with an on-field role in a Super Bowl, as a down judge in Super Bowl LV (2021).",
+      "people": ["Sarah Thomas"],
+      "teams": [],
+      "disputed": false,
+      "note": "Thomas was not a \"referee\" (crew chief) — a commonly misused label — and she wasn't the first woman to officiate an NFL game at all; Shannon Eastin worked as a replacement official during the 2012 referee lockout.",
+      "sources": [
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Sarah_Thomas_(American_football_official)" },
+        { "label": "CBS News", "url": "https://www.cbsnews.com/amp/newyork/news/sarah-thomas-becomes-nfls-first-permanent-female-official" }
+      ]
+    }
+  ]
+}

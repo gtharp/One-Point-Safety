@@ -32,6 +32,8 @@ h1 span{color:var(--accent)}
 .chip{border:1px solid var(--line);background:var(--card);padding:.3rem .7rem;border-radius:99px;font-size:.8rem;cursor:pointer}
 .chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
 .resetbtn{background:var(--warn-soft);border-color:transparent;color:var(--warn);font-weight:600;margin-left:auto}
+.hnav{display:flex;align-items:center;gap:.5rem}
+.navlink{border:1px solid var(--line);background:var(--card);border-radius:99px;padding:.35rem .8rem;font-size:.8rem;white-space:nowrap;text-decoration:none;color:inherit}
 .tvbtn{border:1px solid var(--line);background:var(--card);border-radius:99px;padding:.35rem .8rem;font-size:.8rem;cursor:pointer;white-space:nowrap}
 @media (max-width:899px){.tvbtn{display:none}}
 [hidden]{display:none!important}
@@ -155,6 +157,11 @@ body.tv footer{display:none}
 .big .tt{font-size:1.45rem;font-weight:800;margin:.3rem 0 .2rem}
 .big .d{font-size:1rem}
 .big .m{font-size:.8rem;color:var(--muted);margin-top:.35rem}
+
+/* ---------- History appendix page ---------- */
+.histlayout{grid-template-columns:minmax(0,1fr)!important;grid-template-areas:"odd"!important;max-width:760px}
+.yearpill{display:inline-block;font-size:.68rem;font-weight:800;padding:.08rem .5rem;border-radius:99px;background:var(--accent-soft);color:var(--accent)}
+.disputed{display:inline-block;font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:.08rem .45rem;border-radius:99px;background:var(--warn-soft);color:var(--warn);margin-left:.3rem;vertical-align:middle}
 
 /* ---------- Loading / empty states ---------- */
 .loading,.offseason{padding:2.5rem 1rem;text-align:center;color:var(--muted)}
