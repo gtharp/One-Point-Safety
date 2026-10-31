@@ -19,6 +19,7 @@ const METRICS = [
 
 let META = null, GAMES = [], EVENTS = [], ODD = {}, RARE_PEN = {}, GAMES_BY_ID = new Map(), WEATHER = null;
 let FEED = [];
+let oddBoardEmpty = false;
 const S = { scope: "season", week: 1, day: "all", type: null, sub: null, odd: null, game: null, penSort: "count", logAll: false, feedAll: false };
 
 /* ---------- Load ---------- */
@@ -175,12 +176,13 @@ function renderOdd() {
   const labelOfKey = k => (k === "rare_pen" ? "Rare penalties" : ODD[k].label);
   const keys = Object.keys(counts).sort((a, b) => tierOfKey(b) - tierOfKey(a) || counts[a] - counts[b]);
 
+  oddBoardEmpty = keys.length === 0;
   $("oddCount").textContent = `${ev.length} this ${S.scope === "season" ? "season" : S.day === "all" ? "week" : "day"}`;
   $("board").innerHTML = keys.length ? keys.map(k => {
     const t = tierOfKey(k);
     return `<button class="tile k${t} ${S.odd === k ? "on" : ""}" data-o="${k}"><span class="tier t${t}">${TIER_NAME[t]}</span>
       <div class="n">${counts[k]}</div><div class="l">${esc(labelOfKey(k))}</div></button>`;
-  }).join("") : `<div class="empty">No oddities match the current filter.</div>`;
+  }).join("") : `<div class="empty">No oddities match the current filter — see the play log below.</div>`;
 
   FEED = ev.filter(matchesOdd).sort((a, b) => (b.tier || 0) - (a.tier || 0) || b.id - a.id);
   const lim = S.feedAll ? FEED.length : 6;
@@ -381,16 +383,22 @@ document.addEventListener("click", ev => {
     if (g && !gIn(g)) { S.scope = "week"; S.week = g.week; S.day = "all"; }
     closeSheet(); S.logAll = false; render(); $("logSec").scrollIntoView({ behavior: "smooth" }); return;
   }
+  let drilledIn = false;
   if (d.scope) { S.scope = d.scope; S.game = null; }
   else if (d.wk) { S.week = Math.min(META.weeks[META.weeks.length - 1], Math.max(META.weeks[0], S.week + +d.wk)); S.day = "all"; S.game = null; }
   else if (d.day) { S.day = d.day; if (S.game !== null) { const g = GAMES_BY_ID.get(S.game); if (g && !gIn(g)) S.game = null; } }
-  else if (d.t) { const same = S.type === d.t && !S.sub; S.type = same ? null : d.t; S.sub = null; S.odd = null; }
-  else if (d.s) { const same = S.sub === d.s; S.type = same ? null : "pen"; S.sub = same ? null : d.s; S.odd = null; }
+  else if (d.t) { const same = S.type === d.t && !S.sub; S.type = same ? null : d.t; S.sub = null; S.odd = null; drilledIn = !same; }
+  else if (d.s) { const same = S.sub === d.s; S.type = same ? null : "pen"; S.sub = same ? null : d.s; S.odd = null; drilledIn = !same; }
   else if (d.o) { S.odd = S.odd === d.o ? null : d.o; S.type = S.sub = null; }
   else if (d.g !== undefined) { S.game = S.game === d.g ? null : d.g; }
   else if (t.id === "clear" || t.id === "resetAll") { S.type = S.sub = S.odd = null; S.game = null; }
   S.logAll = false; S.feedAll = false; tvIdx = 0;
   render();
+  // Clicking a League total or penalty that isn't also an oddity leaves
+  // the Oddities board empty while the plays it actually matched sit in
+  // the log, well below League totals/Penalties -- jump straight there
+  // instead of leaving a dead-looking gap up top.
+  if (drilledIn && oddBoardEmpty) $("logSec").scrollIntoView({ behavior: "smooth" });
 });
 document.addEventListener("keydown", e => { if (e.key === "Escape") closeSheet(); });
 
