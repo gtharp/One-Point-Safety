@@ -2,11 +2,13 @@
   --bg:#f6f7f5; --card:#ffffff; --ink:#1c2420; --muted:#66706b; --line:#e2e6e3;
   --accent:#1f6f43; --accent-soft:#e3f1e8; --warn:#b5462b; --warn-soft:#fbe9e4;
   --gold:#946500; --gold-soft:#fbf1d6; --bar:#9fc7ae; --scrim:rgba(0,0,0,.35);
+  --blue:#1d5fa8; --blue-soft:#e3ecf8; --purple:#7a3fa0; --purple-soft:#f0e5f7;
 }
 @media (prefers-color-scheme: dark){
   :root{--bg:#121614; --card:#1b201d; --ink:#e7ece9; --muted:#9aa49f; --line:#2c332f;
     --accent:#5cc58a; --accent-soft:#1f3328; --warn:#f08a6c; --warn-soft:#3a231d;
-    --gold:#e9b949; --gold-soft:#352b14; --bar:#2f6a49; --scrim:rgba(0,0,0,.6);}
+    --gold:#e9b949; --gold-soft:#352b14; --bar:#2f6a49; --scrim:rgba(0,0,0,.6);
+    --blue:#7fb2e8; --blue-soft:#1c2c3d; --purple:#d2a3ec; --purple-soft:#2c2240;}
 }
 html{font-size:15px}
 *{box-sizing:border-box}
@@ -162,6 +164,30 @@ body.tv footer{display:none}
 .histlayout{grid-template-columns:minmax(0,1fr)!important;grid-template-areas:"odd"!important;max-width:760px}
 .yearpill{display:inline-block;font-size:.68rem;font-weight:800;padding:.08rem .5rem;border-radius:99px;background:var(--accent-soft);color:var(--accent)}
 .disputed{display:inline-block;font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:.08rem .45rem;border-radius:99px;background:var(--warn-soft);color:var(--warn);margin-left:.3rem;vertical-align:middle}
+.catpill{display:inline-block;font-size:.62rem;font-weight:700;padding:.06rem .45rem;border-radius:99px;margin-left:.3rem;vertical-align:middle}
+
+/* Distinct color per history category -- used for the left border on both
+   the timeline (mobile) and quilt (desktop) layouts, plus the .catpill. */
+.cat-safety_crisis{border-left-color:var(--warn)!important}
+.cat-equipment{border-left-color:var(--blue)!important}
+.cat-outlawed_plays{border-left-color:var(--gold)!important}
+.cat-rule_changing_injuries{border-left-color:var(--purple)!important}
+.cat-firsts{border-left-color:var(--accent)!important}
+.catpill.cat-safety_crisis{background:var(--warn-soft);color:var(--warn)}
+.catpill.cat-equipment{background:var(--blue-soft);color:var(--blue)}
+.catpill.cat-outlawed_plays{background:var(--gold-soft);color:var(--gold)}
+.catpill.cat-rule_changing_injuries{background:var(--purple-soft);color:var(--purple)}
+.catpill.cat-firsts{background:var(--accent-soft);color:var(--accent)}
+
+/* Quilt: a dense mosaic grid on large screens. Below the breakpoint the
+   feed stays the plain single-column timeline list. */
+@media (min-width:900px){
+  .histlayout{max-width:1400px}
+  .quilt{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.6rem}
+  .quilt .ocard{padding:.55rem .65rem}
+  .quilt .ocard .d{display:none}
+  .quilt .ocard .m{font-size:.68rem;margin-top:.3rem}
+}
 
 /* ---------- Loading / empty states ---------- */
 .loading,.offseason{padding:2.5rem 1rem;text-align:center;color:var(--muted)}

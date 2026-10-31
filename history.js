@@ -45,11 +45,12 @@ function catLabel(id) {
 
 function eventCard(e) {
   const disputed = e.disputed ? `<span class="disputed">Disputed details</span>` : "";
-  return `<button class="ocard" data-e="${e._idx}">
-    <span class="yearpill">${esc(yearLabel(e))}</span> ${disputed}
+  return `<button class="ocard cat-${esc(e.category)}" data-e="${e._idx}">
+    <span class="yearpill">${esc(yearLabel(e))}</span>
+    <span class="catpill cat-${esc(e.category)}">${esc(catLabel(e.category))}</span> ${disputed}
     <div class="tt">${esc(e.title)}</div>
     <div class="d">${esc(e.summary)}</div>
-    <div class="m">${esc(catLabel(e.category))}${e.people && e.people.length ? ` · ${esc(e.people.join(", "))}` : ""}</div></button>`;
+    <div class="m">${e.people && e.people.length ? esc(e.people.join(", ")) : ""}</div></button>`;
 }
 
 function render() {
@@ -58,7 +59,7 @@ function render() {
 
   $("cats").innerHTML = CATS.map(c => {
     const n = counts[c.id] || 0;
-    return `<button class="chip ${S.cat === c.id ? "on" : ""}" data-cat="${c.id}">${esc(c.label)} (${n})</button>`;
+    return `<button class="chip cat-${c.id} ${S.cat === c.id ? "on" : ""}" data-cat="${c.id}">${esc(c.label)} (${n})</button>`;
   }).join("");
   $("resetAll").hidden = !S.cat;
 

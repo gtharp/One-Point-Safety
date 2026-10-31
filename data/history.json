@@ -4,7 +4,7 @@
     "last_updated": "2026-10-31"
   },
   "categories": [
-    { "id": "safety_crisis", "label": "Deaths & safety reform", "blurb": "The early-1900s crisis that nearly got football banned outright, and the rules it produced." },
+    { "id": "safety_crisis", "label": "Deaths & safety reform", "blurb": "From the 1905 crisis that nearly got football banned, to where the sport's deaths actually happen today." },
     { "id": "equipment", "label": "Equipment evolution", "blurb": "Helmets, facemasks, and the slow road to the gear players wear today." },
     { "id": "outlawed_plays", "label": "Plays & hits later banned", "blurb": "Moves that were once legal, the players known for them, and when the league outlawed them." },
     { "id": "rule_changing_injuries", "label": "Injuries that shook the league", "blurb": "Specific incidents that became turning points for player safety, documented or not." },
@@ -105,6 +105,72 @@
         { "label": "The New Republic", "url": "https://newrepublic.com/article/74483/colle-football-bans-wedge-blocking-kickoffs" },
         { "label": "Packers.com", "url": "https://www.packers.com/news/would-the-1906-rule-changes-banning-the-turtle-back-wedge-apply-to-the-tush-push" },
         { "label": "Eleven Warriors", "url": "https://www.elevenwarriors.com/2011/07/the-flying-wedge-and-the-big-ten" }
+      ]
+    },
+    {
+      "id": "1971-chuck-hughes",
+      "year": 1971,
+      "date": "1971-10-24",
+      "category": "safety_crisis",
+      "title": "Chuck Hughes collapses and dies during an NFL game",
+      "summary": "Detroit Lions receiver Chuck Hughes collapsed of a heart attack jogging back to the huddle during a game against the Chicago Bears at Tiger Stadium, and died at the hospital; the game continued after he was taken off the field. He'd had an unexplained locker-room collapse after a preseason game that year.",
+      "people": ["Chuck Hughes"],
+      "teams": ["Detroit Lions", "Chicago Bears"],
+      "disputed": true,
+      "note": "Widely and consistently cited as the only player to die during an actual NFL game -- a status reaffirmed by comparison when Damar Hamlin survived a 2023 on-field cardiac arrest (see below). We couldn't confirm this is affirmatively tracked as an official league statistic, so treat it as the best-documented claim rather than a verified record.",
+      "sources": [
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Chuck_Hughes" },
+        { "label": "ClickOnDetroit retrospective", "url": "https://www.clickondetroit.com/sports/2023/01/03/remembering-chuck-hughes-the-only-nfl-player-to-die-on-the-field-during-a-game" }
+      ]
+    },
+    {
+      "id": "2023-damar-hamlin",
+      "year": 2023,
+      "date": "2023-01-02",
+      "category": "safety_crisis",
+      "title": "Damar Hamlin's on-field cardiac arrest, and survival",
+      "summary": "Bills safety Damar Hamlin went into cardiac arrest on the field after a tackle during a Monday Night Football game against the Bengals. Unlike Chuck Hughes in 1971, the game was stopped immediately and ultimately postponed; Hamlin was resuscitated on the field by the team's medical staff and made a full recovery. Every NFL club is required to maintain a third-party-approved Emergency Action Plan, and opposing medical staffs hold a mandatory pre-kickoff meeting to align emergency protocols -- infrastructure widely credited with Hamlin's survival.",
+      "people": ["Damar Hamlin"],
+      "teams": ["Buffalo Bills", "Cincinnati Bengals"],
+      "disputed": true,
+      "note": "Often cited as evidence that mandatory emergency-response planning -- not any single rule change -- is what's kept this from recurring as a death since 1971, but no source states that as an official, singular causal explanation; it layers on top of decades of equipment and rule reforms.",
+      "sources": [
+        { "label": "NFL emergency preparedness fact sheet", "url": "https://www.nfl.com/news/nfl-emergency-preparedness-fact-sheet" },
+        { "label": "EMS1 on the Hamlin response", "url": "https://ems1.com/football/articles/after-players-cardiac-arrest-nfl-releases-its-emergency-medical-procedures-smuzO9OO3aqZSeHf" }
+      ]
+    },
+    {
+      "id": "football-deaths-moved-to-amateur-level",
+      "year": 2010,
+      "date": null,
+      "category": "safety_crisis",
+      "title": "Football's deaths didn't stop -- they moved to high school and college",
+      "summary": "A peer-reviewed analysis of 1990-2010 data found U.S. high school and college football averaged about 12 deaths a year -- roughly 8 indirect (cardiac failure, heat illness, sickle cell trait) and 4 direct (traumatic brain, neck, or abdominal injury). The National Center for Catastrophic Sport Injury Research has published an Annual Survey of Football Injury Research continuously since 1931, and still does. The pro game's near-total absence of on-field deaths since Chuck Hughes masks a death toll that never went away -- it just moved almost entirely below the NFL, and from single dramatic hits to heat stroke and cardiac events during practice and conditioning.",
+      "people": [],
+      "teams": [],
+      "disputed": true,
+      "note": "Reflects a 1990-2010 study period, not a single year's count -- we couldn't extract an exact recent-year figure from NCCSIR's published reports in this research pass. Treat the ~12/year figure as a long-run average, not a current headline number.",
+      "sources": [
+        { "label": "PubMed", "url": "https://pubmed.ncbi.nlm.nih.gov/23477766/" },
+        { "label": "NCCSIR 2022 annual report (PDF)", "url": "https://nccsir.unc.edu/wp-content/uploads/sites/5614/2023/04/Annual-Football-2022-Fatalities-FINAL-web.pdf" },
+        { "label": "NCCSIR reports index", "url": "https://nccsir.unc.edu/reports/" }
+      ]
+    },
+    {
+      "id": "2018-jordan-mcnair",
+      "year": 2018,
+      "date": "2018-06-13",
+      "category": "safety_crisis",
+      "title": "Jordan McNair dies of heat stroke after a Maryland conditioning workout",
+      "summary": "Maryland offensive lineman Jordan McNair collapsed during a May 29, 2018 offseason conditioning workout and died June 13 of heat stroke, after an emergency liver transplant. An independent medical review found the university culpable: athletic trainers missed escalating symptoms, his cramping complaints were atypically read, and more than an hour passed before 911 was called. University president Wallace Loh publicly accepted \"legal and moral responsibility,\" and a separate investigation into the program's culture followed a report alleging toxicity.",
+      "people": ["Jordan McNair", "Wallace Loh"],
+      "teams": ["Maryland"],
+      "disputed": true,
+      "note": "Sources conflict on head coach D.J. Durkin's ultimate fate after the culture investigation (reports of both reinstatement on Oct. 30, 2018 and firing on Oct. 31 exist) -- left out pending verification.",
+      "sources": [
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Jordan_McNair" },
+        { "label": "CBS Sports", "url": "https://www.cbssports.com/college-football/news/investigation-finds-maryland-culpable-in-death-of-jordan-mcnair-d-j-durkin-remains-on-leave" },
+        { "label": "ESPN", "url": "https://www.espn.com/college-football/story/_/id/24343021/jordan-mcnair-maryland-terrapins-died-heatstroke-team-workout" }
       ]
     },
 
@@ -275,6 +341,22 @@
       "sources": [
         { "label": "CBS News", "url": "https://www.cbsnews.com/boston/news/report-nfl-concussion-settlement-becomes-official-after-supreme-court-rejects-case/" },
         { "label": "historyplace.com", "url": "https://historyplace.com/specials/reviews/concussion.htm" }
+      ]
+    },
+    {
+      "id": "2011-duerson-seau-cte-suicides",
+      "year": 2011,
+      "date": null,
+      "category": "rule_changing_injuries",
+      "title": "Dave Duerson and Junior Seau: CTE-linked suicides",
+      "summary": "Two prominent former NFL players died by suicide years after retiring, each later linked to chronic traumatic encephalopathy. Former Bears safety Dave Duerson died in February 2011, leaving a note asking that his brain be studied; Boston University confirmed CTE that May. Former Chargers linebacker Junior Seau died on May 2, 2012, at age 43; five neuropathologists later confirmed he had CTE too.",
+      "people": ["Dave Duerson", "Junior Seau"],
+      "teams": ["Chicago Bears", "San Diego Chargers"],
+      "disputed": true,
+      "note": "Presented separately from the site's on-field-death entries because these involve long-term cumulative brain trauma rather than an immediate injury. Causation between CTE and either death is widely discussed in media coverage but was not formally established in either case -- CBS News specifically noted no direct causal link between Seau's brain injuries and his death was ever established.",
+      "sources": [
+        { "label": "Bangor Daily News", "url": "https://www.bangordailynews.com/2013/01/10/sports/nfls-junior-seau-had-brain-disease-from-blows-to-head/" },
+        { "label": "CBS News", "url": "https://www.cbsnews.com/news/junior-seaus-death-raises-questions-about-brain-trauma-chronic-traumatic-encephalopathy" }
       ]
     },
     {

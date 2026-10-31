@@ -161,7 +161,7 @@ Every entry needs at least one real source in `sources`.
 To add an entry: add it to `data/history.json` by hand, then run
 `python3 scripts/validate_history.py` to check required fields, duplicate
 ids, and that every entry (especially disputed ones) is sourced. The
-current 38 entries were researched via web search with citations, not
+current entries were researched via web search with citations, not
 pulled from memory — do the same for new ones rather than trusting
 recalled dates, especially death tolls and "first ever" claims, which are
 exactly the kind of thing that turns out to be disputed across sources.
