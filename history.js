@@ -39,6 +39,28 @@ async function boot() {
   $("loading").hidden = true;
   $("layout").hidden = false;
   render();
+
+  loadJSON("data/weather_records.json").then(renderWxRecords).catch(() => {});
+}
+
+const WX_LABELS = {
+  coldest: "Coldest", hottest: "Hottest", muggiest: "Muggiest", driest: "Driest",
+  windiest: "Windiest", rainiest: "Rainiest", snowiest: "Snowiest",
+};
+function wxRecordCard(key, r) {
+  const unit = key === "muggiest" || key === "driest" ? `${r.humidity}%` : key === "windiest" ? `${r.wind} mph` : `${r.temp}°F`;
+  const caveat = r.caveat ? `<span class="disputed" title="${esc(r.caveat)}">Flagged – hover</span>` : "";
+  return `<div class="card" style="cursor:default"><div class="n">${unit}</div>
+    <div class="l">${WX_LABELS[key]} ${caveat}</div>
+    <div class="a">${esc(r.away)} @ ${esc(r.home)} · ${esc(r.date)}</div></div>`;
+}
+function renderWxRecords(wr) {
+  if (!wr || !wr.records || !Object.values(wr.records).some(Boolean)) return;
+  $("wxRecordsSec").hidden = false;
+  const order = ["coldest", "hottest", "muggiest", "driest", "windiest", "rainiest", "snowiest"];
+  $("wxRecordsCards").innerHTML = order.filter(k => wr.records[k]).map(k => wxRecordCard(k, wr.records[k])).join("");
+  const seasons = wr.seasons_used || [];
+  $("wxRecordsNote").textContent = seasons.length ? `(${seasons[0]}–${seasons[seasons.length - 1]}, ${wr.eligible_games} outdoor games)` : "";
 }
 
 function yearLabel(e) {

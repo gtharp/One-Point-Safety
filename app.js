@@ -17,7 +17,7 @@ const METRICS = [
   ["inj", "Injuries"], ["int", "Interceptions"], ["fum", "Fumbles lost"], ["sack", "Sacks"],
 ];
 
-let META = null, GAMES = [], EVENTS = [], ODD = {}, RARE_PEN = {}, GAMES_BY_ID = new Map();
+let META = null, GAMES = [], EVENTS = [], ODD = {}, RARE_PEN = {}, GAMES_BY_ID = new Map(), WEATHER = null;
 let FEED = [];
 const S = { scope: "season", week: 1, day: "all", type: null, sub: null, odd: null, game: null, penSort: "count", logAll: false, feedAll: false };
 
@@ -40,11 +40,13 @@ async function boot() {
     $("offseason").hidden = false;
     return;
   }
-  const [games, events, oddities] = await Promise.all([
+  const [games, events, oddities, weather] = await Promise.all([
     loadJSON("data/games.json"),
     loadJSON("data/events.json"),
     loadJSON("data/oddities.json"),
+    loadJSON("data/weather.json").catch(() => null),
   ]);
+  WEATHER = weather;
   GAMES = games;
   GAMES_BY_ID = new Map(GAMES.map(g => [g.id, g]));
   EVENTS = events;
@@ -59,6 +61,7 @@ async function boot() {
   $("layout").hidden = false;
   $("updated").textContent = `Data updated ${fmtUpdated(META.last_updated)} · ${META.season} season`;
 
+  renderWeather();
   render();
 }
 
@@ -211,6 +214,28 @@ function renderCards() {
     return `<button class="card ${S.type === k && !S.sub ? "on" : ""}" data-t="${k}"><div class="n">${n}</div>
       <div class="l">${label}</div><div class="a">${(n / nG).toFixed(1)} per game</div></button>`;
   }).join("");
+}
+
+/* ---------- Weather ---------- */
+const WX_LABELS = {
+  coldest: "Coldest", hottest: "Hottest", muggiest: "Muggiest", driest: "Driest",
+  windiest: "Windiest", rainiest: "Rainiest", snowiest: "Snowiest",
+};
+function wxCard(key, r) {
+  const unit = key === "muggiest" || key === "driest" ? `${r.humidity}%` : key === "windiest" ? `${r.wind} mph` : `${r.temp}°F`;
+  return `<button class="card" data-gf="${esc(r.game_id)}"><div class="n">${unit}</div>
+    <div class="l">${WX_LABELS[key]}</div><div class="a">${esc(gameName({ away: r.away, home: r.home }))} · Wk ${r.week}</div></button>`;
+}
+function renderWeather() {
+  const sec = $("wxSec");
+  if (!sec) return;
+  if (!WEATHER || !WEATHER.records || !Object.values(WEATHER.records).some(Boolean)) { sec.hidden = true; return; }
+  sec.hidden = false;
+  const r = WEATHER.records;
+  const order = ["coldest", "hottest", "muggiest", "driest", "windiest", "rainiest", "snowiest"];
+  $("wxCards").innerHTML = order.filter(k => r[k]).map(k => wxCard(k, r[k])).join("");
+  const missing = order.filter(k => !r[k]).map(k => WX_LABELS[k].toLowerCase());
+  $("wxNote").textContent = missing.length ? `No ${missing.join("/")} games yet this season (outdoor games only, ${WEATHER.eligible_games} counted so far)` : `Outdoor games only, ${WEATHER.eligible_games} counted so far`;
 }
 
 /* ---------- Penalties ---------- */

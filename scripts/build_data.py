@@ -320,6 +320,97 @@ def compute_rare_penalty_types(pbp):
     return set(counts[counts <= RARE_PENALTY_MAX_SEASON_COUNT].index)
 
 
+# Ranked most to least severe, for picking a single "rainiest"/"snowiest"
+# game out of several candidates when nflverse's weather text doesn't give
+# a quantitative amount for rain (it never does) or snow (sometimes does,
+# handled separately via SNOW_INCHES_RE).
+RAIN_SEVERITY = ["thunderstorm", "downpour", "heavy rain", "rain", "showers", "drizzle"]
+SNOW_SEVERITY = ["blizzard", "heavy snow", "snow showers", "snow", "flurries"]
+HUMIDITY_RE = re.compile(r"Humidity:\s*(\d+)\s*%")
+SNOW_INCHES_RE = re.compile(r"(\d+)\s*(?:to\s*(\d+))?\s*inch", re.IGNORECASE)
+
+
+def parse_weather_text(text):
+    """nflverse's free-text per-game weather field, e.g.
+    'Snow Showers, 3 to 5 inches expected. Temp: 33° F, Humidity: 91%, Wind: SE 5 mph'.
+    Returns None if there's nothing usable (domes/closed roofs leave it blank)."""
+    if not isinstance(text, str) or not text.strip() or "Temp: °" in text:
+        return None
+    condition = text.split("Temp:")[0].strip().strip(",").strip()
+    cl = condition.lower()
+    hm = HUMIDITY_RE.search(text)
+    im = SNOW_INCHES_RE.search(cl)
+    return {
+        "condition": condition or None,
+        "humidity": int(hm.group(1)) if hm else None,
+        "rain_rank": next((i for i, kw in enumerate(RAIN_SEVERITY) if kw in cl), None),
+        "snow_rank": next((i for i, kw in enumerate(SNOW_SEVERITY) if kw in cl), None),
+        "snow_inches": float(im.group(2) or im.group(1)) if im else None,
+    }
+
+
+def build_weather(pbp, games):
+    games_by_id = {g["id"]: g for g in games}
+    rows = []
+    for gid, grp in pbp.drop_duplicates("game_id").set_index("game_id").iterrows():
+        g = games_by_id.get(gid)
+        if not g or g.get("roof") != "outdoors" or pd.isna(grp.get("temp")):
+            continue
+        parsed = parse_weather_text(grp.get("weather")) or {}
+        rows.append(
+            {
+                "game_id": gid,
+                "week": g["week"],
+                "away": g["away"],
+                "home": g["home"],
+                "date": g["date"],
+                "stadium": g["stadium"],
+                "temp": int(grp["temp"]),
+                "wind": None if pd.isna(grp.get("wind")) else int(grp["wind"]),
+                "humidity": parsed.get("humidity"),
+                "condition": parsed.get("condition"),
+                "rain_rank": parsed.get("rain_rank"),
+                "snow_rank": parsed.get("snow_rank"),
+                "snow_inches": parsed.get("snow_inches"),
+            }
+        )
+
+    if not rows:
+        return {"eligible_games": 0, "records": {}}
+
+    def pick(key, reverse=False):
+        candidates = [r for r in rows if r.get(key) is not None]
+        if not candidates:
+            return None
+        best = sorted(candidates, key=lambda r: r[key], reverse=reverse)[0]
+        return {k: v for k, v in best.items() if k not in ("rain_rank", "snow_rank", "snow_inches")}
+
+    rain_candidates = [r for r in rows if r["rain_rank"] is not None]
+    rainiest = None
+    if rain_candidates:
+        best = sorted(rain_candidates, key=lambda r: (r["rain_rank"], -(r["humidity"] or 0)))[0]
+        rainiest = {k: v for k, v in best.items() if k not in ("rain_rank", "snow_rank", "snow_inches")}
+
+    snow_candidates = [r for r in rows if r["snow_rank"] is not None]
+    snowiest = None
+    if snow_candidates:
+        best = sorted(snow_candidates, key=lambda r: (-(r["snow_inches"] or -1), r["snow_rank"]))[0]
+        snowiest = {k: v for k, v in best.items() if k not in ("rain_rank", "snow_rank", "snow_inches")}
+
+    return {
+        "eligible_games": len(rows),
+        "records": {
+            "coldest": pick("temp"),
+            "hottest": pick("temp", reverse=True),
+            "windiest": pick("wind", reverse=True),
+            "muggiest": pick("humidity", reverse=True),
+            "driest": pick("humidity"),
+            "rainiest": rainiest,
+            "snowiest": snowiest,
+        },
+    }
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--season", type=int, default=None)
@@ -365,6 +456,9 @@ def main():
     print("Building totals.json...")
     totals = build_totals(pbp, rare_penalty_types)
 
+    print("Building weather.json...")
+    weather = build_weather(pbp, games)
+
     oddity_counts = {oid: int(mask.sum()) for oid, mask in oddity_masks.items()}
 
     rarity_path = out_dir / "rarity.json"
@@ -409,6 +503,7 @@ def main():
     dump("games.json", games)
     dump("events.json", events)
     dump("totals.json", totals)
+    dump("weather.json", weather)
     dump("oddities.json", {"oddities": oddity_catalog, "rare_penalties": rare_penalty_catalog})
     (out_dir / "meta.json").write_text(json.dumps(meta, indent=2))
 

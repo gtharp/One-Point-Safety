@@ -8,7 +8,8 @@
     { "id": "equipment", "label": "Equipment evolution", "blurb": "Helmets, facemasks, and the slow road to the gear players wear today." },
     { "id": "outlawed_plays", "label": "Plays & hits later banned", "blurb": "Moves that were once legal, the players known for them, and when the league outlawed them." },
     { "id": "rule_changing_injuries", "label": "Injuries that shook the league", "blurb": "Specific incidents that became turning points for player safety, documented or not." },
-    { "id": "firsts", "label": "Historic firsts", "blurb": "Notable firsts across the sport's history." }
+    { "id": "firsts", "label": "Historic firsts", "blurb": "Notable firsts across the sport's history." },
+    { "id": "weather_extremes", "label": "Weather extremes", "blurb": "The coldest, hottest, foggiest, and snowiest games ever played -- see also this season's weather records on the live site." }
   ],
   "events": [
     {
@@ -750,6 +751,87 @@
       "sources": [
         { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Sarah_Thomas_(American_football_official)" },
         { "label": "CBS News", "url": "https://www.cbsnews.com/amp/newyork/news/sarah-thomas-becomes-nfls-first-permanent-female-official" }
+      ]
+    },
+    {
+      "id": "1967-ice-bowl",
+      "year": 1967,
+      "date": "1967-12-31",
+      "category": "weather_extremes",
+      "title": "The Ice Bowl -- the coldest NFL game ever played",
+      "summary": "Green Bay beat Dallas 21-17 in the NFL Championship at Lambeau Field, won on Bart Starr's quarterback sneak with 16 seconds left and no timeouts remaining. Kickoff temperature was -13°F. The field's turf-heating system failed, and moisture trapped under the tarp flash-froze into an ice rink. One spectator died of weather-related causes.",
+      "people": ["Bart Starr"],
+      "teams": ["Green Bay Packers", "Dallas Cowboys"],
+      "disputed": true,
+      "note": "The -13°F air temperature is the official NWS figure (other contemporary reports range -12 to -15°F). Wind chill is the real source of disagreement: commonly quoted as -48°F, but that's under an older wind chill formula superseded in 2001 -- recalculated under the NWS's current formula, it's closer to -36 to -38°F. Both figures describe the same conditions; they're just not interchangeable.",
+      "sources": [
+        { "label": "National Weather Service, Green Bay", "url": "https://www.weather.gov/grb/123167_Icebowl" },
+        { "label": "Fox11 (via History.com)", "url": "https://fox11online.com/sports/packers-and-nfl/tales-from-the-cold-ice-bowl-still-chills-50-years" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Ice_Bowl_(NFL)" }
+      ]
+    },
+    {
+      "id": "1982-freezer-bowl",
+      "year": 1982,
+      "date": "1982-01-10",
+      "category": "weather_extremes",
+      "title": "The Freezer Bowl",
+      "summary": "Cincinnati beat San Diego 27-7 in the AFC Championship at Riverfront Stadium, sending the Bengals to their first Super Bowl. Air temperature was -9°F, for a game played at the end of the 1981 season despite the January 1982 date. Often cited as the second-coldest NFL game ever, after the Ice Bowl.",
+      "people": [],
+      "teams": ["Cincinnati Bengals", "San Diego Chargers"],
+      "disputed": true,
+      "note": "Wind chill is commonly quoted as -59°F, from the era's wind chill formula; recalculated under the NWS's current formula it's closer to -37 to -38°F -- the same old-formula-vs-new-formula gap as the Ice Bowl entry above.",
+      "sources": [
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Freezer_Bowl" },
+        { "label": "History.com", "url": "https://www.history.com/news/freezer-bowl-nfl-chargers-bengals" }
+      ]
+    },
+    {
+      "id": "1988-fog-bowl",
+      "year": 1988,
+      "date": "1988-12-31",
+      "category": "weather_extremes",
+      "title": "The Fog Bowl",
+      "summary": "Chicago beat Philadelphia 20-12 in an NFC Divisional playoff at Soldier Field. Dense advection fog -- moist Lake Michigan air moving over a cooler surface -- rolled in during the second quarter and cut visibility to roughly 15-20 yards for the rest of the game; players and the TV broadcast alike struggled to see the field. The fog lifted within about 30 minutes of the final whistle.",
+      "people": [],
+      "teams": ["Chicago Bears", "Philadelphia Eagles"],
+      "disputed": true,
+      "note": "Minor disagreement across sources on whether the fog rolled in strictly during the second quarter or extended through the second half; the date and final score are not in dispute.",
+      "sources": [
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Fog_Bowl_(American_football)" },
+        { "label": "WHYY", "url": "https://whyy.org/articles/the-weirdest-day-of-my-football-life-remembering-the-fog-bowl-30-years-later" }
+      ]
+    },
+    {
+      "id": "2000-pickle-juice-game",
+      "year": 2000,
+      "date": "2000-09-03",
+      "category": "weather_extremes",
+      "title": "The Pickle Juice Game -- the hottest NFL game on record",
+      "summary": "Philadelphia beat Dallas 41-14 in a season opener at Texas Stadium, with a kickoff temperature most commonly cited at 109°F and turf temperatures reported anywhere from roughly 130°F to 150°F. The Eagles drank pickle juice before and during the game as a hydration/anti-cramping strategy, which gave the game its nickname.",
+      "people": [],
+      "teams": ["Philadelphia Eagles", "Dallas Cowboys"],
+      "disputed": true,
+      "note": "One source gives 107°F instead of 109°F for the kickoff temperature. This is the most commonly cited \"hottest NFL game ever,\" but the sourcing behind that specific superlative is thinner than for the cold-weather games above -- treat it as \"most commonly cited,\" not a verified league record.",
+      "sources": [
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Pickle_Juice_Game" },
+        { "label": "WFAA", "url": "https://www.wfaa.com/article/sports/nfl/cowboys/2000-season-philadelphia-eagles-beat-dallas-cowboys-record-heat-pickle-juice/287-5cf0b518-bcd7-473f-badc-0658bf90943c" }
+      ]
+    },
+    {
+      "id": "2002-snow-bowl-tuck-rule",
+      "year": 2002,
+      "date": "2002-01-19",
+      "category": "weather_extremes",
+      "title": "The Snow Bowl (Tuck Rule Game)",
+      "summary": "New England beat Oakland 16-13 in overtime in an AFC Divisional playoff at Foxboro, played in a heavy snowstorm. Adam Vinatieri tied the game with a 45-yard field goal kicked through the snow late in regulation, after a controversial instant-replay reversal (the \"tuck rule\") overturned what was initially ruled a game-ending Tom Brady fumble. The win launched New England's first Super Bowl championship run.",
+      "people": ["Adam Vinatieri", "Tom Brady"],
+      "teams": ["New England Patriots", "Oakland Raiders"],
+      "disputed": true,
+      "note": "At least three other NFL games carry an informal \"Snow Bowl\" nickname (the 1982 Patriots-Dolphins \"Snowplow Game,\" a 2017 Bills-Colts game, a 2009 Packers-Buccaneers game) -- this is the most famous and heavily sourced one, not the only game with the name.",
+      "sources": [
+        { "label": "NESN", "url": "https://nesn.com/?p=17656" },
+        { "label": "985 The Sports Hub", "url": "https://985thesportshub.com/2020/12/17/patriots-snow-games-history-podcast-dolloff-barth" }
       ]
     }
   ]

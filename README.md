@@ -55,9 +55,61 @@ Written by `scripts/build_data.py` into `data/`:
   reference/debugging; the front end computes totals straight from
   `events.json` instead, since that supports any scope (day/game) without
   needing a separate pre-aggregated file for each.
+- **`weather.json`** — this season's coldest/hottest/muggiest/driest/
+  windiest/rainiest/snowiest outdoor games, parsed from nflverse's
+  per-game weather text (temperature, humidity, wind, conditions).
 - **`rarity.json`** *(generated separately, see below)* — real historical
   occurrence rates, merged into `oddities.json` on the next `build_data.py`
   run.
+- **`weather_records.json`** *(generated separately, see below)* — the
+  same records as `weather.json`, but across every season nflverse has
+  weather data for (2002 onward), not just the current one.
+
+### Weather
+
+`weather.json` comes from a field most of this README doesn't otherwise
+mention: nflverse's pbp `weather` column is a per-game free-text string
+like `"Snow Showers, 3 to 5 inches expected. Temp: 33° F, Humidity: 91%,
+Wind: SE 5 mph"`, present for every *outdoor* game back to the 2002
+season (domes/closed roofs leave it blank — there's no "weather" to
+record). `parse_weather_text()` in `build_data.py` pulls humidity out
+with a regex, splits off the condition description, and ranks rain/snow
+severity by keyword (`RAIN_SEVERITY`/`SNOW_SEVERITY`) since the field
+almost never gives a quantitative rain amount and only sometimes gives
+one for snow (`SNOW_INCHES_RE`). `build_weather()` then picks a single
+record holder per category among that scope's *outdoor* games only (domes
+would make "coldest game" meaningless).
+
+`scripts/build_weather_records.py` reuses that same parser against every
+season since 2002 to compute the data-verified "since 2002" records
+(`data/weather_records.json`) — a separate, occasional script for the
+same reason `build_rarity.py` is: it downloads two dozen seasons of pbp,
+which doesn't need to happen on a daily cron
+(`.github/workflows/update-weather-records.yml` runs it yearly plus
+manual dispatch). Run it by hand with:
+
+```bash
+python3 scripts/build_weather_records.py               # 2002 through last season
+```
+
+Nothing here reaches further back than 2002, since that's as far as
+nflverse's weather field goes — nowhere close to the sport's actual
+all-time extremes (the Ice Bowl, the Freezer Bowl, both well before even
+nflverse's 1999 play-by-play starts). Those live in `data/history.json`'s
+`weather_extremes` category instead, hand-researched the same way the
+rest of that file is — see the History appendix section below. The
+`"since 2002"` panel on `history.html` says as much, pointing at the
+`weather_extremes` entries for the real record holders.
+
+One parsed value got flagged rather than trusted outright: a 2016
+Steelers-Giants game's weather text reads "71 mph" wind, which is
+low-end-hurricane-force and implausible for a game that was actually
+played — almost certainly a transcription error somewhere upstream of
+nflverse, not reality. Rather than silently drop or silently trust it,
+`build_weather_records.py` attaches a `caveat` field when windiest exceeds
+50mph, and the front end shows it as a hoverable "Flagged" pill. If you
+tune the plausibility threshold, keep that spirit: surface it, don't hide
+it.
 
 ## Adding or tuning an oddity rule
 
