@@ -340,3 +340,23 @@ elsewhere:
 - Nothing blocking — phases (a) through (d) from the original plan are
   all built and verified against real data. Remaining work is operational:
   merge to `main`, enable Pages, and set the real custom domain.
+
+## SEO: head tags, sitemap.xml, robots.txt
+
+`scripts/build_seo.py` is the single source of truth for each page's
+`<title>`, meta description, canonical URL, Open Graph and Twitter tags
+(the `PAGES` dict), and for `sitemap.xml`. The canonical domain comes from
+`CNAME` (`https://one-pointsafety.com`, no www).
+
+- After editing `PAGES` or adding a page: `python3 scripts/build_seo.py`,
+  then `python3 scripts/build_seo.py --check`, and commit. Don't hand-edit
+  between the `<!-- seo:start -->` / `<!-- seo:end -->` markers.
+- Every root `*.html` is added to the sitemap automatically. A new page
+  without a `PAGES` entry still gets listed, but `--check` fails until you
+  give it a title and description.
+- `<lastmod>` is per page. Each page lists the files its content comes from,
+  and their hash is stored in `scripts/sitemap_state.json`. The daily
+  `update-data.yml` run calls `build_seo.py --sitemap-only` and commits the
+  sitemap with the data. `meta.json`'s `last_updated` timestamp is ignored.
+- `og-image.png` (1200×630) is a placeholder social preview image. Replace
+  it with any 1200×630 PNG at the same path.
