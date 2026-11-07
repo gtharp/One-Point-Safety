@@ -19,15 +19,17 @@ built around a call budget rather than "download everything":
   * /games (1 call) gives the whole season's schedule and completion status.
   * /plays is fetched one call per week (never per game), and only for
     weeks whose set of completed games grew since the last fetch. Raw
-    plays are never stored: events.json itself is the event store (weeks
-    not refetched keep last run's events), and <out>/cache/weeks.json keeps
-    only per-week fetch state plus per-game counts for totals.json.
-  * /rankings (1 call, every week's polls at once) on daily runs only.
+    plays are never stored: the per-week event files (<out>/events/
+    week-NN.json) are the event store (weeks not refetched keep last run's
+    events), and <out>/cache/weeks.json keeps only per-week fetch state
+    plus per-game counts for totals.json.
+  * /rankings (1 call, every week's polls at once) only when a newer AP
+    poll than the cached one should exist -- about once a week.
   * /teams/fbs (1 call) only when the committed team cache is missing or
     from another season.
 
-A typical daily run spends 2-4 calls; a weekend (--mode weekend) run
-spends 2. See README.md ("College football") for the details.
+A typical daily run spends 1-2 calls (3 on the day a new poll is due);
+a weekend (--mode weekend) run spends 1-2. See README.md ("College football") for the details.
 """
 
 import argparse
@@ -667,17 +669,37 @@ def main():
     def site_week(g):
         return g["week"] if g.get("seasonType") == "regular" else reg_max + g["week"]
 
-    # --- AP poll (daily runs; weekend runs reuse the cache) ---
+    # --- AP poll: only fetched when a newer poll than the cached one should
+    # exist. CFBD's week-N poll comes out before week-N games, so once any
+    # week-N game has kicked off we expect to have it; until then the cache
+    # is current and the call is skipped. Weekend runs never fetch it. ---
+    now = datetime.datetime.now(datetime.timezone.utc)
     polls_path = cache_dir / "ap_polls.json"
     polls_cache = read_json(polls_path, {})
-    if args.mode == "daily" or polls_cache.get("season") != season:
-        print("Fetching AP poll...")
+    fetch_polls, why = polls_cache.get("season") != season, "no poll cached for this season"
+    if not fetch_polls and args.mode == "daily":
+        cached_weeks = [int(k.split("-")[1]) for k in polls_cache.get("polls", {}) if k.startswith("regular-")]
+        cached_max = max(cached_weeks, default=0)
+        started = [g for g in games_raw if (parse_utc(g.get("startDate")) or now) <= now]
+        latest_reg = max((g["week"] for g in started if g.get("seasonType") == "regular"), default=0)
+        post_started = any(g.get("seasonType") == "postseason" for g in started)
+        last_fetch = parse_utc(polls_cache.get("fetched_at")) or datetime.datetime.min.replace(tzinfo=datetime.timezone.utc)
+        if cached_max < latest_reg:
+            fetch_polls, why = True, f"week {latest_reg} has started, cached poll is week {cached_max}"
+        elif post_started and cached_max <= reg_max and (now - last_fetch).days >= 3:
+            # Bowls use the final regular-season poll, released after the
+            # conference championships. Check for it every few days.
+            fetch_polls, why = True, "postseason started; checking for the final regular-season poll"
+    if fetch_polls:
+        print(f"Fetching AP poll ({why})...")
         try:
             rankings = api.get("/rankings", {"year": season})
-            polls_cache = {"season": season, "polls": ap_by_week(rankings)}
+            polls_cache = {"season": season, "fetched_at": now.isoformat(), "polls": ap_by_week(rankings)}
             write_json(polls_path, polls_cache, pretty=True)
         except (RuntimeError, requests.HTTPError) as exc:
             print(f"warning: rankings fetch failed ({exc}); using cached poll", file=sys.stderr)
+    else:
+        print("AP poll cache is current; skipping /rankings.")
     polls = polls_cache.get("polls", {}) if polls_cache.get("season") == season else {}
     game_rank = {}
     for g in games_raw:
@@ -686,21 +708,26 @@ def main():
     ap_games = {gid for gid, (a, h) in game_rank.items() if a is not None or h is not None}
 
     # --- per-week fetch state + counts, and the existing event store ---
-    # events.json itself is the event store: weeks that aren't refetched
-    # keep their events from the last run, so nothing large is duplicated
-    # in cache/. cache/weeks.json holds only what decides refetching plus
-    # the per-game counts behind totals.json.
+    # The per-week event files (events/week-NN.json) are themselves the
+    # event store: weeks that aren't refetched keep their events from the
+    # last run, so nothing large is duplicated in cache/. cache/weeks.json
+    # holds only what decides refetching plus the per-game counts behind
+    # totals.json.
+    events_dir = out_dir / "events"
     state_path = cache_dir / "weeks.json"
     state = read_json(state_path, {})
     old_meta = read_json(out_dir / "meta.json", {})
+    old_events = []
     if state.get("season") != season or old_meta.get("season") != season:
         state = {"season": season, "weeks": {}}
-        old_events = []
     else:
-        old_events = read_json(out_dir / "events.json", [])
+        for rel in old_meta.get("event_files", []):
+            old_events.extend(read_json(out_dir / rel, []))
+        legacy = out_dir / "events.json"  # pre-split single file
+        if not old_events and legacy.exists():
+            old_events = read_json(legacy, [])
 
     # --- decide which weeks' plays to (re)fetch ---
-    now = datetime.datetime.now(datetime.timezone.utc)
     by_week = collections.defaultdict(list)
     for g in games_raw:
         by_week[(g.get("seasonType"), g["week"])].append(g)
@@ -811,7 +838,7 @@ def main():
 
     # Merge: last run's events for weeks not refetched + this run's.
     for i, e in enumerate(old_events):
-        e["_order"] = -i  # old file is already newest-first within a game
+        e["_order"] = -i  # old files are already newest-first within a game
     events = [e for e in old_events if e["game_id"] not in refetched_ids] + new_events
     events = [e for e in events if e["game_id"] in games_by_id]
 
@@ -835,10 +862,17 @@ def main():
         e["tier"] = TIER_RANK["rare"] if tier is None and e["rare_penalty"] else tier
         e["_date"] = g["date"]
     events.sort(key=lambda e: (e["week"], e["_date"], e["game_id"], -e["_order"]))
-    for i, e in enumerate(events):
-        e["id"] = i
+    # One file per week, ids numbered within the file (the page renumbers
+    # after concatenating), so a run that only touches this week rewrites
+    # only this week's file and every other file stays byte-identical.
+    events_by_week = collections.defaultdict(list)
+    for e in events:
         e.pop("_order", None)
         e.pop("_date", None)
+        events_by_week[e["week"]].append(e)
+    for wk_events in events_by_week.values():
+        for i, e in enumerate(wk_events):
+            e["id"] = i
 
     # Totals (reference/debugging, same shape as the NFL file). Injuries
     # count AP Top 25 games only, matching what the page shows.
@@ -908,10 +942,20 @@ def main():
         "source": SOURCE,
         "games_count": len(games),
         "rare_penalty_threshold": threshold,
+        "event_files": [f"events/week-{w:02d}.json" for w in sorted(events_by_week)],
     }
 
     write_json(out_dir / "games.json", games)
-    write_json(out_dir / "events.json", events)
+    events_dir.mkdir(parents=True, exist_ok=True)
+    keep = set()
+    for w, wk_events in events_by_week.items():
+        path = events_dir / f"week-{w:02d}.json"
+        keep.add(path.name)
+        write_json(path, wk_events)
+    for stale_file in events_dir.glob("week-*.json"):
+        if stale_file.name not in keep:
+            stale_file.unlink()
+    (out_dir / "events.json").unlink(missing_ok=True)
     write_json(out_dir / "totals.json", totals)
     write_json(out_dir / "oddities.json", {"oddities": oddity_catalog, "rare_penalties": rare_penalty_catalog})
     (out_dir / "meta.json").write_text(json.dumps(meta, indent=2))

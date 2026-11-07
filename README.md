@@ -223,8 +223,18 @@ JSON.
 ### Data files
 
 `data/ncaa/` uses the same file names and JSON shapes as the NFL side
-(`meta.json`, `games.json`, `events.json`, `oddities.json`, `totals.json`),
-with a few additions:
+(`meta.json`, `games.json`, `oddities.json`, `totals.json`), with a few
+differences:
+
+- **events are split by week**: `data/ncaa/events/week-NN.json`, each a
+  list in the same event shape as the NFL's `events.json`, listed in
+  `meta.json`'s `event_files`. The page loads them all and concatenates
+  them (and numbers `id`s by position), so the front end works the same
+  either way. Split because FBS plays about 7x as many games: a full
+  season is ~10 MB of events, and a single file would be rewritten in
+  full by every daily commit, bloating git history. Now a run that only
+  refetches this week rewrites only this week's file (older weeks change
+  only in the rare case that a penalty type's "rare" flag flips).
 
 - every game and event carries **`ap_top25`**: true if either team was in
   that week's AP Top 25 (the poll released before the game; bowls and the
@@ -238,9 +248,13 @@ with a few additions:
   API calls refetching it: `teams.json` (FBS team/venue info, fetched once
   a season), `ap_polls.json` (every week's AP Top 25), and `weeks.json`
   (per-week fetch state plus per-game counts behind `totals.json`). Raw
-  plays are never stored: `events.json` doubles as the event store, so a
-  run that only refetches this week keeps every earlier week's events
-  from the previous run.
+  plays are never stored: the per-week event files double as the event
+  store, so a run that only refetches this week keeps every earlier
+  week's events from the previous run.
+
+Size: events grow through the season (about 7 MB raw at week 10, ~10 MB
+by the end of the bowls; GitHub Pages serves it gzip-compressed, ~1/7 of
+that) and start over each new season.
 
 ### The API key
 
@@ -266,18 +280,21 @@ around that:
 | --- | --- |
 | `/info` quota check (start of every run) | free |
 | `/games?year&classification=fbs` (whole season's schedule + results) | 1 |
-| `/rankings?year` (every week's polls), daily runs only | 1 |
-| `/plays?year&week` (one call per *week*, never per game), only for weeks whose completed games changed; daily cap 4 | usually 1 |
+| `/plays?year&week` (one call per *week*, never per game), only for weeks whose completed games changed; daily cap 4 | 0–1 |
+| `/rankings?year` (every week's polls), only on daily runs when a newer AP poll than the cached one is due (a week-N game has kicked off but the cache only has polls through N-1; in the postseason, a check every 3 days for the final regular-season poll) | ~1 a week |
 | `/teams/fbs` only when `cache/teams.json` is missing or from another season | ~1 a year |
 
-A daily run is typically 2–3 calls; the in-season weekend runs (Sun 04:30
-and 08:30 UTC, `--mode weekend`) refetch only the current week and skip
-rankings, so 2 calls each. That's roughly 100–150 calls a month in season.
+A daily run is typically 1–2 calls (3 on the day a new poll is due); the
+in-season weekend runs (Sun 04:30 and 08:30 UTC, `--mode weekend`)
+refetch only the current week and never fetch rankings, so 1–2 calls each.
+That's roughly 70–80 calls a month in season. The daily schedule only runs
+August through January, so the offseason costs nothing (use **Run
+workflow** if something needs refreshing then).
 Every response's `X-CallLimit-Remaining` header is logged, there's a hard
 ceiling of 10 calls per run, and if `/info` reports fewer than 100 calls
 left the run keeps the existing data and exits without spending anything.
 
-The daily job runs at 13:30 UTC, 30 minutes after the NFL job, so the two
+The daily job runs at 13:30 UTC (Aug–Jan), 30 minutes after the NFL job, so the two
 never race on `git push`. It has its own concurrency group and does a
 `git pull --rebase` before pushing.
 

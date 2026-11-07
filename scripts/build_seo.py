@@ -75,7 +75,7 @@ PAGES = {
         "priority": "0.9",
         "deps": [
             "college.html", "app.js", "styles.css",
-            "data/ncaa/meta.json", "data/ncaa/games.json", "data/ncaa/events.json",
+            "data/ncaa/meta.json", "data/ncaa/games.json", "data/ncaa/events/*.json",
             "data/ncaa/oddities.json",
         ],
     },

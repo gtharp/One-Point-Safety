@@ -3,17 +3,20 @@ name: Update college data
 # College football (NCAA FBS) data from the CollegeFootballData.com API.
 # The free tier allows 1,000 calls per calendar month, so every run is
 # budgeted (see scripts/build_ncaa_data.py and README.md):
-#   - daily run: /games + /rankings + /plays for weeks with newly final
-#     games (usually 1) -> typically 2-4 calls
+#   - daily run (Aug-Jan only): /games, plus /plays for a week with newly
+#     final games, plus /rankings only when a new AP poll is due
+#     -> 1-3 calls, roughly 70-80 a month in season
 #   - weekend runs (in season): /games + /plays for the current week only
-#     -> 2 calls
+#     -> 1-2 calls
+#   - no scheduled runs Feb-Jul (the season is over); use "Run workflow"
+#     if anything needs refreshing then
 # The script checks the free /info endpoint first and skips the run if
 # fewer than 100 calls remain this month.
 on:
   schedule:
-    # Daily at 13:30 UTC, 30 minutes after update-data.yml (13:00) so the
-    # two jobs never race on git push.
-    - cron: "30 13 * * *"
+    # Daily at 13:30 UTC, Aug-Jan, 30 minutes after update-data.yml (13:00)
+    # so the two jobs never race on git push.
+    - cron: "30 13 * 8-12,1 *"
     # Extra in-season runs (Sep-Jan) to pick up Saturday's games sooner:
     # Sun 04:30 UTC (~10:30-11:30pm Central Sat) and Sun 08:30 UTC (after
     # late West Coast kickoffs finish).

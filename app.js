@@ -67,7 +67,11 @@ async function boot() {
   }
   const [games, events, oddities, weather] = await Promise.all([
     loadJSON(DATA + "games.json"),
-    loadJSON(DATA + "events.json"),
+    // College splits events into one file per week (meta.event_files);
+    // the NFL side keeps a single events.json.
+    META.event_files
+      ? Promise.all(META.event_files.map(f => loadJSON(DATA + f))).then(parts => parts.flat())
+      : loadJSON(DATA + "events.json"),
     loadJSON(DATA + "oddities.json"),
     NCAA ? Promise.resolve(null) : loadJSON(DATA + "weather.json").catch(() => null), // no weather for college
   ]);
@@ -77,6 +81,9 @@ async function boot() {
   EVENTS = events;
   EVENTS.forEach(e => { e.g = GAMES_BY_ID.get(e.game_id) || null; });
   EVENTS = EVENTS.filter(e => e.g);
+  // Clicks look events up by position (EVENTS[id]), so number them by
+  // position after concatenating/filtering.
+  EVENTS.forEach((e, i) => { e.id = i; });
   // Per-game index: college has ~7x the NFL's games, so per-game lookups
   // shouldn't rescan every event.
   EVENTS.forEach(e => {
