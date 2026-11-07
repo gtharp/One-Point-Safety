@@ -1,10 +1,14 @@
 {
+  "college.html": {
+    "hash": "009b9007daa0a4c64aa0204b2b12947157deec0545048fee03dc5c50b6cc5b69",
+    "lastmod": "2026-11-07"
+  },
   "history.html": {
-    "hash": "6ff15a67ec2e861b1098b933a0076bb26e4292c9f5b8cd6a5cd839a159d7184e",
-    "lastmod": "2026-10-31"
+    "hash": "8da234d944fcce9b2098adb940f14cb48975885b6d5c436790854f6854401721",
+    "lastmod": "2026-11-07"
   },
   "index.html": {
-    "hash": "f2d143d8ea168e119e873f7ba80ac26e88296ce87b2caa156f297592373c24e0",
-    "lastmod": "2026-11-06"
+    "hash": "137857be1e3f2b9b4391f49bf155319d8c48b2d26160ab08c28e18d502c4cbeb",
+    "lastmod": "2026-11-07"
   }
 }

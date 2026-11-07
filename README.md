@@ -13,6 +13,10 @@ JS with no build step, served by GitHub Pages straight from this repo.
 Not affiliated with the NFL. Play-by-play data from
 [nflverse](https://github.com/nflverse/nflverse-data).
 
+A second league, college football (NCAA FBS), lives at `college.html`,
+built from the [CollegeFootballData.com](https://collegefootballdata.com) API.
+See [College football](#college-football-ncaa-fbs) below.
+
 ## How it fits together
 
 ```
@@ -182,6 +186,186 @@ here. These are approximations, noted in case a rule needs retuning:
   which also caught the unrelated "Injury Update: X has returned to the
   game" notices — fixed to match only `"injured"`.)
 
+## College football (NCAA FBS)
+
+`college.html` is the college counterpart of the main page: same `app.js`
+and `styles.css`, but `<body data-league="ncaa">` makes `app.js` load
+`data/ncaa/*.json` instead of `data/*.json`, and a `body[data-league="ncaa"]`
+block in `styles.css` swaps the green theme for light blue (light-blue
+fills; a mid blue, `--accent-strong`, for selected buttons/chips: white
+text on it is 5.97:1 in light mode and 5.65:1 in dark, both WCAG AA).
+Both pages have an **NFL | College** toggle in the header. The last choice
+is remembered in `localStorage`, and a fresh visit to the NFL page by
+someone who last picked College goes straight to `college.html`. The
+History page stays NFL-only and isn't linked from the college page.
+
+Not affiliated with the NCAA or any school. College data from
+[CollegeFootballData.com](https://collegefootballdata.com) (CFBD), used
+under its free tier. FBS games only (games with at least one FBS team).
+
+```
+.github/workflows/update-ncaa-data.yml   cron (daily + Sat-night/Sun in season)
+            |
+            v
+scripts/build_ncaa_data.py               CFBD API -> oddity rules -> JSON
+   (uses scripts/ncaa_oddity_rules.py)
+            |
+            v
+data/ncaa/*.json                         committed back to the repo
+            |
+            v
+college.html / app.js / styles.css       fetches data/ncaa/*.json
+```
+
+The browser never calls the CFBD API; the page only reads the committed
+JSON.
+
+### Data files
+
+`data/ncaa/` uses the same file names and JSON shapes as the NFL side
+(`meta.json`, `games.json`, `events.json`, `oddities.json`, `totals.json`),
+with a few additions:
+
+- every game and event carries **`ap_top25`**: true if either team was in
+  that week's AP Top 25 (the poll released before the game; bowls and the
+  CFP use the last regular-season poll). Games also have `away_rank` /
+  `home_rank`, conferences, and `notes` (bowl names etc.).
+- `meta.json` has `week_labels` (postseason weeks show as "Postseason"
+  rather than a week number) and `rare_penalty_threshold`.
+- no `weather.json`. CFBD's weather data is Patreon-only, so the weather
+  panel isn't on the college page.
+- `data/ncaa/cache/` holds what the next run needs so it doesn't spend
+  API calls refetching it: `teams.json` (FBS team/venue info, fetched once
+  a season), `ap_polls.json` (every week's AP Top 25), and `weeks.json`
+  (per-week fetch state plus per-game counts behind `totals.json`). Raw
+  plays are never stored: `events.json` doubles as the event store, so a
+  run that only refetches this week keeps every earlier week's events
+  from the previous run.
+
+### The API key
+
+The CFBD API needs a key. **It is never written into this repo**: not in
+code, config, `.env` files or commit messages. `build_ncaa_data.py` reads
+it only from the `CFBD_API_KEY` environment variable and exits with a clear
+message if it's missing.
+
+- In GitHub Actions it comes from the repository secret `CFBD_API_KEY`
+  (Settings → Secrets and variables → Actions), passed to the build step
+  as `env: CFBD_API_KEY: ${{ secrets.CFBD_API_KEY }}`.
+- Locally: `export CFBD_API_KEY=...` in your shell (get a free key at
+  collegefootballdata.com), then run the script. Don't put it in a file
+  inside the repo.
+
+### Call budget
+
+The free tier is **1,000 calls per calendar month**, shared with
+CollegeBasketballData (which this site doesn't use). The pipeline is built
+around that:
+
+| Run | Calls |
+| --- | --- |
+| `/info` quota check (start of every run) | free |
+| `/games?year&classification=fbs` (whole season's schedule + results) | 1 |
+| `/rankings?year` (every week's polls), daily runs only | 1 |
+| `/plays?year&week` (one call per *week*, never per game), only for weeks whose completed games changed; daily cap 4 | usually 1 |
+| `/teams/fbs` only when `cache/teams.json` is missing or from another season | ~1 a year |
+
+A daily run is typically 2–3 calls; the in-season weekend runs (Sun 04:30
+and 08:30 UTC, `--mode weekend`) refetch only the current week and skip
+rankings, so 2 calls each. That's roughly 100–150 calls a month in season.
+Every response's `X-CallLimit-Remaining` header is logged, there's a hard
+ceiling of 10 calls per run, and if `/info` reports fewer than 100 calls
+left the run keeps the existing data and exits without spending anything.
+
+The daily job runs at 13:30 UTC, 30 minutes after the NFL job, so the two
+never race on `git push`. It has its own concurrency group and does a
+`git pull --rebase` before pushing.
+
+```bash
+export CFBD_API_KEY=...                       # never commit this
+python3 scripts/build_ncaa_data.py            # daily mode (default)
+python3 scripts/build_ncaa_data.py --mode weekend
+python3 scripts/build_ncaa_data.py --refetch-all   # after changing a rule: ~1 call per played week
+```
+
+Season detection: the "2026" season runs late August 2026 to mid-January
+2027, so August–December is that year and January–July belongs to the
+previous one. Regular season and postseason (bowls/CFP) are both included.
+
+### How the college rules differ
+
+CFBD plays don't have nflverse's boolean columns (`touchdown`, `safety`,
+`extra_point_attempt`, ...), so every rule in `scripts/ncaa_oddity_rules.py`
+is rewritten on what CFBD does have: `playType` ("Rushing Touchdown",
+"Field Goal Good", "Safety", ...), `playText`, `yardsGained`,
+`period`/`clock`, and the score *after* each play. `build_ncaa_data.py`
+derives per-play score deltas from those scores, which is what catches
+things folded into one play's text (e.g. a TD and its try).
+Ids, tiers and copy match the NFL rules where the play means the same
+thing; the "why it's odd" copy is rewritten for college (one-point safeties
+*have* happened in major college football, and the defensive 2-point return
+has been legal there since 1988). Two college-only oddities:
+
+- **Targeting ejection**: a Targeting foul that wasn't declined, offset
+  or overturned on review.
+- **Overtime 2-point shootout**: the game reached a third overtime (period
+  7+), where college OT turns into alternating two-point tries. Counted
+  once per game.
+
+Player names are parsed from `playText` ("#2 D.Lagway", "K. Osborne");
+no API calls are spent on per-play stats.
+
+Rare penalties use the same dynamic idea as the NFL side, but FBS plays
+about 7× as many games, so a penalty type is rare when it's been called at
+most `RARE_PENALTY_PER_100_GAMES` (1.0) times per 100 games played so far,
+minimum 3. Penalty names are normalized across CFBD's text formats
+("ST Holding", "Offensive Holding" and "holding" all become "Holding").
+
+Tiers start from the NFL values. There's no college rarity script yet, so
+the detail sheet says "Historical rarity not calculated yet".
+
+### Heuristic college rules
+
+These rely on text patterns or inference rather than a dedicated field:
+
+- **One-point safety**: "safety" in the try portion of a TD play's text
+  plus a 1-point score delta. Untested against a real example so far.
+- **Defensive 2-point return**: CFBD's "Defensive 2pt Conversion"
+  playType, or the defense gaining exactly 2 on a TD play with a
+  return/turnover word in the try text.
+- **Walk-off score**: go-ahead score in the 4th quarter with 0:00 on the
+  clock ("clock 00:00" in the text, else the clock field), and no later
+  scoring in the game. College OT has no clock, so OT winners count as
+  overtime scores instead.
+- **Fake punt/FG TD**: the passer/rusher on a TD punted or kicked for that
+  team in the same game, or the text says "fake". Holders are excluded
+  because they're often quarterbacks.
+- **Non-QB TD pass / QB catches a pass**: no roster positions without
+  extra calls, so a "QB" is whoever threw 5+ passes for that team in that
+  game. A non-QB passer has ≤2 attempts in the game and also caught or ran
+  the ball, or punted/kicked.
+- **Onside kick recovered**: the kicking team has the ball on the next
+  real play.
+- **Multi-lateral TD**: 2+ "lateral" mentions on a TD play.
+- **Targeting ejection**: text match on "Targeting", minus
+  declined/offsetting/overturned.
+- **Penalty team**: play text uses ESPN-style abbreviations (MIZZOU,
+  KSTATE) that don't always match CFBD's team data. Matched by abbreviation,
+  alternate names and letter order, then by elimination using each game's
+  yard-line markers. A few games' abbreviations still don't resolve, and
+  those penalties show no team.
+
+### Injuries (phase 1)
+
+Plays whose text says a player was "injured" (CFBD writes "#9 J.Smith
+injured on the play") are flagged the same way as the NFL side's
+`INJURY_RE`, but **only for games involving an AP Top 25 team**. The page
+labels the count "Injuries (AP Top 25 games)". Pre-game availability
+reports are a planned **phase 2**.
+
+The college page also has an **AP Top 25 only** filter chip that narrows
+the oddities board/feed and the play log to games involving a ranked team.
+
 ## The History appendix
 
 `history.html` (linked from the main page's header) is a separate page: a
@@ -278,6 +462,8 @@ the output directory.
 
 Actions tab → **Update data** → **Run workflow**. Runs the same script
 the cron job does and commits `data/*.json` only if something changed.
+For college: **Update college data** → **Run workflow** (mode `daily` or
+`weekend`), which commits `data/ncaa/`.
 
 ## Computing real rarity numbers
 
@@ -332,8 +518,10 @@ elsewhere:
 
 - No NFL or team logos, no "NFL" in the name — team abbreviations in data
   are fine. Footer disclaimer + nflverse credit are already in `index.html`.
-- Free only — no paid APIs. nflverse data, GitHub Actions, and GitHub
-  Pages are all free for a public repo.
+- Free only — no paid APIs. nflverse data, CFBD's free tier, GitHub
+  Actions, and GitHub Pages are all free for a public repo.
+- No school or conference logos on the college page either (CFBD's team
+  data includes logo URLs; the team cache deliberately drops them).
 
 ## What's left
 

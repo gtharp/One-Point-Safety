@@ -1,0 +1,23 @@
+{
+  "season": 2026,
+  "has_data": true,
+  "league": "ncaa",
+  "current_week": 10,
+  "weeks": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "week_labels": {},
+  "last_updated": "2026-11-07T22:12:46.971506+00:00",
+  "source": "CollegeFootballData.com API",
+  "games_count": 647,
+  "rare_penalty_threshold": 6
+}

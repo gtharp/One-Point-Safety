@@ -1,0 +1,2100 @@
+{
+  "season": 2026,
+  "teams": [
+    {
+      "abbreviation": "AF",
+      "alternateNames": [
+        "AF",
+        "Air Force"
+      ],
+      "city": "Colorado Springs",
+      "conference": "Mountain West",
+      "id": 2005,
+      "mascot": "Falcons",
+      "school": "Air Force",
+      "state": "CO",
+      "timezone": "America/Denver",
+      "venue": "Falcon Stadium"
+    },
+    {
+      "abbreviation": "AKR",
+      "alternateNames": [
+        "AKR",
+        "Akron"
+      ],
+      "city": "Akron",
+      "conference": "Mid-American",
+      "id": 2006,
+      "mascot": "Zips",
+      "school": "Akron",
+      "state": "OH",
+      "timezone": "America/New_York",
+      "venue": "InfoCision Stadium"
+    },
+    {
+      "abbreviation": "ALA",
+      "alternateNames": [
+        "ALA",
+        "Alabama"
+      ],
+      "city": "Tuscaloosa",
+      "conference": "SEC",
+      "id": 333,
+      "mascot": "Crimson Tide",
+      "school": "Alabama",
+      "state": "AL",
+      "timezone": "America/Chicago",
+      "venue": "Bryant-Denny Stadium"
+    },
+    {
+      "abbreviation": "APP",
+      "alternateNames": [
+        "Appalachian State",
+        "APP",
+        "App State"
+      ],
+      "city": "Boone",
+      "conference": "Sun Belt",
+      "id": 2026,
+      "mascot": "Mountaineers",
+      "school": "App State",
+      "state": "NC",
+      "timezone": "America/New_York",
+      "venue": "Kidd Brewer Stadium"
+    },
+    {
+      "abbreviation": "ARIZ",
+      "alternateNames": [
+        "ARIZ",
+        "Arizona"
+      ],
+      "city": "Tucson",
+      "conference": "Big 12",
+      "id": 12,
+      "mascot": "Wildcats",
+      "school": "Arizona",
+      "state": "AZ",
+      "timezone": "America/Phoenix",
+      "venue": "Arizona Stadium"
+    },
+    {
+      "abbreviation": "ASU",
+      "alternateNames": [
+        "ASU",
+        "Arizona St"
+      ],
+      "city": "Tempe",
+      "conference": "Big 12",
+      "id": 9,
+      "mascot": "Sun Devils",
+      "school": "Arizona State",
+      "state": "AZ",
+      "timezone": "America/Phoenix",
+      "venue": "Mountain America Stadium"
+    },
+    {
+      "abbreviation": "ARK",
+      "alternateNames": [
+        "ARK",
+        "Arkansas"
+      ],
+      "city": "Fayetteville",
+      "conference": "SEC",
+      "id": 8,
+      "mascot": "Razorbacks",
+      "school": "Arkansas",
+      "state": "AR",
+      "timezone": "America/Chicago",
+      "venue": "Razorback Stadium"
+    },
+    {
+      "abbreviation": "ARST",
+      "alternateNames": [
+        "ARST",
+        "Arkansas St"
+      ],
+      "city": "Jonesboro",
+      "conference": "Sun Belt",
+      "id": 2032,
+      "mascot": "Red Wolves",
+      "school": "Arkansas State",
+      "state": "AR",
+      "timezone": "America/Chicago",
+      "venue": "Centennial Bank Stadium"
+    },
+    {
+      "abbreviation": "ARMY",
+      "alternateNames": [
+        "ARMY",
+        "Army"
+      ],
+      "city": "West Point",
+      "conference": "American Athletic",
+      "id": 349,
+      "mascot": "Black Knights",
+      "school": "Army",
+      "state": "NY",
+      "timezone": "America/New_York",
+      "venue": "Michie Stadium"
+    },
+    {
+      "abbreviation": "AUB",
+      "alternateNames": [
+        "AUB",
+        "Auburn"
+      ],
+      "city": "Auburn",
+      "conference": "SEC",
+      "id": 2,
+      "mascot": "Tigers",
+      "school": "Auburn",
+      "state": "AL",
+      "timezone": "America/Chicago",
+      "venue": "Jordan-Hare Stadium"
+    },
+    {
+      "abbreviation": "BALL",
+      "alternateNames": [
+        "BALL",
+        "Ball State"
+      ],
+      "city": "Muncie",
+      "conference": "Mid-American",
+      "id": 2050,
+      "mascot": "Cardinals",
+      "school": "Ball State",
+      "state": "IN",
+      "timezone": "America/Indiana/Indianapolis",
+      "venue": "Scheumann Stadium"
+    },
+    {
+      "abbreviation": "BAY",
+      "alternateNames": [
+        "BAY",
+        "Baylor"
+      ],
+      "city": "Waco",
+      "conference": "Big 12",
+      "id": 239,
+      "mascot": "Bears",
+      "school": "Baylor",
+      "state": "TX",
+      "timezone": "America/Chicago",
+      "venue": "McLane Stadium"
+    },
+    {
+      "abbreviation": "BOIS",
+      "alternateNames": [
+        "BOIS",
+        "Boise St"
+      ],
+      "city": "Boise",
+      "conference": "Pac-12",
+      "id": 68,
+      "mascot": "Broncos",
+      "school": "Boise State",
+      "state": "ID",
+      "timezone": "America/Boise",
+      "venue": "Albertsons Stadium"
+    },
+    {
+      "abbreviation": "BC",
+      "alternateNames": [
+        "BC",
+        "Boston College"
+      ],
+      "city": "Chestnut Hill",
+      "conference": "ACC",
+      "id": 103,
+      "mascot": "Eagles",
+      "school": "Boston College",
+      "state": "MA",
+      "timezone": "America/New_York",
+      "venue": "Alumni Stadium (Chestnut Hill, MA)"
+    },
+    {
+      "abbreviation": "BGSU",
+      "alternateNames": [
+        "Bowling Green State",
+        "BGSU",
+        "Bowling Green"
+      ],
+      "city": "Bowling Green",
+      "conference": "Mid-American",
+      "id": 189,
+      "mascot": "Falcons",
+      "school": "Bowling Green",
+      "state": "OH",
+      "timezone": "America/New_York",
+      "venue": "Doyt L. Perry Stadium"
+    },
+    {
+      "abbreviation": "BUF",
+      "alternateNames": [
+        "BUF",
+        "Buffalo"
+      ],
+      "city": "Amherst",
+      "conference": "Mid-American",
+      "id": 2084,
+      "mascot": "Bulls",
+      "school": "Buffalo",
+      "state": "NY",
+      "timezone": "America/New_York",
+      "venue": "UB Stadium"
+    },
+    {
+      "abbreviation": "BYU",
+      "alternateNames": [
+        "Brigham Young",
+        "BYU",
+        "BYU"
+      ],
+      "city": "Provo",
+      "conference": "Big 12",
+      "id": 252,
+      "mascot": "Cougars",
+      "school": "BYU",
+      "state": "UT",
+      "timezone": "America/Denver",
+      "venue": "LaVell Edwards Stadium"
+    },
+    {
+      "abbreviation": "CAL",
+      "alternateNames": [
+        "CAL",
+        "California"
+      ],
+      "city": "Berkeley",
+      "conference": "ACC",
+      "id": 25,
+      "mascot": "Golden Bears",
+      "school": "California",
+      "state": "CA",
+      "timezone": "America/Los_Angeles",
+      "venue": "California Memorial Stadium"
+    },
+    {
+      "abbreviation": "CMU",
+      "alternateNames": [
+        "CMU",
+        "C Michigan"
+      ],
+      "city": "Mount Pleasant",
+      "conference": "Mid-American",
+      "id": 2117,
+      "mascot": "Chippewas",
+      "school": "Central Michigan",
+      "state": "MI",
+      "timezone": "America/Detroit",
+      "venue": "Kelly/Shorts Stadium"
+    },
+    {
+      "abbreviation": "CLT",
+      "alternateNames": [
+        "CLT",
+        "Charlotte"
+      ],
+      "city": "Charlotte",
+      "conference": "American Athletic",
+      "id": 2429,
+      "mascot": "49ers",
+      "school": "Charlotte",
+      "state": "NC",
+      "timezone": "America/New_York",
+      "venue": "Jerry Richardson Stadium"
+    },
+    {
+      "abbreviation": "CIN",
+      "alternateNames": [
+        "CIN",
+        "Cincinnati"
+      ],
+      "city": "Cincinnati",
+      "conference": "Big 12",
+      "id": 2132,
+      "mascot": "Bearcats",
+      "school": "Cincinnati",
+      "state": "OH",
+      "timezone": "America/New_York",
+      "venue": "Nippert Stadium"
+    },
+    {
+      "abbreviation": "CLEM",
+      "alternateNames": [
+        "CLEM",
+        "Clemson"
+      ],
+      "city": "Clemson",
+      "conference": "ACC",
+      "id": 228,
+      "mascot": "Tigers",
+      "school": "Clemson",
+      "state": "SC",
+      "timezone": "America/New_York",
+      "venue": "Memorial Stadium (Clemson, SC)"
+    },
+    {
+      "abbreviation": "CCU",
+      "alternateNames": [
+        "CCU",
+        "Coastal"
+      ],
+      "city": "Conway",
+      "conference": "Sun Belt",
+      "id": 324,
+      "mascot": "Chanticleers",
+      "school": "Coastal Carolina",
+      "state": "SC",
+      "timezone": "America/New_York",
+      "venue": "Brooks Stadium (SC)"
+    },
+    {
+      "abbreviation": "COLO",
+      "alternateNames": [
+        "COLO",
+        "Colorado"
+      ],
+      "city": "Boulder",
+      "conference": "Big 12",
+      "id": 38,
+      "mascot": "Buffaloes",
+      "school": "Colorado",
+      "state": "CO",
+      "timezone": "America/Denver",
+      "venue": "Folsom Field"
+    },
+    {
+      "abbreviation": "CSU",
+      "alternateNames": [
+        "CSU",
+        "Colorado St"
+      ],
+      "city": "Fort Collins",
+      "conference": "Pac-12",
+      "id": 36,
+      "mascot": "Rams",
+      "school": "Colorado State",
+      "state": "CO",
+      "timezone": "America/Denver",
+      "venue": "Canvas Stadium"
+    },
+    {
+      "abbreviation": "DEL",
+      "alternateNames": [
+        "DEL",
+        "Delaware"
+      ],
+      "city": "Newark",
+      "conference": "Conference USA",
+      "id": 48,
+      "mascot": "Blue Hens",
+      "school": "Delaware",
+      "state": "DE",
+      "timezone": "America/New_York",
+      "venue": "Delaware Stadium"
+    },
+    {
+      "abbreviation": "DUKE",
+      "alternateNames": [
+        "DUKE",
+        "Duke"
+      ],
+      "city": "Durham",
+      "conference": "ACC",
+      "id": 150,
+      "mascot": "Blue Devils",
+      "school": "Duke",
+      "state": "NC",
+      "timezone": "America/New_York",
+      "venue": "Wallace Wade Stadium"
+    },
+    {
+      "abbreviation": "ECU",
+      "alternateNames": [
+        "ECU",
+        "East Carolina"
+      ],
+      "city": "Greenville",
+      "conference": "American Athletic",
+      "id": 151,
+      "mascot": "Pirates",
+      "school": "East Carolina",
+      "state": "NC",
+      "timezone": "America/New_York",
+      "venue": "Dowdy-Ficklen Stadium"
+    },
+    {
+      "abbreviation": "EMU",
+      "alternateNames": [
+        "EMU",
+        "E Michigan"
+      ],
+      "city": "Ypsilanti",
+      "conference": "Mid-American",
+      "id": 2199,
+      "mascot": "Eagles",
+      "school": "Eastern Michigan",
+      "state": "MI",
+      "timezone": "America/Detroit",
+      "venue": "Rynearson Stadium"
+    },
+    {
+      "abbreviation": "FLA",
+      "alternateNames": [
+        "FLA",
+        "Florida"
+      ],
+      "city": "Gainesville",
+      "conference": "SEC",
+      "id": 57,
+      "mascot": "Gators",
+      "school": "Florida",
+      "state": "FL",
+      "timezone": "America/New_York",
+      "venue": "Ben Hill Griffin Stadium"
+    },
+    {
+      "abbreviation": "FAU",
+      "alternateNames": [
+        "FAU",
+        "FAU"
+      ],
+      "city": "Boca Raton",
+      "conference": "American Athletic",
+      "id": 2226,
+      "mascot": "Owls",
+      "school": "Florida Atlantic",
+      "state": "FL",
+      "timezone": "America/New_York",
+      "venue": "FAU Stadium"
+    },
+    {
+      "abbreviation": "FIU",
+      "alternateNames": [
+        "Florida Intl",
+        "FIU",
+        "FIU"
+      ],
+      "city": "Miami",
+      "conference": "Conference USA",
+      "id": 2229,
+      "mascot": "Panthers",
+      "school": "Florida International",
+      "state": "FL",
+      "timezone": "America/New_York",
+      "venue": "Pitbull Stadium"
+    },
+    {
+      "abbreviation": "FSU",
+      "alternateNames": [
+        "FSU",
+        "Florida St"
+      ],
+      "city": "Tallahassee",
+      "conference": "ACC",
+      "id": 52,
+      "mascot": "Seminoles",
+      "school": "Florida State",
+      "state": "FL",
+      "timezone": "America/New_York",
+      "venue": "Doak Campbell Stadium"
+    },
+    {
+      "abbreviation": "FRES",
+      "alternateNames": [
+        "FRES",
+        "Fresno St"
+      ],
+      "city": "Fresno",
+      "conference": "Pac-12",
+      "id": 278,
+      "mascot": "Bulldogs",
+      "school": "Fresno State",
+      "state": "CA",
+      "timezone": "America/Los_Angeles",
+      "venue": "Valley Children's Stadium"
+    },
+    {
+      "abbreviation": "UGA",
+      "alternateNames": [
+        "UGA",
+        "Georgia"
+      ],
+      "city": "Athens",
+      "conference": "SEC",
+      "id": 61,
+      "mascot": "Bulldogs",
+      "school": "Georgia",
+      "state": "GA",
+      "timezone": "America/New_York",
+      "venue": "Sanford Stadium"
+    },
+    {
+      "abbreviation": "GASO",
+      "alternateNames": [
+        "GASO",
+        "GA Southern"
+      ],
+      "city": "Statesboro",
+      "conference": "Sun Belt",
+      "id": 290,
+      "mascot": "Eagles",
+      "school": "Georgia Southern",
+      "state": "GA",
+      "timezone": "America/New_York",
+      "venue": "Allen E. Paulson Stadium"
+    },
+    {
+      "abbreviation": "GAST",
+      "alternateNames": [
+        "GAST",
+        "Georgia St"
+      ],
+      "city": "Atlanta",
+      "conference": "Sun Belt",
+      "id": 2247,
+      "mascot": "Panthers",
+      "school": "Georgia State",
+      "state": "GA",
+      "timezone": "America/New_York",
+      "venue": "Center Parc Stadium"
+    },
+    {
+      "abbreviation": "GT",
+      "alternateNames": [
+        "GT",
+        "Georgia Tech"
+      ],
+      "city": "Atlanta",
+      "conference": "ACC",
+      "id": 59,
+      "mascot": "Yellow Jackets",
+      "school": "Georgia Tech",
+      "state": "GA",
+      "timezone": "America/New_York",
+      "venue": "Bobby Dodd Stadium"
+    },
+    {
+      "abbreviation": "HAW",
+      "alternateNames": [
+        "HAW",
+        "Hawai'i"
+      ],
+      "city": "Honolulu",
+      "conference": "Mountain West",
+      "id": 62,
+      "mascot": "Rainbow Warriors",
+      "school": "Hawai'i",
+      "state": "HI",
+      "timezone": "Pacific/Honolulu",
+      "venue": "Clarence T.C. Ching Athletics Complex"
+    },
+    {
+      "abbreviation": "HOU",
+      "alternateNames": [
+        "HOU",
+        "Houston"
+      ],
+      "city": "Houston",
+      "conference": "Big 12",
+      "id": 248,
+      "mascot": "Cougars",
+      "school": "Houston",
+      "state": "TX",
+      "timezone": "America/Chicago",
+      "venue": "TDECU Stadium"
+    },
+    {
+      "abbreviation": "ILL",
+      "alternateNames": [
+        "ILL",
+        "Illinois"
+      ],
+      "city": "Champaign",
+      "conference": "Big Ten",
+      "id": 356,
+      "mascot": "Fighting Illini",
+      "school": "Illinois",
+      "state": "IL",
+      "timezone": "America/Chicago",
+      "venue": "Memorial Stadium (Champaign, IL)"
+    },
+    {
+      "abbreviation": "IU",
+      "alternateNames": [
+        "IU",
+        "Indiana"
+      ],
+      "city": "Bloomington",
+      "conference": "Big Ten",
+      "id": 84,
+      "mascot": "Hoosiers",
+      "school": "Indiana",
+      "state": "IN",
+      "timezone": "America/Indiana/Indianapolis",
+      "venue": "Memorial Stadium (Bloomington, IN)"
+    },
+    {
+      "abbreviation": "IOWA",
+      "alternateNames": [
+        "IOWA",
+        "Iowa"
+      ],
+      "city": "Iowa City",
+      "conference": "Big Ten",
+      "id": 2294,
+      "mascot": "Hawkeyes",
+      "school": "Iowa",
+      "state": "IA",
+      "timezone": "America/Chicago",
+      "venue": "Kinnick Stadium"
+    },
+    {
+      "abbreviation": "ISU",
+      "alternateNames": [
+        "ISU",
+        "Iowa State"
+      ],
+      "city": "Ames",
+      "conference": "Big 12",
+      "id": 66,
+      "mascot": "Cyclones",
+      "school": "Iowa State",
+      "state": "IA",
+      "timezone": "America/Chicago",
+      "venue": "Jack Trice Stadium"
+    },
+    {
+      "abbreviation": "JXST",
+      "alternateNames": [
+        "JXST",
+        "Jax State"
+      ],
+      "city": "Jacksonville",
+      "conference": "Conference USA",
+      "id": 55,
+      "mascot": "Gamecocks",
+      "school": "Jacksonville State",
+      "state": "AL",
+      "timezone": "America/Chicago",
+      "venue": "AmFirst Stadium"
+    },
+    {
+      "abbreviation": "JMU",
+      "alternateNames": [
+        "JMU",
+        "James Madison"
+      ],
+      "city": "Harrisonburg",
+      "conference": "Sun Belt",
+      "id": 256,
+      "mascot": "Dukes",
+      "school": "James Madison",
+      "state": "VA",
+      "timezone": "America/New_York",
+      "venue": "Bridgeforth Stadium"
+    },
+    {
+      "abbreviation": "KU",
+      "alternateNames": [
+        "KU",
+        "Kansas"
+      ],
+      "city": "Lawrence",
+      "conference": "Big 12",
+      "id": 2305,
+      "mascot": "Jayhawks",
+      "school": "Kansas",
+      "state": "KS",
+      "timezone": "America/Chicago",
+      "venue": "Memorial Stadium"
+    },
+    {
+      "abbreviation": "KSU",
+      "alternateNames": [
+        "KSU",
+        "Kansas St"
+      ],
+      "city": "Manhattan",
+      "conference": "Big 12",
+      "id": 2306,
+      "mascot": "Wildcats",
+      "school": "Kansas State",
+      "state": "KS",
+      "timezone": "America/Chicago",
+      "venue": "Bill Snyder Family Stadium"
+    },
+    {
+      "abbreviation": "KENN",
+      "alternateNames": [
+        "Kennesaw",
+        "KENN",
+        "Kennesaw St"
+      ],
+      "city": "Kennesaw",
+      "conference": "Conference USA",
+      "id": 338,
+      "mascot": "Owls",
+      "school": "Kennesaw State",
+      "state": "GA",
+      "timezone": "America/New_York",
+      "venue": "Fifth Third Stadium"
+    },
+    {
+      "abbreviation": "KENT",
+      "alternateNames": [
+        "KENT",
+        "Kent State"
+      ],
+      "city": "Kent",
+      "conference": "Mid-American",
+      "id": 2309,
+      "mascot": "Golden Flashes",
+      "school": "Kent State",
+      "state": "OH",
+      "timezone": "America/New_York",
+      "venue": "Dix Stadium"
+    },
+    {
+      "abbreviation": "UK",
+      "alternateNames": [
+        "UK",
+        "Kentucky"
+      ],
+      "city": "Lexington",
+      "conference": "SEC",
+      "id": 96,
+      "mascot": "Wildcats",
+      "school": "Kentucky",
+      "state": "KY",
+      "timezone": "America/New_York",
+      "venue": "Kroger Field"
+    },
+    {
+      "abbreviation": "LIB",
+      "alternateNames": [
+        "LIB",
+        "Liberty"
+      ],
+      "city": "Lynchburg",
+      "conference": "Conference USA",
+      "id": 2335,
+      "mascot": "Flames",
+      "school": "Liberty",
+      "state": "VA",
+      "timezone": "America/New_York",
+      "venue": "Williams Stadium (VA)"
+    },
+    {
+      "abbreviation": "UL",
+      "alternateNames": [
+        "UL Lafayette",
+        "UL",
+        "Louisiana"
+      ],
+      "city": "Lafayette",
+      "conference": "Sun Belt",
+      "id": 309,
+      "mascot": "Ragin' Cajuns",
+      "school": "Louisiana",
+      "state": "LA",
+      "timezone": "America/Chicago",
+      "venue": "Cajun Field"
+    },
+    {
+      "abbreviation": "LT",
+      "alternateNames": [
+        "LT",
+        "Louisiana Tech"
+      ],
+      "city": "Ruston",
+      "conference": "Sun Belt",
+      "id": 2348,
+      "mascot": "Bulldogs",
+      "school": "Louisiana Tech",
+      "state": "LA",
+      "timezone": "America/Chicago",
+      "venue": "Joe Aillet Stadium"
+    },
+    {
+      "abbreviation": "LOU",
+      "alternateNames": [
+        "LOU",
+        "Louisville"
+      ],
+      "city": "Louisville",
+      "conference": "ACC",
+      "id": 97,
+      "mascot": "Cardinals",
+      "school": "Louisville",
+      "state": "KY",
+      "timezone": "America/Kentucky/Louisville",
+      "venue": "L&N Federal Credit Union Stadium"
+    },
+    {
+      "abbreviation": "LSU",
+      "alternateNames": [
+        "Louisiana State",
+        "LSU",
+        "LSU"
+      ],
+      "city": "Baton Rouge",
+      "conference": "SEC",
+      "id": 99,
+      "mascot": "Tigers",
+      "school": "LSU",
+      "state": "LA",
+      "timezone": "America/Chicago",
+      "venue": "Tiger Stadium (LA)"
+    },
+    {
+      "abbreviation": "MRSH",
+      "alternateNames": [
+        "MRSH",
+        "Marshall"
+      ],
+      "city": "Huntington",
+      "conference": "Sun Belt",
+      "id": 276,
+      "mascot": "Thundering Herd",
+      "school": "Marshall",
+      "state": "WV",
+      "timezone": "America/New_York",
+      "venue": "Joan C. Edwards Stadium"
+    },
+    {
+      "abbreviation": "MD",
+      "alternateNames": [
+        "MD",
+        "Maryland"
+      ],
+      "city": "College Park",
+      "conference": "Big Ten",
+      "id": 120,
+      "mascot": "Terrapins",
+      "school": "Maryland",
+      "state": "MD",
+      "timezone": "America/New_York",
+      "venue": "SECU Stadium"
+    },
+    {
+      "abbreviation": "MASS",
+      "alternateNames": [
+        "UMass",
+        "MASS",
+        "UMass"
+      ],
+      "city": "Hadley",
+      "conference": "Mid-American",
+      "id": 113,
+      "mascot": "Minutemen",
+      "school": "Massachusetts",
+      "state": "MA",
+      "timezone": "America/New_York",
+      "venue": "Warren McGuirk Alumni Stadium"
+    },
+    {
+      "abbreviation": "MEM",
+      "alternateNames": [
+        "MEM",
+        "Memphis"
+      ],
+      "city": "Memphis",
+      "conference": "American Athletic",
+      "id": 235,
+      "mascot": "Tigers",
+      "school": "Memphis",
+      "state": "TN",
+      "timezone": "America/Chicago",
+      "venue": "Simmons Bank Liberty Stadium"
+    },
+    {
+      "abbreviation": "MIA",
+      "alternateNames": [
+        "Miami (FL)",
+        "MIA",
+        "Miami"
+      ],
+      "city": "Miami Gardens",
+      "conference": "ACC",
+      "id": 2390,
+      "mascot": "Hurricanes",
+      "school": "Miami",
+      "state": "FL",
+      "timezone": "America/New_York",
+      "venue": "Hard Rock Stadium"
+    },
+    {
+      "abbreviation": "M-OH",
+      "alternateNames": [
+        "M-OH",
+        "Miami OH"
+      ],
+      "city": "Oxford",
+      "conference": "Mid-American",
+      "id": 193,
+      "mascot": "RedHawks",
+      "school": "Miami (OH)",
+      "state": "OH",
+      "timezone": "America/New_York",
+      "venue": "Yager Stadium"
+    },
+    {
+      "abbreviation": "MICH",
+      "alternateNames": [
+        "MICH",
+        "Michigan"
+      ],
+      "city": "Ann Arbor",
+      "conference": "Big Ten",
+      "id": 130,
+      "mascot": "Wolverines",
+      "school": "Michigan",
+      "state": "MI",
+      "timezone": "America/Detroit",
+      "venue": "Michigan Stadium"
+    },
+    {
+      "abbreviation": "MSU",
+      "alternateNames": [
+        "MSU",
+        "Michigan St"
+      ],
+      "city": "East Lansing",
+      "conference": "Big Ten",
+      "id": 127,
+      "mascot": "Spartans",
+      "school": "Michigan State",
+      "state": "MI",
+      "timezone": "America/Detroit",
+      "venue": "Spartan Stadium"
+    },
+    {
+      "abbreviation": "MTSU",
+      "alternateNames": [
+        "Middle Tennessee State",
+        "MTSU",
+        "MTSU"
+      ],
+      "city": "Murfreesboro",
+      "conference": "Conference USA",
+      "id": 2393,
+      "mascot": "Blue Raiders",
+      "school": "Middle Tennessee",
+      "state": "TN",
+      "timezone": "America/Chicago",
+      "venue": "Johnny \"Red\" Floyd Stadium"
+    },
+    {
+      "abbreviation": "MINN",
+      "alternateNames": [
+        "MINN",
+        "Minnesota"
+      ],
+      "city": "Minneapolis",
+      "conference": "Big Ten",
+      "id": 135,
+      "mascot": "Golden Gophers",
+      "school": "Minnesota",
+      "state": "MN",
+      "timezone": "America/Chicago",
+      "venue": "Huntington Bank Stadium"
+    },
+    {
+      "abbreviation": "MSST",
+      "alternateNames": [
+        "MSST",
+        "Mississippi St"
+      ],
+      "city": "Starkville",
+      "conference": "SEC",
+      "id": 344,
+      "mascot": "Bulldogs",
+      "school": "Mississippi State",
+      "state": "MS",
+      "timezone": "America/Chicago",
+      "venue": "Davis Wade Stadium"
+    },
+    {
+      "abbreviation": "MIZ",
+      "alternateNames": [
+        "MIZ",
+        "Missouri"
+      ],
+      "city": "Columbia",
+      "conference": "SEC",
+      "id": 142,
+      "mascot": "Tigers",
+      "school": "Missouri",
+      "state": "MO",
+      "timezone": "America/Chicago",
+      "venue": "Memorial Stadium"
+    },
+    {
+      "abbreviation": "MOST",
+      "alternateNames": [
+        "MOST",
+        "Missouri St"
+      ],
+      "city": "Springfield",
+      "conference": "Conference USA",
+      "id": 2623,
+      "mascot": "Bears",
+      "school": "Missouri State",
+      "state": "MO",
+      "timezone": "America/Chicago",
+      "venue": "Plaster Sports Complex"
+    },
+    {
+      "abbreviation": "NAVY",
+      "alternateNames": [
+        "NAVY",
+        "Navy"
+      ],
+      "city": "Annapolis",
+      "conference": "American Athletic",
+      "id": 2426,
+      "mascot": "Midshipmen",
+      "school": "Navy",
+      "state": "MD",
+      "timezone": "America/New_York",
+      "venue": "Navy-Marine Corps Memorial Stadium"
+    },
+    {
+      "abbreviation": "NCSU",
+      "alternateNames": [
+        "North Carolina St.",
+        "NCSU",
+        "NC State"
+      ],
+      "city": "Raleigh",
+      "conference": "ACC",
+      "id": 152,
+      "mascot": "Wolfpack",
+      "school": "NC State",
+      "state": "NC",
+      "timezone": "America/New_York",
+      "venue": "Carter-Finley Stadium"
+    },
+    {
+      "abbreviation": "NEB",
+      "alternateNames": [
+        "NEB",
+        "Nebraska"
+      ],
+      "city": "Lincoln",
+      "conference": "Big Ten",
+      "id": 158,
+      "mascot": "Cornhuskers",
+      "school": "Nebraska",
+      "state": "NE",
+      "timezone": "America/Chicago",
+      "venue": "Memorial Stadium (Lincoln, NE)"
+    },
+    {
+      "abbreviation": "NEV",
+      "alternateNames": [
+        "NEV",
+        "Nevada"
+      ],
+      "city": "Reno",
+      "conference": "Mountain West",
+      "id": 2440,
+      "mascot": "Wolf Pack",
+      "school": "Nevada",
+      "state": "NV",
+      "timezone": "America/Los_Angeles",
+      "venue": "Mackay Stadium"
+    },
+    {
+      "abbreviation": "UNM",
+      "alternateNames": [
+        "UNM",
+        "New Mexico"
+      ],
+      "city": "Albuquerque",
+      "conference": "Mountain West",
+      "id": 167,
+      "mascot": "Lobos",
+      "school": "New Mexico",
+      "state": "NM",
+      "timezone": "America/Denver",
+      "venue": "University Stadium (NM)"
+    },
+    {
+      "abbreviation": "NMSU",
+      "alternateNames": [
+        "NMSU",
+        "New Mexico St"
+      ],
+      "city": "Las Cruces",
+      "conference": "Conference USA",
+      "id": 166,
+      "mascot": "Aggies",
+      "school": "New Mexico State",
+      "state": "NM",
+      "timezone": "America/Denver",
+      "venue": "Aggie Memorial Stadium"
+    },
+    {
+      "abbreviation": "UNC",
+      "alternateNames": [
+        "UNC",
+        "North Carolina"
+      ],
+      "city": "Chapel Hill",
+      "conference": "ACC",
+      "id": 153,
+      "mascot": "Tar Heels",
+      "school": "North Carolina",
+      "state": "NC",
+      "timezone": "America/New_York",
+      "venue": "Kenan Stadium"
+    },
+    {
+      "abbreviation": "NDSU",
+      "alternateNames": [
+        "NDSU",
+        "N Dakota St"
+      ],
+      "city": "Fargo",
+      "conference": "Mountain West",
+      "id": 2449,
+      "mascot": "Bison",
+      "school": "North Dakota State",
+      "state": "ND",
+      "timezone": "America/Chicago",
+      "venue": "Fargodome"
+    },
+    {
+      "abbreviation": "NIU",
+      "alternateNames": [
+        "NIU",
+        "N Illinois"
+      ],
+      "city": "DeKalb",
+      "conference": "Mountain West",
+      "id": 2459,
+      "mascot": "Huskies",
+      "school": "Northern Illinois",
+      "state": "IL",
+      "timezone": "America/Chicago",
+      "venue": "Huskie Stadium"
+    },
+    {
+      "abbreviation": "UNT",
+      "alternateNames": [
+        "UNT",
+        "North Texas"
+      ],
+      "city": "Denton",
+      "conference": "American Athletic",
+      "id": 249,
+      "mascot": "Mean Green",
+      "school": "North Texas",
+      "state": "TX",
+      "timezone": "America/Chicago",
+      "venue": "DATCU Stadium"
+    },
+    {
+      "abbreviation": "NU",
+      "alternateNames": [
+        "NU",
+        "Northwestern"
+      ],
+      "city": "Evanston",
+      "conference": "Big Ten",
+      "id": 77,
+      "mascot": "Wildcats",
+      "school": "Northwestern",
+      "state": "IL",
+      "timezone": "America/Chicago",
+      "venue": "Lanny and Sharon Martin Stadium"
+    },
+    {
+      "abbreviation": "ND",
+      "alternateNames": [
+        "ND",
+        "Notre Dame"
+      ],
+      "city": "Notre Dame",
+      "conference": "FBS Independents",
+      "id": 87,
+      "mascot": "Fighting Irish",
+      "school": "Notre Dame",
+      "state": "IN",
+      "timezone": "America/Indiana/Indianapolis",
+      "venue": "Notre Dame Stadium"
+    },
+    {
+      "abbreviation": "OHIO",
+      "alternateNames": [
+        "OHIO",
+        "Ohio"
+      ],
+      "city": "Athens",
+      "conference": "Mid-American",
+      "id": 195,
+      "mascot": "Bobcats",
+      "school": "Ohio",
+      "state": "OH",
+      "timezone": "America/New_York",
+      "venue": "Peden Stadium"
+    },
+    {
+      "abbreviation": "OSU",
+      "alternateNames": [
+        "OSU",
+        "Ohio State"
+      ],
+      "city": "Columbus",
+      "conference": "Big Ten",
+      "id": 194,
+      "mascot": "Buckeyes",
+      "school": "Ohio State",
+      "state": "OH",
+      "timezone": "America/New_York",
+      "venue": "Ohio Stadium"
+    },
+    {
+      "abbreviation": "OU",
+      "alternateNames": [
+        "OU",
+        "Oklahoma"
+      ],
+      "city": "Norman",
+      "conference": "SEC",
+      "id": 201,
+      "mascot": "Sooners",
+      "school": "Oklahoma",
+      "state": "OK",
+      "timezone": "America/Chicago",
+      "venue": "Memorial Stadium (Norman, OK)"
+    },
+    {
+      "abbreviation": "OKST",
+      "alternateNames": [
+        "OKST",
+        "Oklahoma St"
+      ],
+      "city": "Stillwater",
+      "conference": "Big 12",
+      "id": 197,
+      "mascot": "Cowboys",
+      "school": "Oklahoma State",
+      "state": "OK",
+      "timezone": "America/Chicago",
+      "venue": "Boone Pickens Stadium"
+    },
+    {
+      "abbreviation": "ODU",
+      "alternateNames": [
+        "ODU",
+        "Old Dominion"
+      ],
+      "city": "Norfolk",
+      "conference": "Sun Belt",
+      "id": 295,
+      "mascot": "Monarchs",
+      "school": "Old Dominion",
+      "state": "VA",
+      "timezone": "America/New_York",
+      "venue": "S.B. Ballard Stadium"
+    },
+    {
+      "abbreviation": "MISS",
+      "alternateNames": [
+        "MISS",
+        "Ole Miss"
+      ],
+      "city": "Oxford",
+      "conference": "SEC",
+      "id": 145,
+      "mascot": "Rebels",
+      "school": "Ole Miss",
+      "state": "MS",
+      "timezone": "America/Chicago",
+      "venue": "Vaught-Hemingway Stadium"
+    },
+    {
+      "abbreviation": "ORE",
+      "alternateNames": [
+        "ORE",
+        "Oregon"
+      ],
+      "city": "Eugene",
+      "conference": "Big Ten",
+      "id": 2483,
+      "mascot": "Ducks",
+      "school": "Oregon",
+      "state": "OR",
+      "timezone": "America/Los_Angeles",
+      "venue": "Autzen Stadium"
+    },
+    {
+      "abbreviation": "ORST",
+      "alternateNames": [
+        "ORST",
+        "Oregon St"
+      ],
+      "city": "Corvallis",
+      "conference": "Pac-12",
+      "id": 204,
+      "mascot": "Beavers",
+      "school": "Oregon State",
+      "state": "OR",
+      "timezone": "America/Los_Angeles",
+      "venue": "Reser Stadium"
+    },
+    {
+      "abbreviation": "PSU",
+      "alternateNames": [
+        "PSU",
+        "Penn State"
+      ],
+      "city": "University Park",
+      "conference": "Big Ten",
+      "id": 213,
+      "mascot": "Nittany Lions",
+      "school": "Penn State",
+      "state": "PA",
+      "timezone": "America/New_York",
+      "venue": "Beaver Stadium"
+    },
+    {
+      "abbreviation": "PITT",
+      "alternateNames": [
+        "Pitt",
+        "PITT",
+        "Pitt"
+      ],
+      "city": "Pittsburgh",
+      "conference": "ACC",
+      "id": 221,
+      "mascot": "Panthers",
+      "school": "Pittsburgh",
+      "state": "PA",
+      "timezone": "America/New_York",
+      "venue": "Acrisure Stadium"
+    },
+    {
+      "abbreviation": "PUR",
+      "alternateNames": [
+        "PUR",
+        "Purdue"
+      ],
+      "city": "West Lafayette",
+      "conference": "Big Ten",
+      "id": 2509,
+      "mascot": "Boilermakers",
+      "school": "Purdue",
+      "state": "IN",
+      "timezone": "America/Indiana/Indianapolis",
+      "venue": "Ross-Ade Stadium"
+    },
+    {
+      "abbreviation": "RICE",
+      "alternateNames": [
+        "RICE",
+        "Rice"
+      ],
+      "city": "Houston",
+      "conference": "American Athletic",
+      "id": 242,
+      "mascot": "Owls",
+      "school": "Rice",
+      "state": "TX",
+      "timezone": "America/Chicago",
+      "venue": "Rice Stadium"
+    },
+    {
+      "abbreviation": "RUTG",
+      "alternateNames": [
+        "RUTG",
+        "Rutgers"
+      ],
+      "city": "Piscataway",
+      "conference": "Big Ten",
+      "id": 164,
+      "mascot": "Scarlet Knights",
+      "school": "Rutgers",
+      "state": "NJ",
+      "timezone": "America/New_York",
+      "venue": "SHI Stadium"
+    },
+    {
+      "abbreviation": "SAC",
+      "alternateNames": [
+        "Cal State Sacramento",
+        "SAC",
+        "Sacramento St"
+      ],
+      "city": "Sacramento",
+      "conference": "Mid-American",
+      "id": 16,
+      "mascot": "Hornets",
+      "school": "Sacramento State",
+      "state": "CA",
+      "timezone": "America/Los_Angeles",
+      "venue": "Hornet Stadium"
+    },
+    {
+      "abbreviation": "SHSU",
+      "alternateNames": [
+        "Sam Houston State",
+        "SHSU",
+        "Sam Houston"
+      ],
+      "city": "Huntsville",
+      "conference": "Conference USA",
+      "id": 2534,
+      "mascot": "Bearkats",
+      "school": "Sam Houston",
+      "state": "TX",
+      "timezone": "America/Chicago",
+      "venue": "Elliott T. Bowers Stadium"
+    },
+    {
+      "abbreviation": "SDSU",
+      "alternateNames": [
+        "SDSU",
+        "San Diego St"
+      ],
+      "city": "San Diego",
+      "conference": "Pac-12",
+      "id": 21,
+      "mascot": "Aztecs",
+      "school": "San Diego State",
+      "state": "CA",
+      "timezone": "America/Los_Angeles",
+      "venue": "Snapdragon Stadium"
+    },
+    {
+      "abbreviation": "SJSU",
+      "alternateNames": [
+        "San Jose St.",
+        "SJSU",
+        "San Jos\u00e9 St"
+      ],
+      "city": "San Jose",
+      "conference": "Mountain West",
+      "id": 23,
+      "mascot": "Spartans",
+      "school": "San Jos\u00e9 State",
+      "state": "CA",
+      "timezone": "America/Los_Angeles",
+      "venue": "CEFCU Stadium"
+    },
+    {
+      "abbreviation": "SMU",
+      "alternateNames": [
+        "Southern Methodist",
+        "SMU",
+        "SMU"
+      ],
+      "city": "University Park",
+      "conference": "ACC",
+      "id": 2567,
+      "mascot": "Mustangs",
+      "school": "SMU",
+      "state": "TX",
+      "timezone": "America/Chicago",
+      "venue": "Gerald J. Ford Stadium"
+    },
+    {
+      "abbreviation": "USA",
+      "alternateNames": [
+        "USA",
+        "South Alabama"
+      ],
+      "city": "Mobile",
+      "conference": "Sun Belt",
+      "id": 6,
+      "mascot": "Jaguars",
+      "school": "South Alabama",
+      "state": "AL",
+      "timezone": "America/Chicago",
+      "venue": "Hancock Whitney Stadium"
+    },
+    {
+      "abbreviation": "SC",
+      "alternateNames": [
+        "SC",
+        "South Carolina"
+      ],
+      "city": "Columbia",
+      "conference": "SEC",
+      "id": 2579,
+      "mascot": "Gamecocks",
+      "school": "South Carolina",
+      "state": "SC",
+      "timezone": "America/New_York",
+      "venue": "Williams-Brice Stadium"
+    },
+    {
+      "abbreviation": "USM",
+      "alternateNames": [
+        "Southern Mississippi",
+        "USM",
+        "Southern Miss"
+      ],
+      "city": "Hattiesburg",
+      "conference": "Sun Belt",
+      "id": 2572,
+      "mascot": "Golden Eagles",
+      "school": "Southern Miss",
+      "state": "MS",
+      "timezone": "America/Chicago",
+      "venue": "M. M. Roberts Stadium"
+    },
+    {
+      "abbreviation": "USF",
+      "alternateNames": [
+        "USF",
+        "South Florida"
+      ],
+      "city": "Tampa",
+      "conference": "American Athletic",
+      "id": 58,
+      "mascot": "Bulls",
+      "school": "South Florida",
+      "state": "FL",
+      "timezone": "America/New_York",
+      "venue": "Raymond James Stadium"
+    },
+    {
+      "abbreviation": "STAN",
+      "alternateNames": [
+        "STAN",
+        "Stanford"
+      ],
+      "city": "Stanford",
+      "conference": "ACC",
+      "id": 24,
+      "mascot": "Cardinal",
+      "school": "Stanford",
+      "state": "CA",
+      "timezone": "America/Los_Angeles",
+      "venue": "Stanford Stadium"
+    },
+    {
+      "abbreviation": "SYR",
+      "alternateNames": [
+        "SYR",
+        "Syracuse"
+      ],
+      "city": "Syracuse",
+      "conference": "ACC",
+      "id": 183,
+      "mascot": "Orange",
+      "school": "Syracuse",
+      "state": "NY",
+      "timezone": "America/New_York",
+      "venue": "JMA Wireless Dome"
+    },
+    {
+      "abbreviation": "TCU",
+      "alternateNames": [
+        "Texas Christian",
+        "TCU",
+        "TCU"
+      ],
+      "city": "Fort Worth",
+      "conference": "Big 12",
+      "id": 2628,
+      "mascot": "Horned Frogs",
+      "school": "TCU",
+      "state": "TX",
+      "timezone": "America/Chicago",
+      "venue": "Amon G. Carter Stadium"
+    },
+    {
+      "abbreviation": "TEM",
+      "alternateNames": [
+        "TEM",
+        "Temple"
+      ],
+      "city": "Philadelphia",
+      "conference": "American Athletic",
+      "id": 218,
+      "mascot": "Owls",
+      "school": "Temple",
+      "state": "PA",
+      "timezone": "America/New_York",
+      "venue": "Lincoln Financial Field"
+    },
+    {
+      "abbreviation": "TENN",
+      "alternateNames": [
+        "TENN",
+        "Tennessee"
+      ],
+      "city": "Knoxville",
+      "conference": "SEC",
+      "id": 2633,
+      "mascot": "Volunteers",
+      "school": "Tennessee",
+      "state": "TN",
+      "timezone": "America/New_York",
+      "venue": "Neyland Stadium"
+    },
+    {
+      "abbreviation": "TEX",
+      "alternateNames": [
+        "TEX",
+        "Texas"
+      ],
+      "city": "Austin",
+      "conference": "SEC",
+      "id": 251,
+      "mascot": "Longhorns",
+      "school": "Texas",
+      "state": "TX",
+      "timezone": "America/Chicago",
+      "venue": "DKR-Texas Memorial Stadium"
+    },
+    {
+      "abbreviation": "TA&M",
+      "alternateNames": [
+        "TA&M",
+        "Texas A&M"
+      ],
+      "city": "College Station",
+      "conference": "SEC",
+      "id": 245,
+      "mascot": "Aggies",
+      "school": "Texas A&M",
+      "state": "TX",
+      "timezone": "America/Chicago",
+      "venue": "Kyle Field"
+    },
+    {
+      "abbreviation": "TXST",
+      "alternateNames": [
+        "TXST",
+        "Texas St"
+      ],
+      "city": "San Marcos",
+      "conference": "Pac-12",
+      "id": 326,
+      "mascot": "Bobcats",
+      "school": "Texas State",
+      "state": "TX",
+      "timezone": "America/Chicago",
+      "venue": "Bobcat Stadium (TX)"
+    },
+    {
+      "abbreviation": "TTU",
+      "alternateNames": [
+        "TTU",
+        "Texas Tech"
+      ],
+      "city": "Lubbock",
+      "conference": "Big 12",
+      "id": 2641,
+      "mascot": "Red Raiders",
+      "school": "Texas Tech",
+      "state": "TX",
+      "timezone": "America/Chicago",
+      "venue": "Jones AT&T Stadium"
+    },
+    {
+      "abbreviation": "TOL",
+      "alternateNames": [
+        "TOL",
+        "Toledo"
+      ],
+      "city": "Toledo",
+      "conference": "Mid-American",
+      "id": 2649,
+      "mascot": "Rockets",
+      "school": "Toledo",
+      "state": "OH",
+      "timezone": "America/New_York",
+      "venue": "Glass Bowl"
+    },
+    {
+      "abbreviation": "TROY",
+      "alternateNames": [
+        "TROY",
+        "Troy"
+      ],
+      "city": "Troy",
+      "conference": "Sun Belt",
+      "id": 2653,
+      "mascot": "Trojans",
+      "school": "Troy",
+      "state": "AL",
+      "timezone": "America/Chicago",
+      "venue": "Veterans Memorial Stadium (AL)"
+    },
+    {
+      "abbreviation": "TULN",
+      "alternateNames": [
+        "TULN",
+        "Tulane"
+      ],
+      "city": "New Orleans",
+      "conference": "American Athletic",
+      "id": 2655,
+      "mascot": "Green Wave",
+      "school": "Tulane",
+      "state": "LA",
+      "timezone": "America/Chicago",
+      "venue": "Yulman Stadium"
+    },
+    {
+      "abbreviation": "TLSA",
+      "alternateNames": [
+        "TLSA",
+        "Tulsa"
+      ],
+      "city": "Tulsa",
+      "conference": "American Athletic",
+      "id": 202,
+      "mascot": "Golden Hurricane",
+      "school": "Tulsa",
+      "state": "OK",
+      "timezone": "America/Chicago",
+      "venue": "Chapman Stadium"
+    },
+    {
+      "abbreviation": "UAB",
+      "alternateNames": [
+        "Alabama-Birmingham",
+        "UAB",
+        "UAB"
+      ],
+      "city": "Birmingham",
+      "conference": "American Athletic",
+      "id": 5,
+      "mascot": "Blazers",
+      "school": "UAB",
+      "state": "AL",
+      "timezone": "America/Chicago",
+      "venue": "Protective Stadium"
+    },
+    {
+      "abbreviation": "UCF",
+      "alternateNames": [
+        "Central Florida",
+        "UCF",
+        "UCF"
+      ],
+      "city": "Orlando",
+      "conference": "Big 12",
+      "id": 2116,
+      "mascot": "Knights",
+      "school": "UCF",
+      "state": "FL",
+      "timezone": "America/New_York",
+      "venue": "FBC Mortgage Stadium"
+    },
+    {
+      "abbreviation": "UCLA",
+      "alternateNames": [
+        "UCLA",
+        "UCLA"
+      ],
+      "city": "Pasadena",
+      "conference": "Big Ten",
+      "id": 26,
+      "mascot": "Bruins",
+      "school": "UCLA",
+      "state": "CA",
+      "timezone": "America/Los_Angeles",
+      "venue": "Rose Bowl"
+    },
+    {
+      "abbreviation": "CONN",
+      "alternateNames": [
+        "Connecticut",
+        "CONN",
+        "UConn"
+      ],
+      "city": "East Hartford",
+      "conference": "FBS Independents",
+      "id": 41,
+      "mascot": "Huskies",
+      "school": "UConn",
+      "state": "CT",
+      "timezone": "America/New_York",
+      "venue": "Pratt & Whitney Stadium"
+    },
+    {
+      "abbreviation": "ULM",
+      "alternateNames": [
+        "La.-Monroe",
+        "ULM",
+        "UL Monroe"
+      ],
+      "city": "Monroe",
+      "conference": "Sun Belt",
+      "id": 2433,
+      "mascot": "Warhawks",
+      "school": "UL Monroe",
+      "state": "LA",
+      "timezone": "America/Chicago",
+      "venue": "Malone Stadium"
+    },
+    {
+      "abbreviation": "UNLV",
+      "alternateNames": [
+        "Nevada-Las Vegas",
+        "UNLV",
+        "UNLV"
+      ],
+      "city": "Las Vegas",
+      "conference": "Mountain West",
+      "id": 2439,
+      "mascot": "Rebels",
+      "school": "UNLV",
+      "state": "NV",
+      "timezone": "America/Los_Angeles",
+      "venue": "Allegiant Stadium"
+    },
+    {
+      "abbreviation": "USC",
+      "alternateNames": [
+        "USC",
+        "USC"
+      ],
+      "city": "Los Angeles",
+      "conference": "Big Ten",
+      "id": 30,
+      "mascot": "Trojans",
+      "school": "USC",
+      "state": "CA",
+      "timezone": "America/Los_Angeles",
+      "venue": "Los Angeles Memorial Coliseum"
+    },
+    {
+      "abbreviation": "UTAH",
+      "alternateNames": [
+        "UTAH",
+        "Utah"
+      ],
+      "city": "Salt Lake City",
+      "conference": "Big 12",
+      "id": 254,
+      "mascot": "Utes",
+      "school": "Utah",
+      "state": "UT",
+      "timezone": "America/Denver",
+      "venue": "Rice-Eccles Stadium"
+    },
+    {
+      "abbreviation": "USU",
+      "alternateNames": [
+        "USU",
+        "Utah State"
+      ],
+      "city": "Logan",
+      "conference": "Pac-12",
+      "id": 328,
+      "mascot": "Aggies",
+      "school": "Utah State",
+      "state": "UT",
+      "timezone": "America/Denver",
+      "venue": "Maverik Stadium"
+    },
+    {
+      "abbreviation": "UTEP",
+      "alternateNames": [
+        "Texas-El Paso",
+        "UTEP",
+        "UTEP"
+      ],
+      "city": "El Paso",
+      "conference": "Mountain West",
+      "id": 2638,
+      "mascot": "Miners",
+      "school": "UTEP",
+      "state": "TX",
+      "timezone": "America/Denver",
+      "venue": "Sun Bowl"
+    },
+    {
+      "abbreviation": "UTSA",
+      "alternateNames": [
+        "Texas-San Antonio",
+        "UTSA",
+        "UTSA"
+      ],
+      "city": "San Antonio",
+      "conference": "American Athletic",
+      "id": 2636,
+      "mascot": "Roadrunners",
+      "school": "UTSA",
+      "state": "TX",
+      "timezone": "America/Chicago",
+      "venue": "Alamodome"
+    },
+    {
+      "abbreviation": "VAN",
+      "alternateNames": [
+        "VAN",
+        "Vanderbilt"
+      ],
+      "city": "Nashville",
+      "conference": "SEC",
+      "id": 238,
+      "mascot": "Commodores",
+      "school": "Vanderbilt",
+      "state": "TN",
+      "timezone": "America/Chicago",
+      "venue": "FirstBank Stadium"
+    },
+    {
+      "abbreviation": "UVA",
+      "alternateNames": [
+        "UVA",
+        "Virginia"
+      ],
+      "city": "Charlottesville",
+      "conference": "ACC",
+      "id": 258,
+      "mascot": "Cavaliers",
+      "school": "Virginia",
+      "state": "VA",
+      "timezone": "America/New_York",
+      "venue": "Scott Stadium"
+    },
+    {
+      "abbreviation": "VT",
+      "alternateNames": [
+        "VT",
+        "Virginia Tech"
+      ],
+      "city": "Blacksburg",
+      "conference": "ACC",
+      "id": 259,
+      "mascot": "Hokies",
+      "school": "Virginia Tech",
+      "state": "VA",
+      "timezone": "America/New_York",
+      "venue": "Lane Stadium"
+    },
+    {
+      "abbreviation": "WAKE",
+      "alternateNames": [
+        "WAKE",
+        "Wake Forest"
+      ],
+      "city": "Winston-Salem",
+      "conference": "ACC",
+      "id": 154,
+      "mascot": "Demon Deacons",
+      "school": "Wake Forest",
+      "state": "NC",
+      "timezone": "America/New_York",
+      "venue": "Allegacy Federal Credit Union Stadium"
+    },
+    {
+      "abbreviation": "WASH",
+      "alternateNames": [
+        "WASH",
+        "Washington"
+      ],
+      "city": "Seattle",
+      "conference": "Big Ten",
+      "id": 264,
+      "mascot": "Huskies",
+      "school": "Washington",
+      "state": "WA",
+      "timezone": "America/Los_Angeles",
+      "venue": "Husky Stadium"
+    },
+    {
+      "abbreviation": "WSU",
+      "alternateNames": [
+        "WSU",
+        "Washington St"
+      ],
+      "city": "Pullman",
+      "conference": "Pac-12",
+      "id": 265,
+      "mascot": "Cougars",
+      "school": "Washington State",
+      "state": "WA",
+      "timezone": "America/Los_Angeles",
+      "venue": "Gesa Field"
+    },
+    {
+      "abbreviation": "WKU",
+      "alternateNames": [
+        "WKU",
+        "Western KY"
+      ],
+      "city": "Bowling Green",
+      "conference": "Conference USA",
+      "id": 98,
+      "mascot": "Hilltoppers",
+      "school": "Western Kentucky",
+      "state": "KY",
+      "timezone": "America/Chicago",
+      "venue": "Houchens Industries-L.T. Smith Stadium"
+    },
+    {
+      "abbreviation": "WMU",
+      "alternateNames": [
+        "WMU",
+        "W Michigan"
+      ],
+      "city": "Kalamazoo",
+      "conference": "Mid-American",
+      "id": 2711,
+      "mascot": "Broncos",
+      "school": "Western Michigan",
+      "state": "MI",
+      "timezone": "America/Detroit",
+      "venue": "Waldo Stadium"
+    },
+    {
+      "abbreviation": "WVU",
+      "alternateNames": [
+        "WVU",
+        "West Virginia"
+      ],
+      "city": "Morgantown",
+      "conference": "Big 12",
+      "id": 277,
+      "mascot": "Mountaineers",
+      "school": "West Virginia",
+      "state": "WV",
+      "timezone": "America/New_York",
+      "venue": "Milan Puskar Stadium"
+    },
+    {
+      "abbreviation": "WIS",
+      "alternateNames": [
+        "WIS",
+        "Wisconsin"
+      ],
+      "city": "Madison",
+      "conference": "Big Ten",
+      "id": 275,
+      "mascot": "Badgers",
+      "school": "Wisconsin",
+      "state": "WI",
+      "timezone": "America/Chicago",
+      "venue": "Camp Randall Stadium"
+    },
+    {
+      "abbreviation": "WYO",
+      "alternateNames": [
+        "WYO",
+        "Wyoming"
+      ],
+      "city": "Laramie",
+      "conference": "Mountain West",
+      "id": 2751,
+      "mascot": "Cowboys",
+      "school": "Wyoming",
+      "state": "WY",
+      "timezone": "America/Denver",
+      "venue": "War Memorial Stadium"
+    }
+  ]
+}
