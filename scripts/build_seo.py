@@ -62,6 +62,23 @@ PAGES = {
             "data/oddities.json", "data/weather.json",
         ],
     },
+    "college.html": {
+        "path": "/college.html",
+        "title": "One-Point Safety | Tracking College Football's Rarest Plays",
+        "description": (
+            "Tracking college football's rarest plays across every FBS game: "
+            "one-point safeties, targeting ejections, overtime shootouts and "
+            "rare penalties, updated daily."
+        ),
+        "og_type": "website",
+        "changefreq": "daily",
+        "priority": "0.9",
+        "deps": [
+            "college.html", "app.js", "styles.css",
+            "data/ncaa/meta.json", "data/ncaa/games.json", "data/ncaa/events/*.json",
+            "data/ncaa/oddities.json",
+        ],
+    },
     "history.html": {
         "path": "/history.html",
         "title": "Football History Oddities & Banned Plays | One-Point Safety",

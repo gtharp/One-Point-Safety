@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- seo:start -->
+<title>One-Point Safety | Tracking College Football&#x27;s Rarest Plays</title>
+<meta name="description" content="Tracking college football&#x27;s rarest plays across every FBS game: one-point safeties, targeting ejections, overtime shootouts and rare penalties, updated daily.">
+<link rel="canonical" href="https://one-pointsafety.com/college.html">
+<meta property="og:site_name" content="One-Point Safety">
+<meta property="og:type" content="website">
+<meta property="og:title" content="One-Point Safety | Tracking College Football&#x27;s Rarest Plays">
+<meta property="og:description" content="Tracking college football&#x27;s rarest plays across every FBS game: one-point safeties, targeting ejections, overtime shootouts and rare penalties, updated daily.">
+<meta property="og:url" content="https://one-pointsafety.com/college.html">
+<meta property="og:image" content="https://one-pointsafety.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="One-Point Safety — tracking the NFL&#x27;s rarest plays">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="One-Point Safety | Tracking College Football&#x27;s Rarest Plays">
+<meta name="twitter:description" content="Tracking college football&#x27;s rarest plays across every FBS game: one-point safeties, targeting ejections, overtime shootouts and rare penalties, updated daily.">
+<meta name="twitter:image" content="https://one-pointsafety.com/og-image.png">
+<meta name="twitter:image:alt" content="One-Point Safety — tracking the NFL&#x27;s rarest plays">
+<!-- seo:end -->
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-league="ncaa">
+<header>
+  <div class="hrow">
+    <h1>One-Point <span>Safety</span></h1>
+    <nav class="hnav">
+      <div class="seg league" role="group" aria-label="League"><a href="./" data-league-link="nfl">NFL</a><a href="college.html" class="on" aria-current="page" data-league-link="ncaa">College</a></div>
+      <button class="tvbtn" id="tvBtn">Big screen</button>
+    </nav>
+  </div>
+  <div class="hwrap">
+    <div class="sub" id="subline"></div>
+    <div class="controls">
+      <div class="seg" id="scope"></div>
+      <div class="wk" id="wknav"><button data-wk="-1" id="wkPrev" aria-label="Previous week">‹</button><span id="wkLabel"></span><button data-wk="1" id="wkNext" aria-label="Next week">›</button></div>
+      <div class="days" id="days"></div>
+      <button class="chip" id="apOnly" aria-pressed="false" title="Only games involving a team ranked in that week's AP Top 25">AP Top 25 only</button>
+      <button class="chip resetbtn" id="resetAll" hidden>&times; Reset filters</button>
+    </div>
+  </div>
+</header>
+
+<main class="layout" id="layout" hidden>
+  <section class="a-odd">
+    <h2>Oddities <small id="oddCount"></small></h2>
+    <div class="panel">
+      <div id="featured"></div>
+      <div class="board" id="board"></div>
+      <div class="feed" id="feed"></div>
+      <button class="chip more" id="moreFeed" hidden></button>
+      <div class="waiting" id="waiting"></div>
+    </div>
+  </section>
+
+  <section class="a-tot">
+    <h2>FBS totals</h2>
+    <div class="cards" id="cards"></div>
+  </section>
+
+  <section class="a-pen">
+    <h2>Penalties by type <button class="linkbtn" id="penSort"></button></h2>
+    <div class="panel" id="penalties"></div>
+  </section>
+
+  <section class="a-log" id="logSec">
+    <h2>Play log</h2>
+    <div class="panel">
+      <div class="filterbar" id="filterbar"></div>
+      <div id="log"></div>
+      <button class="chip more" id="moreLog" hidden>Show all</button>
+    </div>
+  </section>
+
+  <section class="a-games">
+    <h2 id="gamesTitle">Games</h2>
+    <div class="scroll"><div class="games" id="games"></div></div>
+  </section>
+</main>
+
+<div class="loading" id="loading">Loading season data&hellip;</div>
+<div class="offseason" id="offseason" hidden>
+  <h2>No games yet this season</h2>
+  <p>Check back once the season kicks off. In the meantime, here's last season's data.</p>
+</div>
+
+<footer>
+  <span id="updated"></span> &middot; Not affiliated with the NCAA or any school &middot; Data: <a href="https://collegefootballdata.com" target="_blank" rel="noopener">CollegeFootballData.com</a> &middot; FBS games only
+  <div class="donate">Enjoying the site? <a href="https://venmo.com/u/George-Tharp" target="_blank" rel="noopener">Chip in on Venmo</a></div>
+</footer>
+
+<div class="scrim" id="scrim"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Play details"></div>
+
+<script src="app.js"></script>
+<!-- Cloudflare Web Analytics -->
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "d3902bc33d3544aab51f12727f5c7ce0"}'></script>
+<!-- End Cloudflare Web Analytics -->
+</body>
+</html>

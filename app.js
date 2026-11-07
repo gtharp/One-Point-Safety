@@ -1,10 +1,34 @@
 /* =========================================================
    One-Point Safety — front end
-   Loads static JSON built by scripts/build_data.py from real
-   nflverse play-by-play data. No build step, no frameworks.
+   Loads static JSON built by scripts/build_data.py (NFL, from
+   nflverse play-by-play) or scripts/build_ncaa_data.py (college,
+   from CollegeFootballData.com). No build step, no frameworks.
+   The page picks the league: <body data-league="ncaa"> loads
+   data/ncaa/*.json, anything else loads data/*.json.
    ========================================================= */
 
 const $ = id => document.getElementById(id);
+const LEAGUE = document.body.dataset.league === "ncaa" ? "ncaa" : "nfl";
+const NCAA = LEAGUE === "ncaa";
+const DATA = NCAA ? "data/ncaa/" : "data/";
+
+/* ---------- League toggle (NFL | College) ----------
+   The last league picked with the header toggle is remembered. A fresh
+   visit to the NFL page (not arriving from another page on this site)
+   by someone who last picked College goes straight to college.html. */
+const LEAGUE_KEY = "ops-league";
+function getLeaguePref() { try { return localStorage.getItem(LEAGUE_KEY); } catch (err) { return null; } }
+function setLeaguePref(v) { try { localStorage.setItem(LEAGUE_KEY, v); } catch (err) {} }
+(function leagueRedirect() {
+  if (NCAA || getLeaguePref() !== "ncaa") return;
+  let internal = false;
+  try { internal = !!document.referrer && new URL(document.referrer).origin === location.origin; } catch (err) {}
+  if (!internal) location.replace("college.html" + location.hash);
+})();
+document.addEventListener("click", ev => {
+  const a = ev.target.closest("[data-league-link]");
+  if (a) setLeaguePref(a.dataset.leagueLink);
+});
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
 const SHORT_DAY = { Sunday: "Sun", Monday: "Mon", Tuesday: "Tue", Wednesday: "Wed", Thursday: "Thu", Friday: "Fri", Saturday: "Sat" };
@@ -14,13 +38,13 @@ const TIER_NAME = { 3: "Wild", 2: "Rare", 1: "Uncommon" };
 const LBL = { td: "Touchdown", fg: "Field goal", safety: "Safety", pen: "Penalty", inj: "Injury", int: "Interception", fum: "Fumble lost", sack: "Sack", odd: "Notable play" };
 const METRICS = [
   ["td", "Touchdowns"], ["fg", "Field goals"], ["safety", "Safeties"], ["pen", "Penalties"],
-  ["inj", "Injuries"], ["int", "Interceptions"], ["fum", "Fumbles lost"], ["sack", "Sacks"],
+  ["inj", NCAA ? "Injuries (AP Top 25 games)" : "Injuries"], ["int", "Interceptions"], ["fum", "Fumbles lost"], ["sack", "Sacks"],
 ];
 
-let META = null, GAMES = [], EVENTS = [], ODD = {}, RARE_PEN = {}, GAMES_BY_ID = new Map(), WEATHER = null;
+let META = null, GAMES = [], EVENTS = [], ODD = {}, RARE_PEN = {}, GAMES_BY_ID = new Map(), EVENTS_BY_GAME = new Map(), WEATHER = null;
 let FEED = [];
 let oddBoardEmpty = false;
-const S = { scope: "season", week: 1, day: "all", type: null, sub: null, odd: null, game: null, penSort: "count", logAll: false, feedAll: false };
+const S = { scope: "season", week: 1, day: "all", type: null, sub: null, odd: null, game: null, ap: false, penSort: "count", logAll: false, feedAll: false };
 
 /* ---------- Load ---------- */
 async function loadJSON(path) {
@@ -31,7 +55,7 @@ async function loadJSON(path) {
 
 async function boot() {
   try {
-    META = await loadJSON("data/meta.json");
+    META = await loadJSON(DATA + "meta.json");
   } catch (err) {
     $("loading").textContent = "Couldn't load season data. Try again shortly.";
     return;
@@ -42,10 +66,14 @@ async function boot() {
     return;
   }
   const [games, events, oddities, weather] = await Promise.all([
-    loadJSON("data/games.json"),
-    loadJSON("data/events.json"),
-    loadJSON("data/oddities.json"),
-    loadJSON("data/weather.json").catch(() => null),
+    loadJSON(DATA + "games.json"),
+    // College splits events into one file per week (meta.event_files);
+    // the NFL side keeps a single events.json.
+    META.event_files
+      ? Promise.all(META.event_files.map(f => loadJSON(DATA + f))).then(parts => parts.flat())
+      : loadJSON(DATA + "events.json"),
+    loadJSON(DATA + "oddities.json"),
+    NCAA ? Promise.resolve(null) : loadJSON(DATA + "weather.json").catch(() => null), // no weather for college
   ]);
   WEATHER = weather;
   GAMES = games;
@@ -53,6 +81,15 @@ async function boot() {
   EVENTS = events;
   EVENTS.forEach(e => { e.g = GAMES_BY_ID.get(e.game_id) || null; });
   EVENTS = EVENTS.filter(e => e.g);
+  // Clicks look events up by position (EVENTS[id]), so number them by
+  // position after concatenating/filtering.
+  EVENTS.forEach((e, i) => { e.id = i; });
+  // Per-game index: college has ~7x the NFL's games, so per-game lookups
+  // shouldn't rescan every event.
+  EVENTS.forEach(e => {
+    if (!EVENTS_BY_GAME.has(e.game_id)) EVENTS_BY_GAME.set(e.game_id, []);
+    EVENTS_BY_GAME.get(e.game_id).push(e);
+  });
 
   oddities.oddities.forEach(o => { ODD[o.id] = o; });
   RARE_PEN = oddities.rare_penalties || {};
@@ -73,7 +110,10 @@ function fmtUpdated(iso) {
 }
 
 /* ---------- Helpers ---------- */
-const gameName = g => `${g.away} @ ${g.home}`;
+const rk = r => (r ? `#${r} ` : "");
+const gameName = g => `${rk(g.away_rank)}${g.away} @ ${rk(g.home_rank)}${g.home}`;
+const wkName = w => (META.week_labels && META.week_labels[w]) || `Week ${w}`;
+const wkShort = w => (META.week_labels && META.week_labels[w]) || `Wk ${w}`;
 const clock = s => (s == null ? "—" : `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`);
 const qShort = q => (q == null ? "" : q >= 5 ? (q === 5 ? "OT" : `OT${q - 4}`) : "Q" + q);
 const qLong = q => (q == null ? "" : q >= 5 ? (q === 5 ? "Overtime" : `Overtime ${q - 4}`) : ["1st", "2nd", "3rd", "4th"][q - 1] + " quarter");
@@ -94,7 +134,8 @@ const gIn = g => S.scope === "season" || (g.week === S.week && (S.day === "all" 
 const inScope = e => e.g && gIn(e.g) && (S.game === null || e.game_id === S.game);
 const matchesTypeSub = e => (!S.type || e.type === S.type) && (!S.sub || e.penalty_type === S.sub);
 const matchesOdd = e => !S.odd || (S.odd === "rare_pen" ? e.rare_penalty : e.oddity_ids.includes(S.odd));
-const hasActiveFilter = () => !!(S.type || S.sub || S.odd || S.game !== null);
+const matchesAp = e => !S.ap || e.ap_top25;
+const hasActiveFilter = () => !!(S.type || S.sub || S.odd || S.game !== null || S.ap);
 
 function primaryOddityId(e) {
   if (!e.oddity_ids || !e.oddity_ids.length) return null;
@@ -132,7 +173,7 @@ function renderHeader() {
   const weeks = META.weeks;
   const minWk = weeks[0], maxWk = weeks[weeks.length - 1];
   $("wknav").hidden = $("days").hidden = S.scope !== "week";
-  $("wkLabel").textContent = `Week ${S.week}`;
+  $("wkLabel").textContent = wkName(S.week);
   $("wkPrev").disabled = S.week <= minWk;
   $("wkNext").disabled = S.week >= maxWk;
 
@@ -146,8 +187,9 @@ function renderHeader() {
   } else {
     const wk = GAMES.filter(g => g.week === S.week);
     const first = wk[0], last = wk[wk.length - 1];
-    $("subline").textContent = first ? `Week ${S.week} · ${gDate(first)} – ${gDate(last)} · ${gs.length} games` : `Week ${S.week}`;
+    $("subline").textContent = first ? `${wkName(S.week)} · ${gDate(first)} – ${gDate(last)} · ${gs.length} games` : wkName(S.week);
   }
+  if ($("apOnly")) { $("apOnly").classList.toggle("on", S.ap); $("apOnly").setAttribute("aria-pressed", String(S.ap)); }
 
   $("resetAll").hidden = !hasActiveFilter();
 }
@@ -166,7 +208,7 @@ function renderOdd() {
   // Board tiles respect the type/penalty filter (so clicking "Safeties" in
   // League totals narrows these too) but not S.odd itself, so all tiles
   // stay clickable to switch the selection rather than disappearing.
-  const ev = EVENTS.filter(e => inScope(e) && matchesTypeSub(e) && (e.oddity_ids.length || e.rare_penalty));
+  const ev = EVENTS.filter(e => inScope(e) && matchesTypeSub(e) && matchesAp(e) && (e.oddity_ids.length || e.rare_penalty));
   const counts = {};
   ev.forEach(e => {
     e.oddity_ids.forEach(id => { counts[id] = (counts[id] || 0) + 1; });
@@ -232,7 +274,7 @@ function wxUnit(key, r) {
 }
 function wxCard(key, r) {
   return `<button class="card" data-gf="${esc(r.game_id)}"><div class="n">${esc(wxUnit(key, r))}</div>
-    <div class="l">${WX_LABELS[key]}</div><div class="a">${esc(gameName({ away: r.away, home: r.home }))} · Wk ${r.week}</div></button>`;
+    <div class="l">${WX_LABELS[key]}</div><div class="a">${esc(gameName({ away: r.away, home: r.home }))} · ${wkShort(r.week)}</div></button>`;
 }
 function renderWeather() {
   const sec = $("wxSec");
@@ -269,9 +311,10 @@ function renderPen() {
 
 /* ---------- Play log ---------- */
 function renderLog() {
-  const ev = EVENTS.filter(e => inScope(e) && matchesTypeSub(e) && matchesOdd(e));
+  const ev = EVENTS.filter(e => inScope(e) && matchesTypeSub(e) && matchesOdd(e) && matchesAp(e));
 
   const tags = [];
+  if (S.ap) tags.push("AP Top 25");
   if (S.odd) tags.push(S.odd === "rare_pen" ? "Rare penalties" : ODD[S.odd].label);
   else if (S.type) tags.push(S.sub || METRICS.find(m => m[0] === S.type)[1]);
   if (S.game !== null) { const g = GAMES_BY_ID.get(S.game); if (g) tags.push(gameName(g)); }
@@ -281,7 +324,7 @@ function renderLog() {
   $("log").innerHTML = ev.slice(0, lim).map(e => {
     const t = e.tier || 0;
     return `<button class="row" data-e="${e.id}"><div class="a">${t ? `<span class="dot k${t}"></span>` : ""}<b>${esc(titleOf(e))}</b> · ${esc(e.detail)}</div>
-      <div class="b">${gDate(e.g)} · ${gameName(e.g)} · ${qShort(e.qtr)} ${clock(e.clock_secs)} · ${esc(e.team || "")}${e.injury ? " · approximate" : ""}</div></button>`;
+      <div class="b">${gDate(e.g)} · ${gameName(e.g)} · ${qShort(e.qtr)} ${clock(e.clock_secs)} · ${esc(e.team || "")}${e.injury ? (NCAA ? " · approximate · AP Top 25 games only" : " · approximate") : ""}</div></button>`;
   }).join("");
   $("moreLog").hidden = ev.length <= lim;
 }
@@ -297,7 +340,8 @@ function renderGames() {
   // A game's "weirdness" counts both oddity-tagged plays and any season
   // weather record it holds (coldest, hottest, etc.) -- a game with 2
   // oddities that's also this season's coldest shows "3 odd," not 2.
-  const weird = gid => EVENTS.filter(e => e.game_id === gid).reduce((s, e) => s + (e.tier || 0), 0) + gameWeatherTags(gid).length;
+  const evOf = gid => EVENTS_BY_GAME.get(gid) || [];
+  const weird = gid => evOf(gid).reduce((s, e) => s + (e.tier || 0), 0) + gameWeatherTags(gid).length;
   let gs;
   if (S.scope === "season") {
     gs = GAMES.map(g => [g, weird(g.id)]).filter(x => x[1] > 0).sort((a, b) => b[1] - a[1]).slice(0, 10).map(x => x[0]);
@@ -307,7 +351,7 @@ function renderGames() {
     $("gamesTitle").textContent = "Games";
   }
   $("games").innerHTML = gs.map(g => {
-    const ev = EVENTS.filter(e => e.game_id === g.id);
+    const ev = evOf(g.id);
     const c = t => ev.filter(e => e.type === t).length;
     const odd = ev.filter(e => e.tier);
     const wxTags = gameWeatherTags(g.id);
@@ -317,7 +361,7 @@ function renderGames() {
     const score = g.final ? `${g.away_score}–${g.home_score}` : "—";
     return `<button class="game ${S.game === g.id ? "on" : ""}" data-g="${esc(g.id)}"><div class="teams">${gameName(g)}</div>
       <div class="score">${score}</div>
-      <div class="meta">${S.scope === "season" ? `Wk ${g.week} · ` : ""}${gDate(g)} · ${g.kickoff_ct || ""} · ${c("td")} TD · ${c("pen")} flags${oddCount ? ` · <span class="tier t${top}">${esc(oddLabel)}</span>` : ""}</div></button>`;
+      <div class="meta">${S.scope === "season" ? `${wkShort(g.week)} · ` : ""}${gDate(g)} · ${g.kickoff_ct || ""} · ${c("td")} TD · ${c("pen")} flags${oddCount ? ` · <span class="tier t${top}">${esc(oddLabel)}</span>` : ""}</div></button>`;
   }).join("");
 }
 
@@ -330,13 +374,14 @@ function render() {
 function openSheet(e) {
   const g = e.g, t = e.tier || 0, why = whyOf(e), d = parseDate(g.date);
   const title = titleOf(e);
-  const q = `${g.away} vs ${g.home} ${title} ${MON[d.getMonth()]} ${d.getDate()} ${d.getFullYear()}`;
+  const q = `${g.away} vs ${g.home}${NCAA ? " football" : ""} ${title} ${MON[d.getMonth()]} ${d.getDate()} ${d.getFullYear()}`;
   $("sheet").innerHTML = `<button class="x" id="sheetClose" aria-label="Close">×</button>
     <span class="tier ${t ? "t" + t : ""}">${t ? TIER_NAME[t] : LBL[e.type]}</span>
     <h3>${esc(title)}</h3><div class="d">${esc(e.detail)}</div>
     <dl class="kv">
       <dt>Game</dt><dd>${gameName(g)} · final ${esc(finalScore(g))}</dd>
-      <dt>Date</dt><dd>${gDate(g)} · Week ${g.week} · kickoff ${g.kickoff_ct || "TBD"}</dd>
+      <dt>Date</dt><dd>${gDate(g)} · ${wkName(g.week)} · kickoff ${g.kickoff_ct || "TBD"}</dd>
+      ${g.notes ? `<dt>Note</dt><dd>${esc(g.notes)}</dd>` : ""}
       <dt>When</dt><dd>${qLong(e.qtr)}${e.clock_secs != null ? `, ${clock(e.clock_secs)} left` : ""}</dd>
       <dt>Team</dt><dd>${esc(e.team || "—")}</dd>
       ${e.players.length ? `<dt>Players</dt><dd>${esc(e.players.join(", "))}</dd>` : ""}
@@ -348,7 +393,7 @@ function openSheet(e) {
       <a class="btn" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=${encodeURIComponent(q)}">Search YouTube</a>
       <button class="btn" data-gf="${esc(g.id)}">All plays this game</button>
     </div>
-    ${e.injury ? `<div class="note">Injury plays are detected from play text and may be approximate.</div>` : ""}`;
+    ${e.injury ? `<div class="note">Injury plays are detected from play text and may be approximate.${NCAA ? " College injuries are only tracked in games involving an AP Top 25 team." : ""}</div>` : ""}`;
   $("sheet").classList.add("open"); $("scrim").classList.add("open");
 }
 function closeSheet() { $("sheet").classList.remove("open"); $("scrim").classList.remove("open"); }
@@ -368,7 +413,7 @@ document.addEventListener("fullscreenchange", () => { if (!document.fullscreenEl
 
 /* ---------- Clicks ---------- */
 document.addEventListener("click", ev => {
-  const t = ev.target.closest("[data-scope],[data-wk],[data-day],[data-t],[data-s],[data-g],[data-o],[data-e],[data-gf],#clear,#resetAll,#moreLog,#moreFeed,#penSort,#tvBtn,#sheetClose,#scrim");
+  const t = ev.target.closest("[data-scope],[data-wk],[data-day],[data-t],[data-s],[data-g],[data-o],[data-e],[data-gf],#apOnly,#clear,#resetAll,#moreLog,#moreFeed,#penSort,#tvBtn,#sheetClose,#scrim");
   if (!t) return;
   const d = t.dataset;
   if (d.e !== undefined) { openSheet(EVENTS[+d.e]); return; }
@@ -391,7 +436,8 @@ document.addEventListener("click", ev => {
   else if (d.s) { const same = S.sub === d.s; S.type = same ? null : "pen"; S.sub = same ? null : d.s; S.odd = null; drilledIn = !same; }
   else if (d.o) { S.odd = S.odd === d.o ? null : d.o; S.type = S.sub = null; }
   else if (d.g !== undefined) { S.game = S.game === d.g ? null : d.g; }
-  else if (t.id === "clear" || t.id === "resetAll") { S.type = S.sub = S.odd = null; S.game = null; }
+  else if (t.id === "apOnly") { S.ap = !S.ap; }
+  else if (t.id === "clear" || t.id === "resetAll") { S.type = S.sub = S.odd = null; S.game = null; S.ap = false; }
   S.logAll = false; S.feedAll = false; tvIdx = 0;
   render();
   // Clicking a League total or penalty that isn't also an oddity leaves
