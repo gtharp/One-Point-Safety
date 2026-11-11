@@ -1,4 +1,5 @@
 {
+  "fetched_at": "2026-11-11T20:17:26.002378+00:00",
   "polls": {
     "regular-1": {
       "Alabama": 13,
@@ -53,6 +54,33 @@
       "USC": 18,
       "Utah": 3,
       "Wake Forest": 14
+    },
+    "regular-11": {
+      "Alabama": 7,
+      "Arizona": 22,
+      "BYU": 12,
+      "Boise State": 17,
+      "Georgia": 1,
+      "Houston": 14,
+      "Indiana": 6,
+      "Iowa": 16,
+      "Kentucky": 13,
+      "LSU": 24,
+      "Miami": 5,
+      "New Mexico": 23,
+      "Notre Dame": 3,
+      "Ohio State": 21,
+      "Ole Miss": 19,
+      "Oregon": 18,
+      "SMU": 25,
+      "South Carolina": 20,
+      "Tennessee": 9,
+      "Texas": 8,
+      "Texas Tech": 10,
+      "UCLA": 4,
+      "USC": 15,
+      "Utah": 2,
+      "Wake Forest": 11
     },
     "regular-2": {
       "Alabama": 12,

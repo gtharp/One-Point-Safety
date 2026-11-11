@@ -14450,6 +14450,78 @@
           "Roughing the Kicker": 1
         }
       }
+    },
+    "reg_11": {
+      "completed_ids": [
+        "401866458",
+        "401866459",
+        "401866460"
+      ],
+      "counts": {
+        "401866458": {
+          "fg": 0,
+          "fum": 0,
+          "inj": 0,
+          "int": 0,
+          "pen": 6,
+          "sack": 3,
+          "safety": 0,
+          "td": 8
+        },
+        "401866459": {
+          "fg": 2,
+          "fum": 0,
+          "inj": 0,
+          "int": 2,
+          "pen": 9,
+          "sack": 11,
+          "safety": 0,
+          "td": 7
+        },
+        "401866460": {
+          "fg": 3,
+          "fum": 2,
+          "inj": 0,
+          "int": 1,
+          "pen": 14,
+          "sack": 5,
+          "safety": 0,
+          "td": 6
+        }
+      },
+      "fetched_at": "2026-11-11T20:17:26.002378+00:00",
+      "games_with_plays": [
+        "401866458",
+        "401866459",
+        "401866460"
+      ],
+      "penalties": {
+        "401866458": {
+          "Delay of Game": 1,
+          "False Start": 1,
+          "Offside": 1,
+          "Pass Interference": 1,
+          "Personal Foul": 2
+        },
+        "401866459": {
+          "False Start": 2,
+          "Holding": 1,
+          "Offside": 1,
+          "Personal Foul": 1,
+          "Roughing the Kicker": 1,
+          "Roughing the Passer": 2,
+          "Unnecessary Roughness": 1
+        },
+        "401866460": {
+          "False Start": 7,
+          "Ineligible Downfield on Pass": 1,
+          "Offside": 1,
+          "Pass Interference": 1,
+          "Roughing the Passer": 1,
+          "Tripping": 1,
+          "Unsportsmanlike Conduct": 2
+        }
+      }
     }
   }
 }
