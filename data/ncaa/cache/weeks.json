@@ -14455,7 +14455,10 @@
       "completed_ids": [
         "401866458",
         "401866459",
-        "401866460"
+        "401866460",
+        "401866461",
+        "401866462",
+        "401866463"
       ],
       "counts": {
         "401866458": {
@@ -14487,13 +14490,46 @@
           "sack": 5,
           "safety": 0,
           "td": 6
+        },
+        "401866461": {
+          "fg": 0,
+          "fum": 0,
+          "inj": 0,
+          "int": 0,
+          "pen": 6,
+          "sack": 4,
+          "safety": 0,
+          "td": 5
+        },
+        "401866462": {
+          "fg": 0,
+          "fum": 1,
+          "inj": 0,
+          "int": 1,
+          "pen": 6,
+          "sack": 2,
+          "safety": 0,
+          "td": 5
+        },
+        "401866463": {
+          "fg": 1,
+          "fum": 0,
+          "inj": 0,
+          "int": 1,
+          "pen": 13,
+          "sack": 5,
+          "safety": 0,
+          "td": 3
         }
       },
-      "fetched_at": "2026-11-11T20:17:26.002378+00:00",
+      "fetched_at": "2026-11-12T20:58:45.568368+00:00",
       "games_with_plays": [
         "401866458",
         "401866459",
-        "401866460"
+        "401866460",
+        "401866461",
+        "401866462",
+        "401866463"
       ],
       "penalties": {
         "401866458": {
@@ -14520,6 +14556,28 @@
           "Roughing the Passer": 1,
           "Tripping": 1,
           "Unsportsmanlike Conduct": 2
+        },
+        "401866461": {
+          "False Start": 1,
+          "Holding": 2,
+          "Offside": 1,
+          "Pass Interference": 2
+        },
+        "401866462": {
+          "Delay of Game": 1,
+          "False Start": 1,
+          "Holding": 1,
+          "Offside": 1,
+          "Pass Interference": 1,
+          "Unnecessary Roughness": 1
+        },
+        "401866463": {
+          "Chop Block": 1,
+          "False Start": 3,
+          "Holding": 5,
+          "Illegal Block in Back": 2,
+          "Illegal Snap": 1,
+          "Ineligible Downfield on Pass": 1
         }
       }
     }

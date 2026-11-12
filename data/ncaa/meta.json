@@ -17,9 +17,9 @@
     11
   ],
   "week_labels": {},
-  "last_updated": "2026-11-11T20:17:26.002378+00:00",
+  "last_updated": "2026-11-12T20:58:45.568368+00:00",
   "source": "CollegeFootballData.com API",
-  "games_count": 688,
+  "games_count": 691,
   "rare_penalty_threshold": 7,
   "event_files": [
     "events/week-01.json",
