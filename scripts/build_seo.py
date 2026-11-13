@@ -95,6 +95,19 @@ PAGES = {
             "data/history.json", "data/weather_records.json",
         ],
     },
+    "miami-ohio-video-board-goalposts-penalty.html": {
+        "path": "/miami-ohio-video-board-goalposts-penalty.html",
+        "title": "Miami (OH) Fake Goalposts Video Board Penalty: NCAA Rule 9-2-1",
+        "description": (
+            "Miami (OH)'s video board showed fake goalposts behind the uprights "
+            "on an Ohio field goal try, drawing a rare unsportsmanlike flag "
+            "under NCAA Rule 9-2-1."
+        ),
+        "og_type": "article",
+        "changefreq": "monthly",
+        "priority": "0.8",
+        "deps": ["miami-ohio-video-board-goalposts-penalty.html", "styles.css"],
+    },
 }
 
 # Files in the site root that are HTML but aren't public pages.
