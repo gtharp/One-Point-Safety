@@ -241,3 +241,37 @@ body.tv .a-wx{display:none}
   .layout{grid-template-columns:1fr!important;grid-template-areas:"odd" "tot" "wx" "pen" "log" "games"!important}
   .card,.panel,.game,.ocard,.tile{break-inside:avoid}
 }
+
+/* ---------- Editorial spotlight banner (college.html) ---------- */
+.spotlight{max-width:1200px;margin:1rem auto 0;padding:0 1rem}
+.spotlight a{display:block;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--warn);
+  border-radius:12px;padding:.7rem .85rem;text-decoration:none;color:var(--ink)}
+.spotlight a:hover{background:var(--accent-soft)}
+.spotlight strong{display:block;font-size:1.02rem;margin-top:.25rem}
+.spotlight .sp-d{display:block;font-size:.85rem;color:var(--muted);margin-top:.15rem}
+body.tv .spotlight{display:none}
+
+/* ---------- Story / article pages ---------- */
+.brand{margin:0;font-size:1.35rem;font-weight:700;letter-spacing:-.02em;text-decoration:none;color:var(--ink)}
+.brand span{color:var(--accent)}
+.article{max-width:760px;margin:0 auto;padding:1rem 1rem 2rem}
+.article .crumbs{font-size:.78rem;color:var(--muted);margin-bottom:.8rem}
+.article .crumbs a{color:var(--accent)}
+.article .kicker{font-size:.78rem;color:var(--muted);margin:0 0 .4rem}
+.article h1{font-size:clamp(1.5rem,4.5vw,2.1rem);line-height:1.15;letter-spacing:-.02em;margin:0 0 .4rem}
+.article .byline{font-size:.8rem;color:var(--muted);margin:0 0 1rem}
+.article .lede{font-size:1.1rem;line-height:1.5}
+.article h2{font-size:1.2rem;margin:1.8rem 0 .5rem;text-transform:none;letter-spacing:0;color:var(--ink)}
+.article p,.article li{line-height:1.6}
+.article a{color:var(--accent)}
+.article .btn.pri{color:#fff}
+.article .facts{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--warn);border-radius:12px;padding:.2rem .9rem;margin:1.2rem 0}
+.article .pbp{margin:.8rem 0;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:.75rem .9rem;
+  font:.85rem/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;overflow-wrap:anywhere}
+.article .odd-list{padding-left:1.2rem}
+.article .faq details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:.6rem .8rem;margin-bottom:.5rem}
+.article .faq summary{font-weight:600;cursor:pointer}
+.article .faq details p{margin:.5rem 0 0}
+.article .cta{background:var(--accent-soft);border-radius:12px;padding:1rem;margin:1.8rem 0;text-align:center}
+.article .cta p{margin:0 0 .7rem}
+.article .sources{font-size:.85rem;padding-left:1.2rem;overflow-wrap:anywhere}

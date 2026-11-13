@@ -463,6 +463,27 @@ as the actual animation target. (Elements positioned via real geometry
 attributes -- a `<circle>`'s `cx`/`cy` -- don't have this problem, since
 those aren't in the same "transform" namespace CSS competes with.)
 
+## Story pages and the college spotlight
+
+Hand-written story pages for one-off oddities live in the site root as
+plain HTML (no `app.js`), so search engines index the full text without
+running JavaScript. The first is
+`miami-ohio-video-board-goalposts-penalty.html`, about Miami (OH)'s video
+board showing fake goalposts during an Ohio field goal try (Nov. 10, 2026),
+which drew an unsportsmanlike conduct flag under NCAA Rule 9-2-1.
+
+Each story page has:
+
+- an entry in `PAGES` in `scripts/build_seo.py` (title, 140-160 char
+  description, `og_type: "article"`), so it gets head tags and a sitemap
+  entry like every other page;
+- hand-written `NewsArticle`, `BreadcrumbList` and `FAQPage` JSON-LD
+  after the `<!-- seo:end -->` marker (keep the FAQ JSON-LD in sync with
+  the visible FAQ on the page);
+- a link from the static `<aside class="spotlight">` banner near the top
+  of `college.html`. Swap or remove the banner when the story goes stale;
+  the story page itself stays up.
+
 ## Running locally
 
 ```bash
