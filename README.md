@@ -569,6 +569,12 @@ elsewhere:
 
 ## SEO: head tags, sitemap.xml, robots.txt
 
+**Cache-busting.** `build_seo.py` also appends `?v=<8-char content hash>`
+to every local `.css`/`.js` link (e.g. `styles.css?v=ce150953`). Browsers
+cache these files, so without the suffix visitors can see new HTML with an
+old stylesheet. After editing `styles.css` or any `.js` file, run
+`python3 scripts/build_seo.py` and commit; `--check` fails if a hash is stale.
+
 `scripts/build_seo.py` is the single source of truth for each page's
 `<title>`, meta description, canonical URL, Open Graph and Twitter tags
 (the `PAGES` dict), and for `sitemap.xml`. The canonical domain comes from

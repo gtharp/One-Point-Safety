@@ -8,6 +8,11 @@ Usage:
     python3 scripts/build_seo.py --sitemap-only  # just sitemap.xml (what the daily Action runs)
     python3 scripts/build_seo.py --check         # verify everything is in sync; writes nothing
 
+Local .css/.js links in every page also get a ?v=<content hash> suffix
+(styles.css?v=1a2b3c4d), so browsers fetch the new file as soon as it
+changes instead of reusing a stale cached copy. Re-run this script after
+editing styles.css or any .js file; --check fails if a suffix is stale.
+
 The site has no templating, so PAGES below is the "shared layout" for SEO
 tags: each page's title/description/canonical/Open Graph/Twitter tags are
 generated from it and written between the <!-- seo:start --> and
@@ -115,6 +120,7 @@ EXCLUDE_RE = re.compile(r"^(google[0-9a-f]+|404)\.html$")
 
 SEO_BLOCK_RE = re.compile(r"[ \t]*<!-- seo:start -->.*?<!-- seo:end -->\n?", re.S)
 TITLE_RE = re.compile(r"[ \t]*<title>.*?</title>\n?", re.S)
+ASSET_RE = re.compile(r'((?:href|src)=")([\w.-]+\.(?:css|js))(?:\?v=[0-9a-f]*)?(")')
 
 
 def base_url():
@@ -180,6 +186,19 @@ def render_head(page, text, base):
     if not TITLE_RE.search(text):
         raise SystemExit(f"{page}: no <title> or seo markers to replace")
     return TITLE_RE.sub(lambda _: block, text, count=1)
+
+
+# ---------- asset cache-busting ----------
+
+def version_assets(text):
+    """Stamp each local .css/.js reference with a hash of the file's contents."""
+    def sub(m):
+        f = ROOT / m.group(2)
+        if not f.is_file():
+            return m.group(0)
+        v = hashlib.sha256(f.read_bytes()).hexdigest()[:8]
+        return f"{m.group(1)}{m.group(2)}?v={v}{m.group(3)}"
+    return ASSET_RE.sub(sub, text)
 
 
 # ---------- sitemap ----------
@@ -260,6 +279,8 @@ def check(base):
         cfg = PAGES[page]
         if render_head(page, text, base) != text:
             problems.append(f"{page}: <head> SEO block out of date (run scripts/build_seo.py)")
+        if version_assets(text) != text:
+            problems.append(f"{page}: .css/.js ?v= cache-busting suffix out of date (run scripts/build_seo.py)")
         if not re.search(r'<html[^>]*\blang="en"', text):
             problems.append(f'{page}: missing <html lang="en">')
         if len(re.findall(r'<meta name="viewport"', text)) != 1:
@@ -331,7 +352,7 @@ def main():
                 continue
             f = ROOT / page
             text = f.read_text()
-            new = render_head(page, text, base)
+            new = version_assets(render_head(page, text, base))
             if new != text:
                 f.write_text(new)
                 print(f"updated <head> in {page}")
