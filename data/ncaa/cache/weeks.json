@@ -14453,14 +14453,26 @@
     },
     "reg_11": {
       "completed_ids": [
+        "401862824",
         "401866458",
         "401866459",
         "401866460",
         "401866461",
         "401866462",
-        "401866463"
+        "401866463",
+        "401869969"
       ],
       "counts": {
+        "401862824": {
+          "fg": 3,
+          "fum": 1,
+          "inj": 0,
+          "int": 0,
+          "pen": 10,
+          "sack": 8,
+          "safety": 0,
+          "td": 12
+        },
         "401866458": {
           "fg": 0,
           "fum": 0,
@@ -14520,18 +14532,36 @@
           "sack": 5,
           "safety": 0,
           "td": 3
+        },
+        "401869969": {
+          "fg": 0,
+          "fum": 2,
+          "inj": 0,
+          "int": 1,
+          "pen": 12,
+          "sack": 1,
+          "safety": 0,
+          "td": 9
         }
       },
-      "fetched_at": "2026-11-12T20:58:45.568368+00:00",
+      "fetched_at": "2026-11-13T20:34:21.699843+00:00",
       "games_with_plays": [
+        "401862824",
         "401866458",
         "401866459",
         "401866460",
         "401866461",
         "401866462",
-        "401866463"
+        "401866463",
+        "401869969"
       ],
       "penalties": {
+        "401862824": {
+          "Face Mask": 1,
+          "False Start": 3,
+          "Offside": 4,
+          "Pass Interference": 2
+        },
         "401866458": {
           "Delay of Game": 1,
           "False Start": 1,
@@ -14578,6 +14608,14 @@
           "Illegal Block in Back": 2,
           "Illegal Snap": 1,
           "Ineligible Downfield on Pass": 1
+        },
+        "401869969": {
+          "False Start": 2,
+          "Holding": 5,
+          "Illegal Formation": 1,
+          "Offside": 2,
+          "Pass Interference": 1,
+          "Roughing the Passer": 1
         }
       }
     }
