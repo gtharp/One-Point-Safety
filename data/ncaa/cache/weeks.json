@@ -14453,6 +14453,9 @@
     },
     "reg_11": {
       "completed_ids": [
+        "401856860",
+        "401858293",
+        "401858526",
         "401862824",
         "401866458",
         "401866459",
@@ -14463,6 +14466,36 @@
         "401869969"
       ],
       "counts": {
+        "401856860": {
+          "fg": 2,
+          "fum": 1,
+          "inj": 2,
+          "int": 2,
+          "pen": 12,
+          "sack": 1,
+          "safety": 0,
+          "td": 10
+        },
+        "401858293": {
+          "fg": 4,
+          "fum": 1,
+          "inj": 0,
+          "int": 1,
+          "pen": 9,
+          "sack": 4,
+          "safety": 0,
+          "td": 2
+        },
+        "401858526": {
+          "fg": 2,
+          "fum": 0,
+          "inj": 2,
+          "int": 4,
+          "pen": 10,
+          "sack": 2,
+          "safety": 1,
+          "td": 4
+        },
         "401862824": {
           "fg": 3,
           "fum": 1,
@@ -14544,8 +14577,11 @@
           "td": 9
         }
       },
-      "fetched_at": "2026-11-13T20:34:21.699843+00:00",
+      "fetched_at": "2026-11-14T18:47:21.616963+00:00",
       "games_with_plays": [
+        "401856860",
+        "401858293",
+        "401858526",
         "401862824",
         "401866458",
         "401866459",
@@ -14556,6 +14592,32 @@
         "401869969"
       ],
       "penalties": {
+        "401856860": {
+          "Face Mask": 1,
+          "False Start": 4,
+          "Holding": 1,
+          "Illegal Block in Back": 1,
+          "Illegal Motion": 1,
+          "Offside": 1,
+          "Pass Interference": 1,
+          "Unnecessary Roughness": 1,
+          "Unsportsmanlike Conduct": 1
+        },
+        "401858293": {
+          "Encroachment": 1,
+          "False Start": 2,
+          "Holding": 3,
+          "Offside": 1,
+          "Roughing the Passer": 2
+        },
+        "401858526": {
+          "Block Below Waist": 1,
+          "False Start": 2,
+          "Holding": 3,
+          "Illegal Substitution": 1,
+          "Pass Interference": 2,
+          "Roughing the Kicker": 1
+        },
         "401862824": {
           "Face Mask": 1,
           "False Start": 3,
