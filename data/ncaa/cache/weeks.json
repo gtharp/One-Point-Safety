@@ -14466,6 +14466,7 @@
         "401856884",
         "401856885",
         "401856886",
+        "401856887",
         "401856888",
         "401856889",
         "401858293",
@@ -14536,7 +14537,7 @@
           "fum": 0,
           "inj": 0,
           "int": 1,
-          "pen": 14,
+          "pen": 15,
           "sack": 4,
           "safety": 0,
           "td": 5
@@ -14546,7 +14547,7 @@
           "fum": 2,
           "inj": 0,
           "int": 1,
-          "pen": 9,
+          "pen": 8,
           "sack": 6,
           "safety": 0,
           "td": 7
@@ -14603,7 +14604,7 @@
         },
         "401856882": {
           "fg": 2,
-          "fum": 0,
+          "fum": 1,
           "inj": 0,
           "int": 3,
           "pen": 19,
@@ -14614,7 +14615,7 @@
         "401856883": {
           "fg": 2,
           "fum": 0,
-          "inj": 1,
+          "inj": 3,
           "int": 1,
           "pen": 4,
           "sack": 1,
@@ -14624,7 +14625,7 @@
         "401856884": {
           "fg": 1,
           "fum": 1,
-          "inj": 2,
+          "inj": 3,
           "int": 0,
           "pen": 11,
           "sack": 3,
@@ -14634,9 +14635,9 @@
         "401856885": {
           "fg": 3,
           "fum": 0,
-          "inj": 0,
+          "inj": 1,
           "int": 6,
-          "pen": 15,
+          "pen": 16,
           "sack": 7,
           "safety": 0,
           "td": 5
@@ -14651,6 +14652,16 @@
           "safety": 1,
           "td": 6
         },
+        "401856887": {
+          "fg": 2,
+          "fum": 0,
+          "inj": 0,
+          "int": 0,
+          "pen": 11,
+          "sack": 5,
+          "safety": 0,
+          "td": 5
+        },
         "401856888": {
           "fg": 5,
           "fum": 0,
@@ -14664,7 +14675,7 @@
         "401856889": {
           "fg": 2,
           "fum": 1,
-          "inj": 0,
+          "inj": 3,
           "int": 1,
           "pen": 18,
           "sack": 8,
@@ -14683,10 +14694,10 @@
         },
         "401858294": {
           "fg": 2,
-          "fum": 1,
-          "inj": 1,
+          "fum": 2,
+          "inj": 2,
           "int": 2,
-          "pen": 14,
+          "pen": 13,
           "sack": 5,
           "safety": 0,
           "td": 6
@@ -14704,9 +14715,9 @@
         "401858296": {
           "fg": 4,
           "fum": 0,
-          "inj": 1,
+          "inj": 2,
           "int": 1,
-          "pen": 14,
+          "pen": 15,
           "sack": 0,
           "safety": 0,
           "td": 7
@@ -14716,7 +14727,7 @@
           "fum": 1,
           "inj": 0,
           "int": 2,
-          "pen": 8,
+          "pen": 9,
           "sack": 4,
           "safety": 0,
           "td": 2
@@ -14764,9 +14775,9 @@
         "401858518": {
           "fg": 4,
           "fum": 0,
-          "inj": 0,
+          "inj": 1,
           "int": 3,
-          "pen": 15,
+          "pen": 16,
           "sack": 2,
           "safety": 0,
           "td": 4
@@ -14826,7 +14837,7 @@
           "fum": 1,
           "inj": 0,
           "int": 0,
-          "pen": 10,
+          "pen": 11,
           "sack": 6,
           "safety": 0,
           "td": 8
@@ -14844,7 +14855,7 @@
         "401858526": {
           "fg": 2,
           "fum": 0,
-          "inj": 2,
+          "inj": 5,
           "int": 4,
           "pen": 10,
           "sack": 2,
@@ -14866,14 +14877,14 @@
           "fum": 0,
           "inj": 0,
           "int": 1,
-          "pen": 13,
+          "pen": 12,
           "sack": 3,
           "safety": 0,
           "td": 5
         },
         "401860916": {
           "fg": 1,
-          "fum": 1,
+          "fum": 2,
           "inj": 0,
           "int": 1,
           "pen": 10,
@@ -14906,7 +14917,7 @@
           "fum": 1,
           "inj": 0,
           "int": 0,
-          "pen": 10,
+          "pen": 9,
           "sack": 8,
           "safety": 0,
           "td": 12
@@ -14976,7 +14987,7 @@
           "fum": 0,
           "inj": 0,
           "int": 2,
-          "pen": 15,
+          "pen": 14,
           "sack": 6,
           "safety": 0,
           "td": 4
@@ -14994,7 +15005,7 @@
         "401864539": {
           "fg": 1,
           "fum": 1,
-          "inj": 0,
+          "inj": 2,
           "int": 2,
           "pen": 12,
           "sack": 4,
@@ -15066,7 +15077,7 @@
           "fum": 0,
           "inj": 0,
           "int": 1,
-          "pen": 13,
+          "pen": 15,
           "sack": 5,
           "safety": 0,
           "td": 3
@@ -15083,13 +15094,13 @@
         },
         "401869937": {
           "fg": 0,
-          "fum": 5,
+          "fum": 6,
           "inj": 0,
           "int": 1,
           "pen": 6,
-          "sack": 2,
+          "sack": 1,
           "safety": 0,
-          "td": 6
+          "td": 7
         },
         "401869952": {
           "fg": 3,
@@ -15113,20 +15124,20 @@
         },
         "401870752": {
           "fg": 1,
-          "fum": 2,
+          "fum": 4,
           "inj": 0,
           "int": 2,
           "pen": 5,
-          "sack": 8,
+          "sack": 9,
           "safety": 0,
-          "td": 7
+          "td": 8
         },
         "401870769": {
           "fg": 2,
           "fum": 0,
           "inj": 0,
           "int": 1,
-          "pen": 18,
+          "pen": 17,
           "sack": 6,
           "safety": 0,
           "td": 4
@@ -15182,7 +15193,7 @@
           "td": 5
         }
       },
-      "fetched_at": "2026-11-15T12:10:13.426741+00:00",
+      "fetched_at": "2026-11-16T22:57:30.701414+00:00",
       "games_with_plays": [
         "401856857",
         "401856858",
@@ -15197,6 +15208,7 @@
         "401856884",
         "401856885",
         "401856886",
+        "401856887",
         "401856888",
         "401856889",
         "401858293",
@@ -15260,6 +15272,7 @@
         },
         "401856858": {
           "Delay of Game": 1,
+          "Face Mask": 1,
           "False Start": 2,
           "Holding": 6,
           "Illegal Substitution": 1,
@@ -15272,7 +15285,7 @@
           "Holding": 2,
           "Ineligible Downfield on Pass": 1,
           "Pass Interference": 1,
-          "Personal Foul": 3
+          "Personal Foul": 2
         },
         "401856860": {
           "Face Mask": 1,
@@ -15343,6 +15356,7 @@
           "False Start": 1,
           "Holding": 5,
           "Illegal Motion": 1,
+          "Illegal Shift": 1,
           "Illegal Substitution": 1,
           "Offside": 1,
           "Pass Interference": 4,
@@ -15357,6 +15371,14 @@
           "Offside": 1,
           "Pass Interference": 2,
           "Personal Foul": 2,
+          "Unnecessary Roughness": 1
+        },
+        "401856887": {
+          "Delay of Game": 1,
+          "False Start": 4,
+          "Holding": 3,
+          "Offside": 1,
+          "Pass Interference": 1,
           "Unnecessary Roughness": 1
         },
         "401856888": {
@@ -15381,11 +15403,12 @@
           "False Start": 2,
           "Holding": 3,
           "Offside": 1,
-          "Roughing the Passer": 2
+          "Roughing the Passer": 1,
+          "Targeting": 1
         },
         "401858294": {
           "Delay of Game": 2,
-          "False Start": 4,
+          "False Start": 3,
           "Holding": 4,
           "Intentional Grounding": 1,
           "Offside": 1,
@@ -15409,12 +15432,13 @@
           "Illegal Substitution": 1,
           "Offside": 4,
           "Pass Interference": 1,
-          "Unsportsmanlike Conduct": 1
+          "Unsportsmanlike Conduct": 2
         },
         "401858297": {
           "Holding": 4,
           "Illegal Formation": 1,
           "Illegal Use of Hands": 1,
+          "Kick Catch Interference": 1,
           "Offside": 1,
           "Personal Foul": 1
         },
@@ -15459,6 +15483,7 @@
           "Horse Collar Tackle": 1,
           "Illegal Formation": 1,
           "Illegal Substitution": 1,
+          "Kick Catch Interference": 1,
           "Offside": 1,
           "Pass Interference": 2,
           "Personal Foul": 1,
@@ -15518,7 +15543,7 @@
           "Holding": 2,
           "Illegal Formation": 1,
           "Intentional Grounding": 1,
-          "Kick Catch Interference": 1,
+          "Kick Catch Interference": 2,
           "Pass Interference": 1
         },
         "401858525": {
@@ -15548,7 +15573,7 @@
           "False Start": 6,
           "Holding": 1,
           "Pass Interference": 3,
-          "Personal Foul": 3
+          "Personal Foul": 2
         },
         "401860916": {
           "False Start": 1,
@@ -15575,7 +15600,7 @@
         "401862824": {
           "Face Mask": 1,
           "False Start": 3,
-          "Offside": 4,
+          "Offside": 3,
           "Pass Interference": 2
         },
         "401862825": {
@@ -15635,7 +15660,7 @@
         },
         "401864537": {
           "Delay of Game": 2,
-          "False Start": 4,
+          "False Start": 3,
           "Holding": 4,
           "Illegal Block in Back": 1,
           "Illegal Formation": 1,
@@ -15709,7 +15734,9 @@
           "Holding": 5,
           "Illegal Block in Back": 2,
           "Illegal Snap": 1,
-          "Ineligible Downfield on Pass": 1
+          "Ineligible Downfield on Pass": 1,
+          "Kick Catch Interference": 1,
+          "Targeting": 1
         },
         "401869928": {
           "Delay of Game": 1,
@@ -15756,7 +15783,6 @@
           "Illegal Snap": 1,
           "Ineligible Downfield on Pass": 1,
           "Offside": 1,
-          "Pass Interference": 1,
           "Roughing the Passer": 1,
           "Targeting": 1,
           "Unsportsmanlike Conduct": 2
