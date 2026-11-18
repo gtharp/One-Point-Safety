@@ -15829,6 +15829,81 @@
           "Pass Interference": 2
         }
       }
+    },
+    "reg_12": {
+      "completed_ids": [
+        "401866464",
+        "401866465",
+        "401866466"
+      ],
+      "counts": {
+        "401866464": {
+          "fg": 2,
+          "fum": 1,
+          "inj": 0,
+          "int": 2,
+          "pen": 11,
+          "sack": 3,
+          "safety": 0,
+          "td": 8
+        },
+        "401866465": {
+          "fg": 2,
+          "fum": 0,
+          "inj": 0,
+          "int": 1,
+          "pen": 16,
+          "sack": 4,
+          "safety": 0,
+          "td": 8
+        },
+        "401866466": {
+          "fg": 1,
+          "fum": 0,
+          "inj": 0,
+          "int": 1,
+          "pen": 10,
+          "sack": 4,
+          "safety": 0,
+          "td": 3
+        }
+      },
+      "fetched_at": "2026-11-18T21:29:48.022120+00:00",
+      "games_with_plays": [
+        "401866464",
+        "401866465",
+        "401866466"
+      ],
+      "penalties": {
+        "401866464": {
+          "False Start": 1,
+          "Holding": 4,
+          "Horse Collar Tackle": 1,
+          "Illegal Block in Back": 1,
+          "Pass Interference": 3,
+          "Unsportsmanlike Conduct": 1
+        },
+        "401866465": {
+          "Face Mask": 2,
+          "False Start": 2,
+          "Holding": 2,
+          "Horse Collar Tackle": 1,
+          "Illegal Block in Back": 2,
+          "Ineligible Downfield on Pass": 1,
+          "Pass Interference": 2,
+          "Personal Foul": 1,
+          "Roughing the Passer": 2,
+          "Unsportsmanlike Conduct": 1
+        },
+        "401866466": {
+          "Delay of Game": 1,
+          "False Start": 1,
+          "Holding": 3,
+          "Illegal Forward Pass": 1,
+          "Offside": 3,
+          "Personal Foul": 1
+        }
+      }
     }
   }
 }

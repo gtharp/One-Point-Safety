@@ -2,7 +2,7 @@
   "season": 2026,
   "has_data": true,
   "league": "ncaa",
-  "current_week": 11,
+  "current_week": 12,
   "weeks": [
     1,
     2,
@@ -14,12 +14,13 @@
     8,
     9,
     10,
-    11
+    11,
+    12
   ],
   "week_labels": {},
-  "last_updated": "2026-11-17T21:50:37.635013+00:00",
+  "last_updated": "2026-11-18T21:29:48.022120+00:00",
   "source": "CollegeFootballData.com API",
-  "games_count": 752,
+  "games_count": 755,
   "rare_penalty_threshold": 8,
   "event_files": [
     "events/week-01.json",
@@ -32,6 +33,7 @@
     "events/week-08.json",
     "events/week-09.json",
     "events/week-10.json",
-    "events/week-11.json"
+    "events/week-11.json",
+    "events/week-12.json"
   ]
 }
