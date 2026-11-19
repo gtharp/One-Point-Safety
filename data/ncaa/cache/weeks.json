@@ -15834,7 +15834,9 @@
       "completed_ids": [
         "401866464",
         "401866465",
-        "401866466"
+        "401866466",
+        "401866467",
+        "401866469"
       ],
       "counts": {
         "401866464": {
@@ -15866,13 +15868,35 @@
           "sack": 4,
           "safety": 0,
           "td": 3
+        },
+        "401866467": {
+          "fg": 4,
+          "fum": 0,
+          "inj": 0,
+          "int": 3,
+          "pen": 13,
+          "sack": 2,
+          "safety": 0,
+          "td": 8
+        },
+        "401866469": {
+          "fg": 2,
+          "fum": 1,
+          "inj": 0,
+          "int": 2,
+          "pen": 9,
+          "sack": 0,
+          "safety": 0,
+          "td": 8
         }
       },
-      "fetched_at": "2026-11-18T21:29:48.022120+00:00",
+      "fetched_at": "2026-11-19T21:42:17.696771+00:00",
       "games_with_plays": [
         "401866464",
         "401866465",
-        "401866466"
+        "401866466",
+        "401866467",
+        "401866469"
       ],
       "penalties": {
         "401866464": {
@@ -15902,6 +15926,24 @@
           "Illegal Forward Pass": 1,
           "Offside": 3,
           "Personal Foul": 1
+        },
+        "401866467": {
+          "False Start": 4,
+          "Holding": 1,
+          "Illegal Shift": 1,
+          "Offside": 1,
+          "Pass Interference": 2,
+          "Personal Foul": 1,
+          "Roughing the Passer": 1,
+          "Unnecessary Roughness": 1,
+          "Unsportsmanlike Conduct": 1
+        },
+        "401866469": {
+          "Face Mask": 1,
+          "False Start": 2,
+          "Holding": 2,
+          "Offside": 1,
+          "Pass Interference": 3
         }
       }
     }
