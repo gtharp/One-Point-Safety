@@ -15832,20 +15832,87 @@
     },
     "reg_12": {
       "completed_ids": [
+        "401856869",
+        "401858303",
+        "401858529",
         "401862830",
+        "401862831",
+        "401864542",
+        "401864545",
         "401866464",
         "401866465",
         "401866466",
         "401866467",
+        "401866468",
         "401866469"
       ],
       "counts": {
+        "401856869": {
+          "fg": 3,
+          "fum": 3,
+          "inj": 0,
+          "int": 1,
+          "pen": 14,
+          "sack": 3,
+          "safety": 0,
+          "td": 8
+        },
+        "401858303": {
+          "fg": 3,
+          "fum": 1,
+          "inj": 0,
+          "int": 2,
+          "pen": 12,
+          "sack": 2,
+          "safety": 0,
+          "td": 3
+        },
+        "401858529": {
+          "fg": 1,
+          "fum": 0,
+          "inj": 0,
+          "int": 1,
+          "pen": 17,
+          "sack": 4,
+          "safety": 0,
+          "td": 7
+        },
         "401862830": {
           "fg": 3,
           "fum": 2,
           "inj": 0,
           "int": 0,
           "pen": 7,
+          "sack": 3,
+          "safety": 0,
+          "td": 7
+        },
+        "401862831": {
+          "fg": 3,
+          "fum": 0,
+          "inj": 0,
+          "int": 2,
+          "pen": 11,
+          "sack": 2,
+          "safety": 0,
+          "td": 1
+        },
+        "401864542": {
+          "fg": 2,
+          "fum": 1,
+          "inj": 0,
+          "int": 0,
+          "pen": 12,
+          "sack": 4,
+          "safety": 0,
+          "td": 5
+        },
+        "401864545": {
+          "fg": 2,
+          "fum": 1,
+          "inj": 0,
+          "int": 1,
+          "pen": 5,
           "sack": 3,
           "safety": 0,
           "td": 7
@@ -15890,6 +15957,16 @@
           "safety": 0,
           "td": 8
         },
+        "401866468": {
+          "fg": 4,
+          "fum": 1,
+          "inj": 0,
+          "int": 0,
+          "pen": 11,
+          "sack": 8,
+          "safety": 0,
+          "td": 1
+        },
         "401866469": {
           "fg": 2,
           "fum": 1,
@@ -15901,16 +15978,52 @@
           "td": 8
         }
       },
-      "fetched_at": "2026-11-20T21:22:41.261159+00:00",
+      "fetched_at": "2026-11-21T20:11:18.113994+00:00",
       "games_with_plays": [
+        "401856869",
+        "401858303",
+        "401858529",
         "401862830",
+        "401862831",
+        "401864542",
+        "401864545",
         "401866464",
         "401866465",
         "401866466",
         "401866467",
+        "401866468",
         "401866469"
       ],
       "penalties": {
+        "401856869": {
+          "Delay of Game": 1,
+          "Face Mask": 1,
+          "False Start": 2,
+          "Holding": 5,
+          "Illegal Substitution": 1,
+          "Ineligible Downfield on Pass": 1,
+          "Offside": 2,
+          "Pass Interference": 1
+        },
+        "401858303": {
+          "Delay of Game": 1,
+          "Face Mask": 1,
+          "False Start": 4,
+          "Holding": 2,
+          "Illegal Block After FC Signal": 1,
+          "Intentional Grounding": 1,
+          "Pass Interference": 2
+        },
+        "401858529": {
+          "Delay of Game": 2,
+          "False Start": 4,
+          "Holding": 4,
+          "Illegal Shift": 1,
+          "Illegal Snap": 1,
+          "Offside": 1,
+          "Pass Interference": 1,
+          "Unsportsmanlike Conduct": 3
+        },
         "401862830": {
           "Chop Block": 1,
           "False Start": 1,
@@ -15918,6 +16031,28 @@
           "Intentional Grounding": 1,
           "Offside": 2,
           "Personal Foul": 1
+        },
+        "401862831": {
+          "Delay of Game": 1,
+          "Face Mask": 1,
+          "False Start": 5,
+          "Holding": 2,
+          "Offside": 1,
+          "Running Into the Kicker": 1
+        },
+        "401864542": {
+          "Delay of Game": 1,
+          "False Start": 3,
+          "Holding": 3,
+          "Ineligible Downfield on Pass": 1,
+          "Intentional Grounding": 1,
+          "Pass Interference": 1,
+          "Personal Foul": 1,
+          "Unsportsmanlike Conduct": 1
+        },
+        "401864545": {
+          "False Start": 3,
+          "Holding": 2
         },
         "401866464": {
           "False Start": 1,
@@ -15957,6 +16092,13 @@
           "Roughing the Passer": 1,
           "Unnecessary Roughness": 1,
           "Unsportsmanlike Conduct": 1
+        },
+        "401866468": {
+          "Delay of Game": 3,
+          "False Start": 3,
+          "Holding": 3,
+          "Offside": 1,
+          "Roughing the Passer": 1
         },
         "401866469": {
           "Face Mask": 1,
