@@ -33,7 +33,8 @@ few derived columns every rule below can use:
     next_offense Series aligned to df.index: offense on the next real play
 
 Tiers: "wild" (rarest), "rare", "uncommon". Tiers start from the NFL
-side's values; there's no college rarity script yet (see README).
+side's values. Once scripts/build_ncaa_rarity.py has filled in
+data/ncaa/rarity.json, check them against the real college rates.
 Rules marked HEURISTIC in their comment lean on play-text patterns rather
 than a clean field and are listed in README.md.
 """

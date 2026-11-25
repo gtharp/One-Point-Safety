@@ -171,10 +171,10 @@ last choice is remembered in `localStorage` (`ops-pen-sort`):
 - **Common → rare / Rare → common**: by how common the type is in
   general, as calls per game. This doesn't change with the scope, so in a
   single week a normally rare foul still sorts as rare. The NFL uses the
-  10-season average from `data/rarity.json` (the front end loads it
-  directly), and falls back to this season's rate for a type with no
-  history. College uses this season's rate, since there's no college
-  history yet.
+  10-season average from `data/rarity.json`, and college uses the
+  `per_game` rate in `data/ncaa/rarity.json` (the front end loads both
+  directly). A type with no history, including every college type until
+  the college rarity script has run, falls back to this season's rate.
 
 Tags: **RARE** is the build script's dynamic rare set above (the same one
 the Oddities board uses). **COMMON** is any type called at least
@@ -265,6 +265,9 @@ differences:
   rather than a week number) and `rare_penalty_threshold`.
 - no `weather.json`. CFBD's weather data is Patreon-only, so the weather
   panel isn't on the college page.
+- `rarity.json` comes from a separate script, `build_ncaa_rarity.py`
+  (see "College rarity numbers" below). Its in-progress state lives in
+  `cache/rarity_progress.json`.
 - `data/ncaa/cache/` holds what the next run needs so it doesn't spend
   API calls refetching it: `teams.json` (FBS team/venue info, fetched once
   a season), `ap_polls.json` (every week's AP Top 25), and `weeks.json`
@@ -359,8 +362,54 @@ most `RARE_PENALTY_PER_100_GAMES` (1.0) times per 100 games played so far,
 minimum 3. Penalty names are normalized across CFBD's text formats
 ("ST Holding", "Offensive Holding" and "holding" all become "Holding").
 
-Tiers start from the NFL values. There's no college rarity script yet, so
-the detail sheet says "Historical rarity not calculated yet".
+Tiers start from the NFL values. Once the college rarity script has
+filled in `data/ncaa/rarity.json` (below), check them against the real
+FBS rates the way the NFL tiers were.
+
+### College rarity numbers
+
+`scripts/build_ncaa_rarity.py` is the college counterpart of
+`build_rarity.py`. It counts every oddity and penalty type over the last
+10 completed FBS seasons and writes `data/ncaa/rarity.json`, in the same
+shape as the NFL file. Each entry also has a `per_game` rate, because FBS
+seasons differ in size (2020 was cut short). It reuses
+`build_ncaa_data.py`'s play processing and oddity rules, so past seasons
+are counted exactly the way the live season is. The detail sheet's "how
+rare" line and the penalties panel's common/rare sort both use it.
+
+The hard part is the call budget. A past season costs about 17 calls (one
+`/games` plus one `/plays` per week), so 10 seasons is about 170, from the
+same 1,000-a-month allowance the daily job uses. The script fills in over
+several runs:
+
+- Each run spends at most `--max-calls` (default 120). It stops before the
+  month's remaining calls drop below `--reserve` (default 300), which is
+  left for the daily job.
+- Progress is saved after every week to
+  `data/ncaa/cache/rarity_progress.json`, so a run that stops partway
+  resumes next time without refetching anything.
+- Seasons already in `rarity.json` are never refetched. After the first
+  fill, each year costs only the newly completed season, and a run with
+  nothing to do spends 0 calls.
+- After adding or changing a college oddity rule, delete
+  `data/ncaa/rarity.json` (and the progress file) to recount past seasons.
+  Otherwise they count the new rule as 0.
+
+`.github/workflows/update-ncaa-rarity.yml` runs it on the 2nd of each
+month from February through July, while the daily job is off, plus manual
+dispatch with a `max_calls` input. It shares the daily job's concurrency
+group so the two never push at the same time. The first fill needs two
+runs at the default cap. Locally:
+
+```bash
+export CFBD_API_KEY=...
+python3 scripts/build_ncaa_rarity.py                 # 10 seasons, up to 120 calls this run
+python3 scripts/build_ncaa_rarity.py --max-calls 40  # smaller bite
+```
+
+`build_ncaa_data.py` merges the numbers into `oddities.json` on its next
+run. The page also reads `rarity.json` directly, so new numbers show up
+even in the offseason, when the daily job isn't running.
 
 ### Heuristic college rules
 
@@ -587,11 +636,10 @@ elsewhere:
 The site is live on `main` at one-pointsafety.com and the daily NFL and
 college jobs are running. Open items:
 
-- **College rarity.** There's no college version of `build_rarity.py`, so
-  college detail sheets say "Historical rarity not calculated yet" and the
-  college penalty sort uses only this season. A yearly script spending a
-  few CFBD calls per past season would fix both (watch the 1,000-call
-  monthly budget).
+- **College rarity: first fill.** `build_ncaa_rarity.py` is built but has
+  not run against the real API yet. Run **Update college rarity numbers**
+  twice (or wait for February), then review the college tiers in
+  `ncaa_oddity_rules.py` against the real rates.
 - **College injuries phase 2.** Pre-game availability reports are planned
   but not built (see "Injuries (phase 1)").
 - **One-point safety, both leagues.** The detector has never matched a

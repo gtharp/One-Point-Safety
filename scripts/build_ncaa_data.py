@@ -908,6 +908,8 @@ def main():
     oddity_counts = collections.Counter()
     for e in events:
         oddity_counts.update(e["oddity_ids"])
+    # Historical rates from build_ncaa_rarity.py, if it has run.
+    rarity = read_json(out_dir / "rarity.json", {})
     oddity_catalog = [
         {
             "id": r["id"],
@@ -915,12 +917,13 @@ def main():
             "label": r["label"],
             "why": r["why"],
             "count": oddity_counts.get(r["id"], 0),
-            "rarity": None,  # no college rarity script yet
+            "rarity": rarity.get("oddities", {}).get(r["id"]),
         }
         for r in ODDITIES
     ]
     rare_penalty_catalog = {
-        pt: {"why": RARE_PENALTY_WHY.get(pt, "Called only a handful of times across FBS this season."), "rarity": None}
+        pt: {"why": RARE_PENALTY_WHY.get(pt, "Called only a handful of times across FBS this season."),
+             "rarity": rarity.get("penalties", {}).get(pt)}
         for pt in sorted(rare_penalty_types)
     }
 

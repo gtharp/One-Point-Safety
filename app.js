@@ -41,7 +41,7 @@ const METRICS = [
   ["inj", NCAA ? "Injuries (AP Top 25 games)" : "Injuries"], ["int", "Interceptions"], ["fum", "Fumbles lost"], ["sack", "Sacks"],
 ];
 
-let META = null, GAMES = [], EVENTS = [], ODD = {}, RARE_PEN = {}, PEN_HIST = {}, PEN_SEASON = {}, GAMES_BY_ID = new Map(), EVENTS_BY_GAME = new Map(), WEATHER = null;
+let META = null, GAMES = [], EVENTS = [], ODD = {}, RARE_PEN = {}, PEN_HIST = {}, ODD_HIST = {}, PEN_SEASON = {}, GAMES_BY_ID = new Map(), EVENTS_BY_GAME = new Map(), WEATHER = null;
 let FEED = [];
 const PEN_SORTS = ["count_desc", "count_asc", "common", "rare"];
 function getPenSort() { try { const v = localStorage.getItem("ops-pen-sort"); return PEN_SORTS.includes(v) ? v : "count_desc"; } catch (err) { return "count_desc"; } }
@@ -77,11 +77,12 @@ async function boot() {
       : loadJSON(DATA + "events.json"),
     loadJSON(DATA + "oddities.json"),
     NCAA ? Promise.resolve(null) : loadJSON(DATA + "weather.json").catch(() => null), // no weather for college
-    // Historical per-season averages for every penalty type (NFL only;
-    // scripts/build_rarity.py). College has no history yet.
-    NCAA ? Promise.resolve(null) : loadJSON(DATA + "rarity.json").catch(() => null),
+    // Historical rates for every penalty type (scripts/build_rarity.py,
+    // scripts/build_ncaa_rarity.py). Optional: the page works without it.
+    loadJSON(DATA + "rarity.json").catch(() => null),
   ]);
   PEN_HIST = (rarity && rarity.penalties) || {};
+  ODD_HIST = (rarity && rarity.oddities) || {};
   WEATHER = weather;
   GAMES = games;
   GAMES_BY_ID = new Map(GAMES.map(g => [g.id, g]));
@@ -171,9 +172,13 @@ function whyOf(e) {
 }
 function rarityOf(e) {
   const oid = primaryOddityId(e);
-  const r = oid ? ODD[oid].rarity : e.rare_penalty ? RARE_PEN[e.penalty_type]?.rarity : null;
+  // oddities.json carries rarity once the daily build has merged it; read
+  // rarity.json directly as well, so new numbers show up even when the
+  // daily job isn't running (the college offseason).
+  const r = oid ? (ODD[oid].rarity || ODD_HIST[oid])
+    : e.rare_penalty ? (RARE_PEN[e.penalty_type]?.rarity || PEN_HIST[e.penalty_type]) : null;
   if (!r) return "Historical rarity not calculated yet.";
-  return `About ${r.avg_per_season} per season (last ${r.seasons} seasons)`;
+  return `About ${r.avg_per_season} per season (last ${r.seasons} seasons${NCAA ? ", all of FBS" : ""})`;
 }
 
 /* ---------- Header ---------- */
@@ -304,16 +309,17 @@ function renderWeather() {
    Four sorts: by how many times each type was called in the current
    scope (high->low, low->high), or by how common the type is in general
    (common->rare, rare->common). "How common" is a calls-per-game rate
-   that doesn't change with the scope: the NFL uses the 10-season
-   historical average from rarity.json, falling back to this season's
-   count for a type with no history; college uses this season's count
-   (no college history yet). Tags: RARE is the build script's dynamic
+   that doesn't change with the scope, from the league's rarity.json
+   (past seasons; college entries carry their own per_game rate since
+   FBS season sizes vary), falling back to this season's rate for a type
+   with no history. Tags: RARE is the build script's dynamic
    rare set (same one the Oddities board uses); COMMON is anything called
    at least COMMON_PER_GAME times per game (~100 a season in the NFL). */
 const COMMON_PER_GAME = 0.35;
 const NFL_GAMES_PER_SEASON = 272;
 function penRate(p) {
   const h = PEN_HIST[p];
+  if (h && h.per_game != null) return h.per_game;
   if (h && h.avg_per_season != null) return h.avg_per_season / NFL_GAMES_PER_SEASON;
   const played = GAMES.filter(g => g.final).length || GAMES.length || 1;
   return (PEN_SEASON[p] || 0) / played;

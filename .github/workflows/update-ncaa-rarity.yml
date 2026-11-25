@@ -1,0 +1,64 @@
+name: Update college rarity numbers
+
+# Historical FBS rates from past seasons (scripts/build_ncaa_rarity.py).
+# A past season costs ~17 CFBD calls, and the free tier is 1,000 a month
+# shared with update-ncaa-data.yml, so the script fills in over several
+# runs: at most --max-calls per run, never below a reserve left for the
+# daily job, resuming from data/ncaa/cache/rarity_progress.json. Once
+# every season in the window is done, a run spends 0 calls.
+#
+# Scheduled on the 2nd of Feb-Jul (the college offseason, when the daily
+# job doesn't run) so a new completed season gets picked up each year.
+# Run it by hand any time; in season, keep max_calls modest.
+on:
+  schedule:
+    - cron: "0 14 2 2-7 *"
+  workflow_dispatch:
+    inputs:
+      max_calls:
+        description: "Most CFBD calls this run may spend (~17 per season)"
+        required: false
+        default: "120"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-ncaa-data # shares the daily college job's group so they never race
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+          cache-dependency-path: scripts/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Compute college rarity
+        env:
+          CFBD_API_KEY: ${{ secrets.CFBD_API_KEY }}
+          MAX_CALLS: ${{ github.event.inputs.max_calls || '120' }}
+        run: python3 scripts/build_ncaa_rarity.py --out data/ncaa --max-calls "$MAX_CALLS"
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A -- data/ncaa
+          if git diff --cached --quiet; then
+            echo "No college rarity changes."
+            exit 0
+          fi
+          git commit -m "Update college rarity numbers ($(date -u +'%Y-%m-%d'))"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
