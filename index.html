@@ -23,7 +23,7 @@
 <meta name="twitter:image" content="https://one-pointsafety.com/og-image.png">
 <meta name="twitter:image:alt" content="One-Point Safety — tracking the NFL&#x27;s rarest plays">
 <!-- seo:end -->
-<link rel="stylesheet" href="styles.css?v=ce150953">
+<link rel="stylesheet" href="styles.css?v=e23f069f">
 </head>
 <body>
 <header>
@@ -70,7 +70,12 @@
   </section>
 
   <section class="a-pen">
-    <h2>Penalties by type <button class="linkbtn" id="penSort"></button></h2>
+    <h2>Penalties by type <label class="sortsel"><span class="sr">Sort penalties</span><select id="penSort" aria-label="Sort penalties">
+      <option value="count_desc">Most called</option>
+      <option value="count_asc">Fewest called</option>
+      <option value="common">Common &rarr; rare</option>
+      <option value="rare">Rare &rarr; common</option>
+    </select></label></h2>
     <div class="panel" id="penalties"></div>
   </section>
 
@@ -103,7 +108,7 @@
 <div class="scrim" id="scrim"></div>
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Play details"></div>
 
-<script src="app.js?v=1be4fd66"></script>
+<script src="app.js?v=8b02cafc"></script>
 <!-- Cloudflare Web Analytics -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "d3902bc33d3544aab51f12727f5c7ce0"}'></script>
 <!-- End Cloudflare Web Analytics -->

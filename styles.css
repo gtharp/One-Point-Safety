@@ -113,6 +113,9 @@ section h2 small{text-transform:none;letter-spacing:0;font-weight:500}
 .pen .bar{height:.4rem;border-radius:3px;background:var(--bar);margin-top:.25rem}
 .pen .ct{text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
 .rare{font-size:.6rem;font-weight:800;color:var(--warn);background:var(--warn-soft);padding:.05rem .4rem;border-radius:99px;margin-left:.35rem;vertical-align:middle}
+.common{font-size:.6rem;font-weight:800;color:var(--muted);background:var(--bg);border:1px solid var(--line);padding:0 .4rem;border-radius:99px;margin-left:.35rem;vertical-align:middle}
+.sortsel select{font:inherit;font-size:.78rem;text-transform:none;letter-spacing:0;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:99px;padding:.2rem .5rem;cursor:pointer}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* ---------- Play log ---------- */
 .filterbar{display:flex;gap:.4rem;align-items:center;flex-wrap:wrap;margin-bottom:.4rem;font-size:.8rem;color:var(--muted)}
@@ -237,7 +240,7 @@ body.tv .a-wx{display:none}
 @media print{
   :root,body[data-league="ncaa"]{--bg:#fff;--card:#fff;--ink:#000;--muted:#444;--line:#ccc}
   header{position:static}
-  .controls,.tvbtn,.linkbtn,.more,.sheet,.scrim,#featured{display:none!important}
+  .controls,.tvbtn,.linkbtn,.sortsel,.more,.sheet,.scrim,#featured{display:none!important}
   .layout{grid-template-columns:1fr!important;grid-template-areas:"odd" "tot" "wx" "pen" "log" "games"!important}
   .card,.panel,.game,.ocard,.tile{break-inside:avoid}
 }
