@@ -134,12 +134,17 @@ def detect_fake_special_teams_td(df, ctx):
     # passing TD where the ball-carrier/passer is someone who punted or
     # kicked for that team in the same game -- or the text says "fake"
     # outright. Holders are deliberately left out: they're often backup or
-    # even starting QBs, so "holder throws a TD" is usually just a QB.
+    # even starting QBs, so "holder throws a TD" is usually just a QB. For
+    # the same reason, that game's QB (5+ pass attempts) never counts, even
+    # if he punted: quarterbacks pooch-punt fairly often, and every TD he
+    # then threw or ran would look like a fake.
     spec = ctx["specialists"]
+    atts = ctx["pass_atts"]
 
     def by_specialist(row):
         who = row["passer"] or row["rusher"]
-        return bool(who) and who in spec.get((row["game_id"], row["offense"]), ())
+        key = (row["game_id"], row["offense"])
+        return bool(who) and who in spec.get(key, ()) and atts.get(key + (who,), 0) < 5
 
     scrim_td = df["ptype"].isin(SCRIMMAGE_TD)
     if not scrim_td.any():
@@ -156,15 +161,24 @@ def detect_onside_recovered(df, ctx):
     # HEURISTIC. An onside kick where the kicking team (CFBD's "offense" on
     # a kickoff) still has the ball on the next real play. Kicks wiped out
     # by a penalty ("NO PLAY") are skipped.
-    onside = df["ptype"].str.contains("Kickoff", case=False) & _ci(df, r"onside")
+    # Older text (before 2025) never says "onside", so a short kickoff
+    # ("kickoff for 12 yds") the kicking team kept counts too; a short
+    # squib the receiving team fields fails the possession check.
+    short = _t(df).str.extract(r"(?i)kickoff for (\d+) y", expand=False).astype(float) <= 20
+    onside = df["ptype"].str.contains("Kickoff", case=False) & (_ci(df, r"onside") | short.fillna(False))
     no_play = _ci(df, r"NO PLAY")
     kept = ctx["next_offense"] == df["offense"]
     return onside & ~no_play & kept
 
 
 def detect_off_fumble_rec_td(df, ctx):
-    # The offense fumbles and recovers its own ball for a touchdown.
-    return (df["ptype"] == "Fumble Recovery (Own)") & (df["off_delta"] >= 6)
+    # The offense fumbles and recovers its own ball for a touchdown. Newer
+    # data tags it ("Fumble Recovery (Own)", "... Touchdown"); older seasons
+    # file it as a normal rushing/passing TD whose text says the ball was
+    # fumbled -- the offense still scoring 6+ means the offense recovered.
+    tagged = df["ptype"].str.startswith("Fumble Recovery (Own)")
+    folded = df["ptype"].isin(SCRIMMAGE_TD) & _ci(df, r"\bfumbled\b")
+    return (tagged | folded) & (df["off_delta"] >= 6)
 
 
 def detect_non_qb_td_pass(df, ctx):

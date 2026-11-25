@@ -156,10 +156,72 @@ def kickoff_fields(game):
 NAME = r"[A-Z][a-z]{0,2}\.\s?[A-Z][A-Za-z'\-]*[a-z][A-Za-z'\-]*(?:\s(?:Jr\.|Sr\.|II|III|IV|V)(?![A-Za-z]))?"
 NAME_RE = re.compile(rf"(?<![A-Za-z])({NAME})")
 HOLDER_LS_RE = re.compile(r"\((?:H|LS):[^)]*\)")
-PASSER_RE = re.compile(rf"(?:#\d+\s+)?({NAME})\s+pass\b")
-RECEIVER_RE = re.compile(rf"pass complete\b[^#]*?\bto\s+(?:#\d+\s+)?({NAME})")
-RUSHER_RE = re.compile(rf"(?:#\d+\s+)?({NAME})\s+(?:rush|run)\b")
-SPECIALIST_RE = re.compile(rf"(?:#\d+\s+)?({NAME})\s+(?:punt|onside kickoff|kickoff|field goal attempt|kick attempt)\b")
+
+# Who passed / caught / ran / kicked, for the rules that compare players
+# within a game (QB catches a pass, non-QB TD pass, fake punt/FG TD).
+# CFBD's play text has used several name styles over the years, sometimes
+# within one season:
+#   current:  "Shotgun #11 M.Van Buren Jr. pass complete short right to #29 C.Durham"
+#   older:    "Ian Book pass complete to Miles Boykin for 29 yds"  (most of 2016-2024)
+#   also:     "DeVito, Tommy pass incomplete to Bobo, Jake"
+# Every style reduces to the same key with person_key() ("m.van buren",
+# "i.book", "t.devito"), so the same player matches across styles.
+_TOKEN = r"[A-Z][A-Za-z'.\-]*"
+_SUFFIX = r"(?:\s(?:Jr\.?|Sr\.?|II|III|IV|V)(?![A-Za-z]))"
+_PARTICLE = r"(?:(?:Van|Von|De|Del|Da|La|Le|St\.|Di|Du|Mac)\s)?"
+_INIT = rf"[A-Z][a-z]{{0,2}}\.\s?{_PARTICLE}[A-Z][A-Za-z'\-]*[a-z][A-Za-z'\-]*{_SUFFIX}?"
+_COMMA = rf"[A-Z][A-Za-z'\-]+(?:\s[A-Z][A-Za-z'\-]+)?{_SUFFIX}?,\s?[A-Z][a-z][A-Za-z'.\-]*"
+_FULL = rf"{_TOKEN}(?:\s{_PARTICLE}{_TOKEN}){{1,2}}"
+PERSON = rf"(?:{_COMMA}|{_INIT}|{_FULL})"
+# Start of a play's text, before the first player: CFBD's "(08:43) " clock,
+# a formation, a jersey number.
+_LEAD = r"^(?:\(\d{1,2}:\d{2}\)\s*)?(?:(?:No Huddle-)?Shotgun\s+|No Huddle\s+|Under Center\s+)?(?:#\d+\s+)?"
+PASSER_RE = re.compile(rf"{_LEAD}({PERSON})\s+pass\b")
+PASSER_ANY_RE = re.compile(rf"#\d+\s+({_INIT})\s+pass\b")  # mid-text, current style only
+RECEIVER_RE = re.compile(
+    rf"pass complete\b[^#]*?\bto\s+(?:#\d+\s+)?({PERSON})(?=\s+for\b|\s+caught\b|\s*,|\s*\(|\s+to the\b|\s*$|\.)"
+)
+RUSHER_RE = re.compile(rf"{_LEAD}({PERSON})\s+(?:rush|run)\b")
+RUSHER_ANY_RE = re.compile(rf"#\d+\s+({_INIT})\s+(?:rush|run)\b")
+SPECIALIST_RES = [
+    re.compile(rf"(?:#\d+\s+)?({PERSON})\s+(?:punt|onside kickoff|kickoff|field goal attempt|kick attempt)\b"),
+    re.compile(rf"({PERSON})\s+\d+\s+(?:Yd|Yds|Yard|Yards)\s+(?:Field Goal|FG)\b"),  # "James Turner 39 Yd Field Goal"
+    re.compile(rf"\(({PERSON})\s+KICK\)"),  # older PAT: "(Brooks Buce KICK)"
+]
+_SUFFIX_WORDS = {"jr", "sr", "ii", "iii", "iv", "v"}
+_NOT_PEOPLE = {"team", "tm", "penalty", "timeout", "shotgun", "huddle", "touchdown"}
+
+
+def person_key(name):
+    """'M.Van Buren Jr.', 'Michael Van Buren', 'Van Buren Jr., Michael' -> 'm.van buren'.
+    '' if it doesn't look like a person."""
+    name = (name or "").strip()
+    if not name:
+        return ""
+    if "," in name:
+        last, first_name = (x.strip() for x in name.split(",", 1))
+    elif re.match(r"^[A-Z][a-z]{0,2}\.", name):
+        first_name, last = name.split(".", 1)
+    else:
+        parts = name.split(None, 1)
+        if len(parts) < 2:
+            return ""
+        first_name, last = parts
+    words = [w.strip(".").lower() for w in last.split()]
+    words = [w for w in words if w and w not in _SUFFIX_WORDS]
+    if not words or not first_name or words[-1] in _NOT_PEOPLE or first_name.lower().strip(".") in _NOT_PEOPLE:
+        return ""
+    return f"{first_name[0].lower()}.{' '.join(words)}"
+
+
+def player_in(text, *regexes):
+    for rx in regexes:
+        m = rx.search(text)
+        if m:
+            key = person_key(m.group(1))
+            if key:
+                return key
+    return ""
 END_CLOCK_RE = re.compile(r"clock (\d{1,2}):(\d{2})")
 FG_DIST_RE = re.compile(r"from (\d+) (?:yards|yds|yard)", re.I)
 
@@ -385,9 +447,10 @@ def plays_frame(plays):
     tagged_td = df["ptype"].str.contains("Touchdown", case=False) & ~(no_play & ~big_delta)
     df["is_td"] = tagged_td | (t.str.contains("TOUCHDOWN", regex=False) & big_delta)
     df["try_text"] = t.map(lambda s: s.rsplit("TOUCHDOWN", 1)[1] if "TOUCHDOWN" in s else "")
-    df["passer"] = t.map(lambda s: first(PASSER_RE, s))
-    df["receiver"] = t.map(lambda s: first(RECEIVER_RE, s))
-    df["rusher"] = t.map(lambda s: first(RUSHER_RE, s))
+    # Player keys (person_key), not display names: compared within a game.
+    df["passer"] = t.map(lambda s: player_in(s, PASSER_RE, PASSER_ANY_RE))
+    df["receiver"] = t.map(lambda s: player_in(s, RECEIVER_RE))
+    df["rusher"] = t.map(lambda s: player_in(s, RUSHER_RE, RUSHER_ANY_RE))
     return df
 
 
@@ -395,11 +458,17 @@ def build_ctx(df):
     specialists = collections.defaultdict(set)
     pass_atts = collections.Counter()
     touches = collections.defaultdict(set)
-    kick_rows = df["ptype"].str.contains(r"Punt|Kickoff|Field Goal", case=False)
+    # Kicks, plus TD rows that name the PAT kicker ("kick attempt good",
+    # older "(Name KICK)").
+    kick_rows = df["ptype"].str.contains(r"Punt|Kickoff|Field Goal", case=False) | \
+        df["text"].str.contains(r"kick attempt|KICK\)", regex=True)
     for _, r in df[kick_rows].iterrows():
         key = (r["game_id"], r["offense"])
-        for m in SPECIALIST_RE.finditer(r["text"]):
-            specialists[key].add(m.group(1).strip())
+        for rx in SPECIALIST_RES:
+            for m in rx.finditer(r["text"]):
+                k = person_key(m.group(1))
+                if k:
+                    specialists[key].add(k)
     for _, r in df[(df["passer"] != "") | (df["receiver"] != "") | (df["rusher"] != "")].iterrows():
         key = (r["game_id"], r["offense"])
         if r["passer"]:

@@ -50,10 +50,17 @@ from ncaa_oddity_rules import ODDITIES
 CALLS_PER_SEASON_ESTIMATE = 17
 
 
+SEASON_TYPES = ("regular", "postseason")
+
+
 def fbs_games(api, season):
+    # Regular season and postseason only. 2020 also has "spring_regular"
+    # weeks (games moved to spring 2021), which aren't a normal FBS slate
+    # and whose week numbers would collide with regular-season weeks.
     games = api.get("/games", {"year": season, "classification": "fbs"})
     return [g for g in games
-            if (g.get("homeClassification") == "fbs" or g.get("awayClassification") == "fbs") and g.get("completed")]
+            if (g.get("homeClassification") == "fbs" or g.get("awayClassification") == "fbs")
+            and g.get("completed") and g.get("seasonType") in SEASON_TYPES]
 
 
 def week_counts(api, season, stype, week, lookup, valid_ids):
@@ -141,6 +148,9 @@ def main():
     done = {s: v for s, v in unsummarize(existing).items() if s in wanted}
     progress = read_json(progress_path, {})  # {season: {"games", "weeks": [...], "week_counts": {key: counts}}}
     progress = {s: v for s, v in progress.items() if s in wanted and s not in done}
+    for sp in progress.values():  # progress saved before spring weeks were excluded
+        if "weeks" in sp:
+            sp["weeks"] = [w for w in sp["weeks"] if w[0] in SEASON_TYPES]
     todo = [s for s in reversed(wanted) if s not in done]  # newest first
     print(f"Window {wanted[0]}-{wanted[-1]}: {len(done)} seasons done, {len(todo)} to go {todo}")
 
@@ -198,18 +208,21 @@ def main():
         except (RuntimeError, requests.HTTPError) as exc:
             print(f"warning: {season} stopped early ({exc}); will resume next run", file=sys.stderr)
             break
-        if "weeks" in sp and len(sp["week_counts"]) == len(sp["weeks"]):
+        if "weeks" in sp and all(week_key(st, wk) in sp["week_counts"] for st, wk in sp["weeks"]):
             odd, pen, with_plays = collections.Counter(), collections.Counter(), 0
             for wc in sp["week_counts"].values():
                 odd.update(wc["oddities"])
                 pen.update(wc["penalties"])
                 with_plays += wc["games_with_plays"]
             # Rates are per game that actually had plays, so a few games
-            # missing play-by-play don't drag every rate down.
-            done[season] = {"games": with_plays or sp["games"], "oddities": dict(odd), "penalties": dict(pen)}
+            # missing play-by-play don't drag every rate down. Capped at the
+            # scheduled count: a rescheduled game can show up in two weeks'
+            # plays (2020), which would otherwise be counted twice.
+            games_n = min(with_plays, sp["games"]) if with_plays else sp["games"]
+            done[season] = {"games": games_n, "oddities": dict(odd), "penalties": dict(pen)}
             progress.pop(season, None)
             write_json(progress_path, progress, pretty=True)
-            print(f"  {season} done: {with_plays} games with plays, {sum(pen.values())} penalties")
+            print(f"  {season} done: {games_n} games with plays, {sum(pen.values())} penalties")
         else:
             break
 
