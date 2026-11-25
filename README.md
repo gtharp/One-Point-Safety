@@ -368,9 +368,14 @@ most `RARE_PENALTY_PER_100_GAMES` (1.0) times per 100 games played so far,
 minimum 3. Penalty names are normalized across CFBD's text formats
 ("ST Holding", "Offensive Holding" and "holding" all become "Holding").
 
-Tiers start from the NFL values. Once the college rarity script has
-filled in `data/ncaa/rarity.json` (below), check them against the real
-FBS rates the way the NFL tiers were.
+Tiers come from the real 2016-2025 FBS rates in `data/ncaa/rarity.json`
+(below), using the NFL tiers' cutoffs per game, since FBS plays about 3.3x
+as many games: wild under ~8 a season, rare under ~31, uncommon above.
+The first re-tier (Nov 2026) moved 60+ yard field goal, the overtime
+2-point shootout and the offensive fumble-recovery TD from Rare to Wild,
+and the walk-off score from Wild to Rare (about 14 a season). Non-QB TD
+pass measures ~41 a season but stays Rare, because that count includes
+backup quarterbacks the heuristic can't tell apart.
 
 ### College rarity numbers
 
@@ -648,14 +653,14 @@ elsewhere:
 The site is live on `main` at one-pointsafety.com and the daily NFL and
 college jobs are running. Open items:
 
-- **College rarity: refill, then re-tier.** The first run (Nov 2026)
-  counted 2021-2025 with name parsing that missed CFBD's older text, so
-  those numbers were deleted when the parsing was fixed. Run **Update
-  college rarity numbers** twice to recount all 10 seasons (~170 calls),
-  then review the college tiers in `ncaa_oddity_rules.py` against the real
-  rates. Expect roughly (from ESPN play-by-play, FBS + FCS): QB catches a
-  pass 30-50 a season, non-QB TD pass 30-50, fake punt/FG TD 1-5,
-  onside recovered 3-27, offensive fumble-recovery TD 1-7.
+- **College rarity: format splits.** All 10 seasons are in and the tiers
+  are set, but a few rules still read very differently before and after
+  2021, which looks like CFBD text or play-type changes rather than real
+  swings: onside recovered (~4 a season 2016-2020, ~20 after), blocked
+  punt/FG TD (2-12 vs 14-23), and an offensive fumble-recovery TD spike
+  in 2018 (23, vs 1-10 in other years). None of them would change tier,
+  but they're worth a look with the ESPN-data check described in the
+  name-parsing commit.
 - **Live college season (optional).** The current season's events were
   built with the old parsing. Its text is the current style, which mostly
   parsed fine, but the pooch-punt fix changes fake punt/FG TD counts. A

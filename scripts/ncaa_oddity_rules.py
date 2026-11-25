@@ -32,9 +32,12 @@ few derived columns every rule below can use:
     pass_atts    {(game_id, team, name): pass attempts by that player}
     next_offense Series aligned to df.index: offense on the next real play
 
-Tiers: "wild" (rarest), "rare", "uncommon". Tiers start from the NFL
-side's values. Once scripts/build_ncaa_rarity.py has filled in
-data/ncaa/rarity.json, check them against the real college rates.
+Tiers: "wild" (rarest), "rare", "uncommon". Set from the real 2016-2025
+FBS rates in data/ncaa/rarity.json (scripts/build_ncaa_rarity.py), using
+the NFL tiers' cutoffs per game rather than per season, since FBS plays
+~3.3x the NFL's games: wild under ~8 a season (~0.009/game), rare under
+~31 (~0.035/game), uncommon above. The NFL equivalents are ~2.5 and ~9.5
+a season out of 272 games.
 Rules marked HEURISTIC in their comment lean on play-text patterns rather
 than a clean field and are listed in README.md.
 """
@@ -301,7 +304,7 @@ ODDITIES = [
     },
     {
         "id": "walkoff",
-        "tier": "wild",
+        "tier": "rare",
         "label": "Walk-off score",
         "why": "The go-ahead score comes with no time left in regulation. College overtime has no clock, "
         "so OT winners show up as overtime scores instead.",
@@ -316,9 +319,11 @@ ODDITIES = [
         "detect": detect_fake_special_teams_td,
     },
     # ---- Rare ----
+    # (walkoff, ot_shootout, fg_60 and off_fumble_rec_td are listed where
+    # they started; their "tier" field is what counts)
     {
         "id": "ot_shootout",
-        "tier": "rare",
+        "tier": "wild",
         "label": "Overtime 2-point shootout",
         "why": "Since 2021, college games still tied after two overtimes go to alternating two-point tries, "
         "with no more drives. It takes a third overtime to get there.",
@@ -333,10 +338,10 @@ ODDITIES = [
     },
     {
         "id": "fg_60",
-        "tier": "rare",
+        "tier": "wild",
         "label": "60+ yard field goal",
         "why": "Even rarer in college than the NFL. Most college kickers top out in the low 50s, "
-        "so a 60-yarder may happen only a few times across all of FBS in a season.",
+        "so across all of FBS a 60-yarder comes along only once or twice a season.",
         "detect": detect_fg_60,
     },
     {
@@ -348,12 +353,15 @@ ODDITIES = [
     },
     {
         "id": "off_fumble_rec_td",
-        "tier": "rare",
+        "tier": "wild",
         "label": "Offensive fumble recovery TD",
         "why": "The offense fumbles and recovers its own ball for a touchdown.",
         "detect": detect_off_fumble_rec_td,
     },
     {
+        # Measured ~41 a season, over the ~31 cutoff, but that includes
+        # backup QBs who throw once and also run (no roster data to tell
+        # them apart), so the true rate sits near the line. Kept at rare.
         "id": "non_qb_td_pass",
         "tier": "rare",
         "label": "Non-QB touchdown pass",
