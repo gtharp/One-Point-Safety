@@ -636,10 +636,15 @@ elsewhere:
 The site is live on `main` at one-pointsafety.com and the daily NFL and
 college jobs are running. Open items:
 
-- **College rarity: first fill.** `build_ncaa_rarity.py` is built but has
-  not run against the real API yet. Run **Update college rarity numbers**
-  twice (or wait for February), then review the college tiers in
-  `ncaa_oddity_rules.py` against the real rates.
+- **College rarity: finish the fill, then check the name-based rules.**
+  The first run (Nov 2026) finished 2021-2025. Run **Update college rarity
+  numbers** again for 2016-2020. Before re-tiering, look at the rules
+  that depend on parsing player names from play text (QB catches a pass,
+  non-QB TD pass, fake punt/FG TD, offensive fumble-return TD, onside
+  recovered). They read 0 in most of 2021-2024 and then jump in 2025
+  (e.g. QB catches a pass: 0, 0, 0, 0, 16), which points to CFBD's older
+  play-text format not matching the name regexes. Those historical rates
+  are undercounts until the parsing handles the older format.
 - **College injuries phase 2.** Pre-game availability reports are planned
   but not built (see "Injuries (phase 1)").
 - **One-point safety, both leagues.** The detector has never matched a
