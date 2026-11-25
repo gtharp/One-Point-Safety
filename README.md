@@ -353,8 +353,14 @@ has been legal there since 1988). Two college-only oddities:
   7+), where college OT turns into alternating two-point tries. Counted
   once per game.
 
-Player names are parsed from `playText` ("#2 D.Lagway", "K. Osborne");
-no API calls are spent on per-play stats.
+Player names are parsed from `playText`; no API calls are spent on
+per-play stats. CFBD's text has used several name styles over the years,
+sometimes within one season: "#2 D.Lagway" (current), "Ian Book" (most
+of 2016-2024) and "DeVito, Tommy". The rules that compare players within
+a game (QB catches a pass, non-QB TD pass, fake punt/FG TD) reduce every
+style to one key with `person_key()` ("i.book"), so the same player
+matches however he's written. Before that, those rules found a passer on
+only ~2% of pre-2025 pass plays; now it's ~98% in every season.
 
 Rare penalties use the same dynamic idea as the NFL side, but FBS plays
 about 7× as many games, so a penalty type is rare when it's been called at
@@ -426,13 +432,19 @@ These rely on text patterns or inference rather than a dedicated field:
   overtime scores instead.
 - **Fake punt/FG TD**: the passer/rusher on a TD punted or kicked for that
   team in the same game, or the text says "fake". Holders are excluded
-  because they're often quarterbacks.
+  because they're often quarterbacks, and so is that game's QB (5+ pass
+  attempts) even if he punted: QBs pooch-punt often enough that every TD
+  they threw would otherwise look like a fake.
 - **Non-QB TD pass / QB catches a pass**: no roster positions without
   extra calls, so a "QB" is whoever threw 5+ passes for that team in that
   game. A non-QB passer has ≤2 attempts in the game and also caught or ran
   the ball, or punted/kicked.
-- **Onside kick recovered**: the kicking team has the ball on the next
-  real play.
+- **Onside kick recovered**: an onside kick (or, since older text never
+  says "onside", a kickoff of 20 yards or less) where the kicking team
+  has the ball on the next real play.
+- **Offensive fumble-recovery TD**: tagged "Fumble Recovery (Own)" in
+  newer data; older seasons file it as a rushing/passing TD whose text
+  says the ball was fumbled.
 - **Multi-lateral TD**: 2+ "lateral" mentions on a TD play.
 - **Targeting ejection**: text match on "Targeting", minus
   declined/offsetting/overturned.
@@ -636,15 +648,18 @@ elsewhere:
 The site is live on `main` at one-pointsafety.com and the daily NFL and
 college jobs are running. Open items:
 
-- **College rarity: finish the fill, then check the name-based rules.**
-  The first run (Nov 2026) finished 2021-2025. Run **Update college rarity
-  numbers** again for 2016-2020. Before re-tiering, look at the rules
-  that depend on parsing player names from play text (QB catches a pass,
-  non-QB TD pass, fake punt/FG TD, offensive fumble-return TD, onside
-  recovered). They read 0 in most of 2021-2024 and then jump in 2025
-  (e.g. QB catches a pass: 0, 0, 0, 0, 16), which points to CFBD's older
-  play-text format not matching the name regexes. Those historical rates
-  are undercounts until the parsing handles the older format.
+- **College rarity: refill, then re-tier.** The first run (Nov 2026)
+  counted 2021-2025 with name parsing that missed CFBD's older text, so
+  those numbers were deleted when the parsing was fixed. Run **Update
+  college rarity numbers** twice to recount all 10 seasons (~170 calls),
+  then review the college tiers in `ncaa_oddity_rules.py` against the real
+  rates. Expect roughly (from ESPN play-by-play, FBS + FCS): QB catches a
+  pass 30-50 a season, non-QB TD pass 30-50, fake punt/FG TD 1-5,
+  onside recovered 3-27, offensive fumble-recovery TD 1-7.
+- **Live college season (optional).** The current season's events were
+  built with the old parsing. Its text is the current style, which mostly
+  parsed fine, but the pooch-punt fix changes fake punt/FG TD counts. A
+  local `build_ncaa_data.py --refetch-all` (~16 calls) would rebuild it.
 - **College injuries phase 2.** Pre-game availability reports are planned
   but not built (see "Injuries (phase 1)").
 - **One-point safety, both leagues.** The detector has never matched a
