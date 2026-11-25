@@ -161,6 +161,27 @@ is automatically flagged rare. Add flavor text for one in
 `RARE_PENALTY_WHY`; anything rare without an entry there gets a generic
 line.
 
+### Penalties panel: sorting and Rare/Common tags
+
+The "Penalties by type" panel has a sort menu with four orders, and the
+last choice is remembered in `localStorage` (`ops-pen-sort`):
+
+- **Most called / Fewest called**: by how many times each type was called
+  in the current scope (season, week, day or game).
+- **Common → rare / Rare → common**: by how common the type is in
+  general, as calls per game. This doesn't change with the scope, so in a
+  single week a normally rare foul still sorts as rare. The NFL uses the
+  10-season average from `data/rarity.json` (the front end loads it
+  directly), and falls back to this season's rate for a type with no
+  history. College uses this season's rate, since there's no college
+  history yet.
+
+Tags: **RARE** is the build script's dynamic rare set above (the same one
+the Oddities board uses). **COMMON** is any type called at least
+`COMMON_PER_GAME` (0.35, about 100 a season in the NFL) times per game;
+hovering it shows the rate. Both constants are near the top of the
+penalties block in `app.js`.
+
 ### Rules that are heuristics, not clean field filters
 
 nflverse's play-by-play doesn't have a dedicated flag for every oddity
@@ -563,9 +584,19 @@ elsewhere:
 
 ## What's left
 
-- Nothing blocking — phases (a) through (d) from the original plan are
-  all built and verified against real data. Remaining work is operational:
-  merge to `main`, enable Pages, and set the real custom domain.
+The site is live on `main` at one-pointsafety.com and the daily NFL and
+college jobs are running. Open items:
+
+- **College rarity.** There's no college version of `build_rarity.py`, so
+  college detail sheets say "Historical rarity not calculated yet" and the
+  college penalty sort uses only this season. A yearly script spending a
+  few CFBD calls per past season would fix both (watch the 1,000-call
+  monthly budget).
+- **College injuries phase 2.** Pre-game availability reports are planned
+  but not built (see "Injuries (phase 1)").
+- **One-point safety, both leagues.** The detector has never matched a
+  real play, so it's untested.
+- **`og-image.png`** is still the placeholder social preview image.
 
 ## SEO: head tags, sitemap.xml, robots.txt
 

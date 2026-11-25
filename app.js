@@ -41,10 +41,13 @@ const METRICS = [
   ["inj", NCAA ? "Injuries (AP Top 25 games)" : "Injuries"], ["int", "Interceptions"], ["fum", "Fumbles lost"], ["sack", "Sacks"],
 ];
 
-let META = null, GAMES = [], EVENTS = [], ODD = {}, RARE_PEN = {}, GAMES_BY_ID = new Map(), EVENTS_BY_GAME = new Map(), WEATHER = null;
+let META = null, GAMES = [], EVENTS = [], ODD = {}, RARE_PEN = {}, PEN_HIST = {}, PEN_SEASON = {}, GAMES_BY_ID = new Map(), EVENTS_BY_GAME = new Map(), WEATHER = null;
 let FEED = [];
+const PEN_SORTS = ["count_desc", "count_asc", "common", "rare"];
+function getPenSort() { try { const v = localStorage.getItem("ops-pen-sort"); return PEN_SORTS.includes(v) ? v : "count_desc"; } catch (err) { return "count_desc"; } }
+function setPenSort(v) { try { localStorage.setItem("ops-pen-sort", v); } catch (err) {} }
 let oddBoardEmpty = false;
-const S = { scope: "season", week: 1, day: "all", type: null, sub: null, odd: null, game: null, ap: false, penSort: "count", logAll: false, feedAll: false };
+const S = { scope: "season", week: 1, day: "all", type: null, sub: null, odd: null, game: null, ap: false, penSort: getPenSort(), logAll: false, feedAll: false };
 
 /* ---------- Load ---------- */
 async function loadJSON(path) {
@@ -65,7 +68,7 @@ async function boot() {
     $("offseason").hidden = false;
     return;
   }
-  const [games, events, oddities, weather] = await Promise.all([
+  const [games, events, oddities, weather, rarity] = await Promise.all([
     loadJSON(DATA + "games.json"),
     // College splits events into one file per week (meta.event_files);
     // the NFL side keeps a single events.json.
@@ -74,7 +77,11 @@ async function boot() {
       : loadJSON(DATA + "events.json"),
     loadJSON(DATA + "oddities.json"),
     NCAA ? Promise.resolve(null) : loadJSON(DATA + "weather.json").catch(() => null), // no weather for college
+    // Historical per-season averages for every penalty type (NFL only;
+    // scripts/build_rarity.py). College has no history yet.
+    NCAA ? Promise.resolve(null) : loadJSON(DATA + "rarity.json").catch(() => null),
   ]);
+  PEN_HIST = (rarity && rarity.penalties) || {};
   WEATHER = weather;
   GAMES = games;
   GAMES_BY_ID = new Map(GAMES.map(g => [g.id, g]));
@@ -93,6 +100,11 @@ async function boot() {
 
   oddities.oddities.forEach(o => { ODD[o.id] = o; });
   RARE_PEN = oddities.rare_penalties || {};
+  EVENTS.forEach(e => {
+    if (e.type !== "pen") return;
+    const p = e.penalty_type || "Penalty (unspecified)";
+    PEN_SEASON[p] = (PEN_SEASON[p] || 0) + 1;
+  });
 
   S.week = META.current_week;
   $("loading").hidden = true;
@@ -288,23 +300,51 @@ function renderWeather() {
   $("wxNote").textContent = missing.length ? `No ${missing.join("/")} games yet this season (outdoor games only, ${WEATHER.eligible_games} counted so far)` : `Outdoor games only, ${WEATHER.eligible_games} counted so far`;
 }
 
-/* ---------- Penalties ---------- */
+/* ---------- Penalties ----------
+   Four sorts: by how many times each type was called in the current
+   scope (high->low, low->high), or by how common the type is in general
+   (common->rare, rare->common). "How common" is a calls-per-game rate
+   that doesn't change with the scope: the NFL uses the 10-season
+   historical average from rarity.json, falling back to this season's
+   count for a type with no history; college uses this season's count
+   (no college history yet). Tags: RARE is the build script's dynamic
+   rare set (same one the Oddities board uses); COMMON is anything called
+   at least COMMON_PER_GAME times per game (~100 a season in the NFL). */
+const COMMON_PER_GAME = 0.35;
+const NFL_GAMES_PER_SEASON = 272;
+function penRate(p) {
+  const h = PEN_HIST[p];
+  if (h && h.avg_per_season != null) return h.avg_per_season / NFL_GAMES_PER_SEASON;
+  const played = GAMES.filter(g => g.final).length || GAMES.length || 1;
+  return (PEN_SEASON[p] || 0) / played;
+}
+function penTag(p) {
+  if (RARE_PEN[p]) return `<span class="rare" title="Called only a handful of times this season">RARE</span>`;
+  const r = penRate(p);
+  if (r >= COMMON_PER_GAME) {
+    const per = PEN_HIST[p] ? `about ${Math.round(PEN_HIST[p].avg_per_season)} a season (last ${PEN_HIST[p].seasons} seasons)` : `about ${r.toFixed(1)} a game this season`;
+    return `<span class="common" title="Called ${per}">COMMON</span>`;
+  }
+  return "";
+}
 function renderPen() {
   const counts = {};
   EVENTS.filter(e => inScope(e) && e.type === "pen").forEach(e => {
     const p = e.penalty_type || "Penalty (unspecified)";
     counts[p] = (counts[p] || 0) + 1;
   });
-  const rows = Object.entries(counts).sort((a, b) => {
-    if (S.penSort !== "rare") return b[1] - a[1];
-    const ra = RARE_PEN[a[0]]?.rarity?.avg_per_season, rb = RARE_PEN[b[0]]?.rarity?.avg_per_season;
-    if (ra != null && rb != null) return ra - rb;
-    return a[1] - b[1];
-  });
+  const byName = (a, b) => a[0].localeCompare(b[0]);
+  const cmp = {
+    count_desc: (a, b) => b[1] - a[1] || byName(a, b),
+    count_asc: (a, b) => a[1] - b[1] || byName(a, b),
+    common: (a, b) => penRate(b[0]) - penRate(a[0]) || b[1] - a[1] || byName(a, b),
+    rare: (a, b) => penRate(a[0]) - penRate(b[0]) || a[1] - b[1] || byName(a, b),
+  }[S.penSort] || ((a, b) => b[1] - a[1]);
+  const rows = Object.entries(counts).sort(cmp);
   const max = Math.max(1, ...rows.map(r => r[1]));
-  $("penSort").textContent = S.penSort === "rare" ? "Sort: rarest first" : "Sort: most called";
+  $("penSort").value = S.penSort;
   $("penalties").innerHTML = rows.length ? rows.map(([p, n]) => `
-    <div class="pen ${S.sub === p ? "on" : ""}" data-s="${esc(p)}"><div><div class="name">${esc(p)}${RARE_PEN[p] ? '<span class="rare">RARE</span>' : ""}</div>
+    <div class="pen ${S.sub === p ? "on" : ""}" data-s="${esc(p)}"><div><div class="name">${esc(p)}${penTag(p)}</div>
     <div class="bar" style="width:${Math.max(3, n / max * 100)}%"></div></div><div class="ct">${n}</div></div>`).join("")
     : `<div class="empty">No penalties in this period.</div>`;
 }
@@ -413,7 +453,7 @@ document.addEventListener("fullscreenchange", () => { if (!document.fullscreenEl
 
 /* ---------- Clicks ---------- */
 document.addEventListener("click", ev => {
-  const t = ev.target.closest("[data-scope],[data-wk],[data-day],[data-t],[data-s],[data-g],[data-o],[data-e],[data-gf],#apOnly,#clear,#resetAll,#moreLog,#moreFeed,#penSort,#tvBtn,#sheetClose,#scrim");
+  const t = ev.target.closest("[data-scope],[data-wk],[data-day],[data-t],[data-s],[data-g],[data-o],[data-e],[data-gf],#apOnly,#clear,#resetAll,#moreLog,#moreFeed,#tvBtn,#sheetClose,#scrim");
   if (!t) return;
   const d = t.dataset;
   if (d.e !== undefined) { openSheet(EVENTS[+d.e]); return; }
@@ -421,7 +461,6 @@ document.addEventListener("click", ev => {
   if (t.id === "tvBtn") { setTV(!document.body.classList.contains("tv")); return; }
   if (t.id === "moreLog") { S.logAll = true; renderLog(); return; }
   if (t.id === "moreFeed") { S.feedAll = !S.feedAll; renderOdd(); return; }
-  if (t.id === "penSort") { S.penSort = S.penSort === "count" ? "rare" : "count"; renderPen(); return; }
   if (d.gf !== undefined) {
     S.game = d.gf; S.type = S.sub = S.odd = null;
     const g = GAMES_BY_ID.get(S.game);
@@ -445,6 +484,11 @@ document.addEventListener("click", ev => {
   // the log, well below League totals/Penalties -- jump straight there
   // instead of leaving a dead-looking gap up top.
   if (drilledIn && oddBoardEmpty) $("logSec").scrollIntoView({ behavior: "smooth" });
+});
+document.addEventListener("change", ev => {
+  if (ev.target.id !== "penSort") return;
+  S.penSort = PEN_SORTS.includes(ev.target.value) ? ev.target.value : "count_desc";
+  setPenSort(S.penSort); renderPen();
 });
 document.addEventListener("keydown", e => { if (e.key === "Escape") closeSheet(); });
 
