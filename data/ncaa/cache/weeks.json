@@ -17291,6 +17291,58 @@
           "Unnecessary Roughness": 3
         }
       }
+    },
+    "reg_13": {
+      "completed_ids": [
+        "401866470",
+        "401866471"
+      ],
+      "counts": {
+        "401866470": {
+          "fg": 1,
+          "fum": 0,
+          "inj": 0,
+          "int": 2,
+          "pen": 7,
+          "sack": 6,
+          "safety": 0,
+          "td": 4
+        },
+        "401866471": {
+          "fg": 1,
+          "fum": 0,
+          "inj": 0,
+          "int": 2,
+          "pen": 15,
+          "sack": 3,
+          "safety": 0,
+          "td": 7
+        }
+      },
+      "fetched_at": "2026-11-25T22:38:41.056139+00:00",
+      "games_with_plays": [
+        "401866470",
+        "401866471"
+      ],
+      "penalties": {
+        "401866470": {
+          "False Start": 2,
+          "Holding": 1,
+          "Ineligible Downfield on Pass": 1,
+          "Offside": 1,
+          "Pass Interference": 1,
+          "Personal Foul": 1
+        },
+        "401866471": {
+          "False Start": 4,
+          "Holding": 1,
+          "Illegal Block in Back": 2,
+          "Illegal Substitution": 1,
+          "Illegal Use of Hands": 1,
+          "Offside": 1,
+          "Pass Interference": 5
+        }
+      }
     }
   }
 }
