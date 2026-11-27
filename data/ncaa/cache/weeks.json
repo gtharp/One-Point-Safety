@@ -17294,10 +17294,56 @@
     },
     "reg_13": {
       "completed_ids": [
+        "401856762",
+        "401856879",
+        "401858536",
+        "401862840",
         "401866470",
-        "401866471"
+        "401866471",
+        "401866472",
+        "401866473"
       ],
       "counts": {
+        "401856762": {
+          "fg": 3,
+          "fum": 0,
+          "inj": 0,
+          "int": 1,
+          "pen": 15,
+          "sack": 9,
+          "safety": 0,
+          "td": 7
+        },
+        "401856879": {
+          "fg": 4,
+          "fum": 2,
+          "inj": 0,
+          "int": 0,
+          "pen": 12,
+          "sack": 4,
+          "safety": 0,
+          "td": 9
+        },
+        "401858536": {
+          "fg": 1,
+          "fum": 1,
+          "inj": 0,
+          "int": 1,
+          "pen": 5,
+          "sack": 5,
+          "safety": 0,
+          "td": 5
+        },
+        "401862840": {
+          "fg": 1,
+          "fum": 0,
+          "inj": 0,
+          "int": 1,
+          "pen": 10,
+          "sack": 4,
+          "safety": 2,
+          "td": 6
+        },
         "401866470": {
           "fg": 1,
           "fum": 0,
@@ -17317,14 +17363,73 @@
           "sack": 3,
           "safety": 0,
           "td": 7
+        },
+        "401866472": {
+          "fg": 2,
+          "fum": 0,
+          "inj": 0,
+          "int": 0,
+          "pen": 4,
+          "sack": 3,
+          "safety": 0,
+          "td": 3
+        },
+        "401866473": {
+          "fg": 3,
+          "fum": 1,
+          "inj": 0,
+          "int": 1,
+          "pen": 12,
+          "sack": 2,
+          "safety": 0,
+          "td": 8
         }
       },
-      "fetched_at": "2026-11-25T22:38:41.056139+00:00",
+      "fetched_at": "2026-11-27T22:11:26.372305+00:00",
       "games_with_plays": [
+        "401856762",
+        "401856879",
+        "401858536",
+        "401862840",
         "401866470",
-        "401866471"
+        "401866471",
+        "401866472",
+        "401866473"
       ],
       "penalties": {
+        "401856762": {
+          "Delay of Game": 1,
+          "Face Mask": 1,
+          "False Start": 2,
+          "Holding": 5,
+          "Illegal Formation": 1,
+          "Illegal Shift": 1,
+          "Pass Interference": 3,
+          "Unnecessary Roughness": 1
+        },
+        "401856879": {
+          "Clipping": 1,
+          "Delay of Game": 2,
+          "False Start": 3,
+          "Holding": 2,
+          "Pass Interference": 3,
+          "Unsportsmanlike Conduct": 1
+        },
+        "401858536": {
+          "Delay of Game": 1,
+          "False Start": 2,
+          "Pass Interference": 1,
+          "Personal Foul": 1
+        },
+        "401862840": {
+          "Face Mask": 1,
+          "False Start": 2,
+          "Holding": 1,
+          "Illegal Block in Back": 2,
+          "Personal Foul": 1,
+          "Roughing the Passer": 1,
+          "Unnecessary Roughness": 2
+        },
         "401866470": {
           "False Start": 2,
           "Holding": 1,
@@ -17341,6 +17446,18 @@
           "Illegal Use of Hands": 1,
           "Offside": 1,
           "Pass Interference": 5
+        },
+        "401866472": {
+          "False Start": 1,
+          "Holding": 3
+        },
+        "401866473": {
+          "Delay of Game": 1,
+          "Face Mask": 2,
+          "False Start": 2,
+          "Holding": 4,
+          "Pass Interference": 2,
+          "Personal Foul": 1
         }
       }
     }
